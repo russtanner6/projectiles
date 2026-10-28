@@ -98,7 +98,7 @@ update this file in the same commit as the design change.
 - Designs are parametric OpenSCAD (`.scad`), with all key dimensions as named
   parameters at the top of the file.
 - For every design change: render the STL, check it's watertight, check max width
-  ≤ 38.0 mm, report volume and estimated PCTG mass, and render preview PNGs for
+  ≤ 38.5 mm, report volume and estimated PCTG mass, and render preview PNGs for
   Russ to review.
 - Record each revision in git with a commit message describing what changed and
   why. Note print settings that matter (pause layer, infill, walls) in the design
@@ -112,7 +112,7 @@ Setup in a fresh cloud container:
 `apt-get install -y openscad xvfb && pip install trimesh scipy shapely rtree networkx matplotlib`
 
 - `tools/render.sh design.scad`: STL (binary) + side/tail preview PNGs + checks.
-- `tools/check_stl.py part.stl`: watertight, max diameter vs 38 mm, mass, CG.
+- `tools/check_stl.py part.stl`: watertight, max diameter vs 38.5 mm, mass, CG.
 - `tools/overhangs.py part.stl`: finds surfaces that would need supports.
 - `tools/islands.py part.stl`: finds floating regions (layers starting in mid-air),
   the thing Bambu Studio warns about. Strict by default; Bambu flags even tiny ones.

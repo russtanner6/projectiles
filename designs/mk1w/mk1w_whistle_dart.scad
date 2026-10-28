@@ -36,9 +36,9 @@ flare_length   = 22.0;
 /* [Tail] */
 boom_d         = 16.0;
 duct_length    = 22.0;
-duct_wall      = 2.0;
+duct_wall      = 3.0;    // thick enough to survive glancing hits
 fin_count      = 8;
-fin_thickness  = 3.2;
+fin_thickness  = 4.2;    // thicker for glancing hits
 fin_root_fillet= 2.0;
 fin_tip_angle  = 6.0;
 
