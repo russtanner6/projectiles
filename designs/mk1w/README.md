@@ -1,69 +1,60 @@
-# Mk1-W Screaming Dart
+# Mk1-W Screaming Dart (Rev B)
 
-> **Status: printed, and silent when blown.** The holes were based on a
-> mis-measurement of the skull whistle (2.8 mm instead of ~6–7 mm). See
-> `../whistle-tests/` for the test pieces that will decide the fix.
-
-![section](previews/mk1w_whistle_dart_section.png)
+![section](previews/mk1w_whistle_dart_section_slots.png)
 
 The Mk1 Ducted-Tail Dart with a death-whistle sound system inside, driven by air
 rammed into the nose in flight. Same outside shape, fit, and print orientation as
 Mk1.
 
+## History
+
+- **Rev A** printed fine but was silent: its holes (2.8 mm) came from a
+  mis-measurement of the skull whistle.
+- **Whistle tests** (`../whistle-tests/`): A (skull copy) and D (dart-size with
+  a 22 mm inlet channel) screamed like the skull. B and C (no channel) made sound
+  but were too high-pitched.
+- **Rev B** (this version) copies test piece D's internals.
+
 ## How it makes noise
 
-It copies the layout of Russ's skull whistle (blown through the top hole, sound out
-the back slits). The skull column below has the original, wrong hole sizes; see
-`../whistle-tests/README.md` for corrected ones:
-
-| Skull whistle | Mk1-W |
-|---|---|
-| You blow into a ~2.5–3 mm hole in the top | Air rams into a 5 mm funnel at the nose tip, narrowing to a 2.8 mm jet channel |
-| ~6 mm gap, then the inner ball's top hole | ~7 mm gap from jet exit to the ball's 2.8 mm top hole |
-| Hollow ball, ~32 mm, 1.2 mm shell | Hollow capsule with cone ends, 24.2 mm wide, 2.0 mm shell |
-| ~4 mm gap around the ball | 3.5 mm gap around the ball |
-| Exits: back slits (~120 mm²) and open bottom | Exits: 4 slots in the flare between fins (~110 mm²) and the open tail tube (~72 mm²) |
-
-Rough resonance estimate (Helmholtz, ball volume and hole): ~560 Hz for the skull
-whistle, ~640 Hz for Mk1-W, so a similar pitch. The death-whistle scream is largely
-turbulent, broadband noise, so this is only a rough indicator.
+| | Test piece D (works) | Rev B |
+|---|---|---|
+| Inlet | 8 mm × 22 mm channel (you blow into it) | 8 mm × 22 mm channel from the nose tip (ram air) |
+| Blow hole | 6 mm × 3 mm | 6 mm × 3 mm |
+| Blow hole to ball hole | 5.4 mm | 5.4 mm |
+| Ball | 24.2 mm cone-ended capsule, 1.2 mm shell, 7 mm hole | Same |
+| Gap around ball | 3.5 mm | 3.5 mm |
+| Ball held by | Pedestal on the bed | Four 2.4 mm gussets under the ball |
+| Exits | Open bottom | 8 slots between the fins (~220 mm²) + open tail tube (~80 mm²) |
 
 Ram-air pressure at the nose is about 1.0 kPa at 40 m/s, 2.2 kPa at 60 m/s, and
-3.9 kPa at 80 m/s. That should be in the range of hard human blowing, so it
-should scream loudest right after launch and fade as it slows.
+3.9 kPa at 80 m/s, similar to hard blowing. Expect it loudest right after launch.
+
+## Internal strength
+
+On a nose-first impact the ball keeps moving forward and loads its gussets. The
+ball shell weighs ~4 g. Stopping from 50 m/s in ~50 mm of dirt puts ~105 N on
+the gussets; stopping in ~5 mm on hard ground puts ~1,050 N. That is about
+6 MPa of shear in the gusset joints in the hard case, several times below PCTG's
+strength. The load runs ball → gusset → wall along joints within each layer, so
+it does not pull layers apart. The nose rim around the 8 mm inlet is 2 mm thick at
+the very tip and thickens quickly behind it.
 
 ## Numbers vs Mk1
 
-| | Mk1-W | Mk1 |
+| | Mk1-W Rev B | Mk1 |
 |---|---|---|
-| Mass (100% PCTG) | ~91 g | ~107 g |
-| CG from tip | 57.6 mm | 56.6 mm |
+| Mass (100% PCTG) | ~84 g | ~107 g |
+| CG from tip | 58.8 mm | 56.6 mm |
 | CG off-axis | 0.000 mm | 0.000 mm |
-| Stability margin (est., fins only / with duct) | +0.53 / +0.67 cal | +0.56 / +0.70 cal |
-| Weakest layer, section modulus | 1559 mm³ (Z = 26 mm) | 1570 mm³ (Z = 26 mm) |
-| Supports needed | None (steepest overhang 41.8°) | None (40.0°) |
-
-## Symmetry
-
-Everything is on the axis or repeated evenly around it: inlet, jet, ball, chamber,
-4 gussets at 90°, and 4 outlet slots at 90° (centered between fins, following the
-fin twist). The rendered STL's CG is on the axis to within 0.001 mm.
+| Stability margin (est., fins only / with duct) | +0.50 / +0.64 cal | +0.56 / +0.70 cal |
+| Weakest layer, section modulus | 1555 mm³ (Z = 26 mm) | 1570 mm³ (Z = 26 mm) |
+| Supports needed | None (steepest overhang 40.9°) | None (40.0°) |
 
 ## Printing and use
 
 - Same settings as Mk1: 100% infill, 6+ walls, supports off, brim, nose-up.
-- The ball is held by four thin gussets underneath, angled so they print without
-  supports.
-- After landing, clear dirt out of the nose inlet (a paper clip works), and shake
-  out anything that got into the tail.
-- Some launch air will leak through the dart and out the nose (2.8 mm hole).
-  The effect on launch should be negligible, and it may whistle in the barrel too.
-
-## Unknowns to test
-
-- Whether it actually screams, and at what speed it starts. If it's quiet, the
-  first things to try are a larger inlet funnel, a different jet-to-ball gap
-  (`jet_gap`), or a thinner ball shell.
-- Stability is estimated, same caveats as Mk1.
+- Test it before firing: blow into the nose. It should sound like test piece D.
+- After landing, clear dirt out of the nose inlet and shake out the tail.
 
 Regenerate: `tools/render.sh designs/mk1w/mk1w_whistle_dart.scad`.

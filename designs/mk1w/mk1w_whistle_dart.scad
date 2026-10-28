@@ -1,15 +1,17 @@
-// Mk1-W Screaming Dart (death-whistle variant of the Mk1 Ducted-Tail Dart)
+// Mk1-W Screaming Dart, Rev B (death-whistle variant of the Mk1 Ducted-Tail Dart)
 // 38 mm potato-cannon projectile, PCTG, printed nose-up (base on the bed).
 //
-// Same outside as Mk1. Inside, a death-whistle sound system driven by ram air:
-//  - A small inlet at the nose tip. In flight, air piles up at the nose and is
-//    forced down a narrow channel, the way breath goes into the whistle's top hole.
-//  - The channel ends as a jet aimed at the top hole of a hollow inner "ball",
-//    a few mm below, inside a chamber with a gap all around the ball. This copies
-//    the layout of the skull whistle (top hole -> gap -> holed hollow ball ->
-//    surrounding chamber -> outlets).
-//  - Air leaves through four slots in the flare (between fins) and the open tail
-//    tube. Outlet area is much larger than the inlet, as in the whistle.
+// Same outside as Mk1. Inside, a death-whistle sound system driven by ram air,
+// copied from whistle test piece D, which screamed like the skull whistle when
+// blown (pieces B and C, without D's inlet channel, were too high-pitched):
+//  - An 8 mm inlet at the nose tip feeds a 22 mm channel. In flight, air piles
+//    up at the nose and is forced in, the way breath goes into the whistle.
+//  - The channel ends in a 6 mm x 3 mm blow hole, aimed at the 7 mm hole in the
+//    top of a hollow inner "ball" 5.4 mm below, inside a chamber with a gap all
+//    around the ball.
+//  - Air leaves through eight slots in the flare (between all fins) and the open
+//    tail tube, about as much outlet area as the gap around the ball.
+//  - Rev A (2.8 mm holes from a mis-measurement of the skull) was silent.
 //  - Everything is centered on the axis or repeated evenly around it so the dart
 //    stays balanced and flies straight.
 //  - The ball is a capsule with cone ends instead of a sphere so it prints
@@ -25,7 +27,7 @@ total_length   = 125.0;
 
 /* [Nose] */
 nose_length    = 30.0;
-nose_tip_d     = 9.0;    // flat tip wide enough for a sturdy rim around the inlet
+nose_tip_d     = 12.0;   // flat tip wide enough for a sturdy rim around the inlet
 
 /* [Body] */
 bearing_length = 40.0;
@@ -41,25 +43,25 @@ fin_root_fillet= 2.0;
 fin_tip_angle  = 6.0;
 
 /* [Whistle: inlet and jet] */
-inlet_d        = 5.0;    // funnel mouth at the nose tip
-jet_d          = 2.8;    // jet channel diameter (whistle top hole is ~2.5-3 mm)
-funnel_depth   = 3.0;
-jet_z          = 100.0;  // where the jet exits into the chamber (chamber roof apex)
-jet_gap        = 6.0;    // jet exit to ball hole (whistle: ~6 mm)
+inlet_d        = 8.0;    // channel from the nose tip down to the blow hole (test D)
+blow_d         = 6.0;    // blow hole (skull and test D: 6 mm)
+blow_len       = 3.0;    // blow hole length (skull and test D: 3 mm)
+jet_z          = 100.0;  // where the blow hole exits into the chamber
+jet_gap        = 5.4;    // blow hole exit to the top of the ball's hole edge (test D)
 
 /* [Whistle: chamber and ball] */
-wall           = 3.2;    // outer wall around the chamber
+wall           = 3.0;    // outer wall around the chamber (test D)
 roof_angle     = 50.0;   // chamber roof, degrees from horizontal (>= 45)
 ball_gap       = 3.5;    // gap between ball and chamber wall (whistle: ~4 mm)
-ball_shell     = 2.0;    // whistle uses 1.2; thicker survives impacts
-ball_hole_d    = 2.8;
+ball_shell     = 1.2;    // as in the skull and test D
+ball_hole_d    = 7.0;    // skull and test D
 ball_cone_angle= 50.0;   // ball end cones, degrees from horizontal (>= 45)
 ball_mid_h     = 18.0;   // straight middle section of the ball
 
 /* [Whistle: supports and outlets] */
 gusset_count   = 4;
-gusset_t       = 1.6;
-slot_count     = 4;      // outlet slots in the flare, evenly spaced between fins
+gusset_t       = 2.4;    // thick enough to hold the ball through hard impacts
+slot_count     = 8;      // outlet slots in the flare, one between each pair of fins
 slot_w         = 2.6;
 slot_h         = 10.0;   // straight part; plus a pointed top for support-free printing
 slot_z         = 43.0;   // bottom of the slots
@@ -81,11 +83,11 @@ fin_twist  = tan(fin_tip_angle) * fin_top / R * 180 / PI;
 
 // Chamber and ball
 r_ch       = R - wall;                                // chamber radius in the body
-roof_h     = r_ch * tan(roof_angle);
-z_roof     = jet_z - roof_h;                          // where the roof cone starts
+z_roof     = jet_z - (r_ch - blow_d / 2) * tan(roof_angle);  // where the roof cone starts
 r_ball     = r_ch - ball_gap;                         // ball outer radius
 cone_h     = r_ball * tan(ball_cone_angle);
-z_ball_top = jet_z - jet_gap;                         // ball top apex (hole)
+// ball top apex (virtual; the hole cuts it off), placed so the hole edge sits jet_gap below the blow hole
+z_ball_top = jet_z - jet_gap + (ball_hole_d / 2) * tan(ball_cone_angle);
 z_ball_up  = z_ball_top - cone_h;                     // top of the straight section
 z_ball_lo  = z_ball_up - ball_mid_h;                  // bottom of the straight section
 z_ball_bot = z_ball_lo - cone_h;                      // bottom apex
@@ -93,6 +95,7 @@ z_ball_bot = z_ball_lo - cone_h;                      // bottom apex
 assert(z_boom > duct_length, "duct must end below the flare so air can enter it");
 assert(z_ball_lo > z_bearing, "ball's straight section must sit in the full-width body");
 assert(jet_z < z_nose + 10, "jet exit too far into the nose");
+assert(inlet_d + 4 <= nose_tip_d, "nose tip too small for a 2 mm rim around the inlet");
 assert(fin_count % slot_count == 0, "slot_count must divide fin_count so every slot sits between fins");
 
 function smooth(t) = (1 - cos(t * 180)) / 2;
@@ -152,17 +155,17 @@ module chamber() {
         [[0, -1], [rb - wall, -1]],
         [for (i = [0 : profile_steps]) let(z = z_roof * i / profile_steps)
             [chamber_r(z), z]],
-        [[0, jet_z]]
+        [[blow_d / 2, jet_z], [0, jet_z]]
     );
     rotate_extrude() polygon(pts);
 }
 
-// Funnel at the nose tip and the jet channel down to the chamber roof
+// Inlet channel from the nose tip, then the short blow hole into the chamber
 module inlet() {
-    translate([0, 0, total_length - funnel_depth])
-        cylinder(d1 = jet_d, d2 = inlet_d, h = funnel_depth + 0.01);
     translate([0, 0, jet_z - 1])
-        cylinder(d = jet_d, h = total_length - funnel_depth - jet_z + 1.01);
+        cylinder(d = blow_d, h = blow_len + 1.01);
+    translate([0, 0, jet_z + blow_len])
+        cylinder(d = inlet_d, h = total_length - jet_z - blow_len + 1);
 }
 
 // Capsule with cone ends, given outer radius and apex-to-apex layout
@@ -176,7 +179,7 @@ module ball() {
     difference() {
         capsule(r_ball, z_ball_bot, z_ball_lo, z_ball_up, z_ball_top);
         ball_interior();
-        translate([0, 0, z_ball_up]) cylinder(d = ball_hole_d, h = cone_h + 1);
+        translate([0, 0, z_ball_up]) cylinder(d = ball_hole_d, h = cone_h + 0.01);
     }
 }
 

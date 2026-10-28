@@ -71,10 +71,15 @@ update this file in the same commit as the design change.
 
 - `designs/mk1/`: Mk1 Ducted-Tail Dart (current). See its README for numbers.
 - `designs/mk1w/`: Mk1-W Screaming Dart, Mk1 with a ram-air death whistle inside.
-  **Printed and silent when blown.** Its holes were based on a mis-measurement
-  of the skull whistle (2.8 mm instead of ~6 mm blow hole / ~7 mm ball hole).
-- `designs/whistle-tests/`: four short test pieces (A–D) to find a whistle core
-  that screams before rebuilding the dart. Waiting on Russ's results.
+  Rev A (2.8 mm holes, from a mis-measurement) was silent. Rev B copies whistle
+  test piece D's internals. Waiting on Russ's print/blow test.
+- `designs/whistle-tests/`: four short test pieces. Results: A (skull copy) and
+  D (dart-size + 22 mm × 8 mm inlet channel) scream like the skull; B and C (no
+  channel) make sound but too high-pitched. The inlet channel is what gives the
+  dart-size core its low scream: keep it in any whistle design.
+- **Internal parts must survive impact.** Anything inside (like the whistle ball)
+  must be tied to the outer wall so impact loads run along layers, not across
+  them, and sized for a hard-ground stop (~25,000 g from 50 m/s in 5 mm).
 - Russ's skull whistle (reference, not in the repo; source/license unknown):
   blown into a ~6 mm hole in the top through a ~3 mm wall; ~5.4 mm below is a
   ~7 mm hole with a short raised rim in a hollow ellipsoid ball (~32 mm, 1.2 mm

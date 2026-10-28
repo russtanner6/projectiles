@@ -1,5 +1,9 @@
 # Whistle test pieces
 
+**Results (Russ):** A and D scream like the skull whistle. B and C make sound but
+are too high-pitched. So at dart size, the 22 mm inlet channel (D) is what makes
+it sound right. Mk1-W Rev B uses D's internals.
+
 ![sections](previews/whistle_tests_sections.png)
 
 Mk1-W printed fine but made no sound when blown. Re-measuring Russ's skull
