@@ -1,5 +1,9 @@
 # Mk1-W Screaming Dart
 
+> **Status: printed, and silent when blown.** The holes were based on a
+> mis-measurement of the skull whistle (2.8 mm instead of ~6–7 mm). See
+> `../whistle-tests/` for the test pieces that will decide the fix.
+
 ![section](previews/mk1w_whistle_dart_section.png)
 
 The Mk1 Ducted-Tail Dart with a death-whistle sound system inside, driven by air
@@ -9,7 +13,8 @@ Mk1.
 ## How it makes noise
 
 It copies the layout of Russ's skull whistle (blown through the top hole, sound out
-the back slits):
+the back slits). The skull column below has the original, wrong hole sizes; see
+`../whistle-tests/README.md` for corrected ones:
 
 | Skull whistle | Mk1-W |
 |---|---|
