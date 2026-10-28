@@ -18,6 +18,10 @@ update this file in the same commit as the design change.
 - **Printing only. No metal inserts.** No bolts, nuts, steel balls, or other
   non-printed parts. Every piece must be printable in PCTG.
 - **Slicer: Bambu Studio.** Output STL files that import cleanly into it.
+- **No supports.** Every design must print nose-up with supports turned off,
+  internal cavities included. No downward-facing surface may be flatter than
+  45° from horizontal (cone-tipped channels and roofs, no flat ceilings). Verify
+  with `tools/overhangs.py` on the STL.
 
 ## Agreed design principles
 
@@ -36,8 +40,6 @@ update this file in the same commit as the design change.
   steps.
 - **Moderate spin, not maximum spin.** Spin from canted or twisted fins should be
   enough to average out print imperfections. Extra cant adds drag and costs range.
-- **Support-free printing.** Internal voids and overhangs should print without
-  supports (cone-tipped channels, roughly 45° or steeper overhangs).
 
 ## Proposed, not yet confirmed
 
@@ -89,6 +91,7 @@ Setup in a fresh cloud container:
 
 - `tools/render.sh design.scad`: STL (binary) + side/tail preview PNGs + checks.
 - `tools/check_stl.py part.stl`: watertight, max diameter vs 38 mm, mass, CG.
+- `tools/overhangs.py part.stl`: finds surfaces that would need supports.
 - `tools/stability.py design.scad part.stl`: Barrowman CP estimate and stability
   margin (Mk1-style geometry; adapt for other layouts).
 - `tools/strength.py a.stl b.stl`: weakest-layer bending section modulus, for

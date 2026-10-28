@@ -30,8 +30,9 @@ nose-first, within the 38 mm limit, printed in PCTG with no metal.
   tips also reach full diameter between them.
 - **Spin.** Fins are helical, about 6° at the tips. Ideal roll rate is about
   53 RPM per m/s of velocity (≈3,200 RPM at 60 m/s); expect less in practice.
-- **Printing.** Nose-up, no supports. Overhangs are at least 50° from horizontal
-  (the cavity roof) or close to vertical (the flare).
+- **Printing.** Nose-up, no supports. Verified on the STL: the steepest
+  downward-facing surface is 40° from vertical (the cavity roof), inside the 45°
+  limit; the flare and fins are gentler.
 
 ## Print settings (Bambu Studio)
 
