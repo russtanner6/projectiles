@@ -13,6 +13,7 @@ mkdir -p "$dir/previews"
 openscad -o "$stl" "$@" "$scad"
 python3 "$(dirname "$0")/check_stl.py" "$stl" --binary
 python3 "$(dirname "$0")/overhangs.py" "$stl"
+python3 "$(dirname "$0")/islands.py" "$stl"
 
 wrapper="$(mktemp --suffix=.scad)"
 echo "color(\"SteelBlue\") import(\"$(realpath "$stl")\");" > "$wrapper"

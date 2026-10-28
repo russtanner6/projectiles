@@ -9,9 +9,10 @@ update this file in the same commit as the design change.
 
 ## Hard constraints
 
-- **Max width: 38.0 mm.** No part of any projectile may exceed 38.0 mm in diameter
+- **Max width: 38.5 mm.** No part of any projectile may exceed 38.5 mm in diameter
   or width, fins and rings included. Verify this from the generated STL, not just
-  from the parameters.
+  from the parameters. (Raised from 38.0 after Russ's first barrel test: a dart
+  slid in with a tiny bit of play. Confirm with `designs/fit-test/` rings.)
 - **Material: PCTG.** Use PCTG for all mass, CG, and strength calculations
   (density about 1.23–1.27 g/cm³; use 1.25 unless a measured print weight says
   otherwise).
@@ -38,6 +39,8 @@ update this file in the same commit as the design change.
   of what to avoid.
 - **Forward CG for stability.** Get weight forward with geometry, not infill
   steps.
+- **No thin lips or sharp edges on the outside**, especially at the nose: round
+  over any opening (e.g. Mk1-W's inlet mouth) so impacts don't chip it.
 - **Symmetry.** Everything must be on the axis or repeated evenly around it
   (holes, slots, internal parts) so the CG stays on the axis and the dart flies
   straight. Check the STL's CG x/y is ~0.
@@ -48,9 +51,9 @@ update this file in the same commit as the design change.
 
 - **Length:** Gemini's Rev 15 dart is 115 mm. Russ said that length or a little
   longer is fine; 115–125 mm is the working range.
-- **Bearing diameter:** about 37.6 mm to leave clearance for PCTG's slight
-  oversizing and elephant's foot. Confirm against test prints and the barrel's
-  actual inner diameter.
+- **Bearing diameter:** 38.5 mm (Russ's call). Not yet confirmed: the fit-test
+  rings (38.2 / 38.5 / 38.8) will show which size slides with no play once
+  printed in PCTG. Set `body_d` to the winner.
 - **Barrel contact:** projectiles must bear on the barrel wall at two widely
   spaced full-diameter surfaces (e.g. a body band and a tail ring) so they don't
   wobble or tip in the barrel. Russ asked for this explicitly.
@@ -73,6 +76,7 @@ update this file in the same commit as the design change.
 - `designs/mk1w/`: Mk1-W Screaming Dart, Mk1 with a ram-air death whistle inside.
   Rev A (2.8 mm holes, from a mis-measurement) was silent. Rev B copies whistle
   test piece D's internals. Waiting on Russ's print/blow test.
+- `designs/fit-test/`: barrel fit rings at 38.2 / 38.5 / 38.8 mm.
 - `designs/whistle-tests/`: four short test pieces. Results: A (skull copy) and
   D (dart-size + 22 mm × 8 mm inlet channel) scream like the skull; B and C (no
   channel) make sound but too high-pitched. The inlet channel is what gives the
@@ -110,6 +114,8 @@ Setup in a fresh cloud container:
 - `tools/render.sh design.scad`: STL (binary) + side/tail preview PNGs + checks.
 - `tools/check_stl.py part.stl`: watertight, max diameter vs 38 mm, mass, CG.
 - `tools/overhangs.py part.stl`: finds surfaces that would need supports.
+- `tools/islands.py part.stl`: finds floating regions (layers starting in mid-air),
+  the thing Bambu Studio warns about. Strict by default; Bambu flags even tiny ones.
 - `tools/stability.py design.scad part.stl`: Barrowman CP estimate and stability
   margin (Mk1-style geometry; adapt for other layouts).
 - `tools/strength.py a.stl b.stl`: weakest-layer bending section modulus, for

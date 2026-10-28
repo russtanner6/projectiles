@@ -17,8 +17,8 @@
 // and low part-cooling fan for layer adhesion, dry filament.
 
 /* [Global] */
-max_width      = 38.0;   // hard project limit, checked below
-body_d         = 37.6;   // bearing diameter (clearance under max_width)
+max_width      = 38.5;   // hard project limit, checked below
+body_d         = 38.5;   // bearing diameter
 total_length   = 125.0;
 
 /* [Nose] */
