@@ -38,6 +38,9 @@ update this file in the same commit as the design change.
   of what to avoid.
 - **Forward CG for stability.** Get weight forward with geometry, not infill
   steps.
+- **Symmetry.** Everything must be on the axis or repeated evenly around it
+  (holes, slots, internal parts) so the CG stays on the axis and the dart flies
+  straight. Check the STL's CG x/y is ~0.
 - **Moderate spin, not maximum spin.** Spin from canted or twisted fins should be
   enough to average out print imperfections. Extra cant adds drag and costs range.
 
@@ -67,6 +70,9 @@ update this file in the same commit as the design change.
 ## Designs
 
 - `designs/mk1/`: Mk1 Ducted-Tail Dart (current). See its README for numbers.
+- `designs/mk1w/`: Mk1-W Screaming Dart, Mk1 with a ram-air death whistle inside.
+  Modeled on Russ's skull whistle (blown into the top hole, sound out the back
+  slits). That whistle's STL is not in the repo; its source/license is unknown.
 - Gemini's "Rev 15" dart is the reference for comparisons: weakest-layer
   section modulus ~733 mm³, estimated stability margin ~+0.8 cal. Its source isn't
   in the repo; Russ shared it only as an example.

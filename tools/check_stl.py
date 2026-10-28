@@ -37,6 +37,8 @@ def main():
     print(f"volume:        {m.volume / 1000:.2f} cm^3")
     print(f"mass (solid):  {mass:.1f} g ({mass / 28.3495:.2f} oz) at {args.density} g/cm^3")
     print(f"CG from tip:   {cg_from_tip:.1f} mm ({cg_from_tip / length * 100:.0f}% of length)")
+    off = float(np.hypot(*m.center_mass[:2]))
+    print(f"CG off-axis:   {off:.3f} mm {'OK' if off < 0.05 else 'ASYMMETRIC'}")
 
     if args.binary:
         m.export(args.stl, file_type="stl")

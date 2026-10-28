@@ -5,5 +5,6 @@ Designs are OpenSCAD source files that generate STLs for Bambu Studio, printed i
 PCTG.
 
 - `designs/mk1/`: Mk1 Ducted-Tail Dart ([notes](designs/mk1/README.md))
+- `designs/mk1w/`: Mk1-W Screaming Dart, with a death-whistle inside ([notes](designs/mk1w/README.md))
 - `tools/`: render, check, stability, and strength scripts
 - `CLAUDE.md`: the design rules and decisions so far
