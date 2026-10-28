@@ -46,15 +46,28 @@ update this file in the same commit as the design change.
 - **Bearing diameter:** about 37.6 mm to leave clearance for PCTG's slight
   oversizing and elephant's foot. Confirm against test prints and the barrel's
   actual inner diameter.
-- **Printed core rod:** a hex PCTG rod printed lying flat (layers along its
-  length), dropped into a central channel during a pause at height so it's
-  captured inside the dart. Waiting on Russ's OK for the pause step.
+- **Barrel contact:** projectiles must bear on the barrel wall at two widely
+  spaced full-diameter surfaces (e.g. a body band and a tail ring) so they don't
+  wobble or tip in the barrel. Russ asked for this explicitly.
+
+## Evaluated and rejected
+
+- **Printed core rod** (PCTG rod printed flat, captured via pause at height):
+  in Mk1 it would add only a few percent to the weakest layer's bending strength. Not
+  worth the pause step. Revisit only if a design has a much larger core.
 
 ## Open questions
 
 - Cannon specs: barrel inner diameter, barrel length, chamber volume, firing
   pressure. Needed for velocity, spin, and range estimates.
 - Whether darts are fired bare or behind a wad or sabot.
+
+## Designs
+
+- `designs/mk1/`: Mk1 Ducted-Tail Dart (current). See its README for numbers.
+- Gemini's "Rev 15" dart is the reference for comparisons: weakest-layer
+  section modulus ~733 mm³, estimated stability margin ~+0.8 cal. Its source isn't
+  in the repo; Russ shared it only as an example.
 
 ## Workflow
 
@@ -69,11 +82,16 @@ update this file in the same commit as the design change.
 - Use inches and pounds in conversation when it helps, but keep design files in
   millimeters (what Bambu Studio expects).
 
-## Tooling notes (cloud container)
+## Tooling
 
-- `apt-get install -y openscad xvfb` provides OpenSCAD (2021.01) and a virtual
-  display for PNG renders.
-- Render STL: `openscad -o out.stl design.scad`
-- Render PNG: create a wrapper `.scad` containing `import("out.stl");`, then run
-  `xvfb-run -a openscad -o view.png --imgsize=900,1100 --camera=0,0,57,70,0,25,280 wrapper.scad`
-- `pip install trimesh manifold3d` for watertightness, bounds, and volume checks.
+Setup in a fresh cloud container:
+`apt-get install -y openscad xvfb && pip install trimesh scipy shapely rtree networkx matplotlib`
+
+- `tools/render.sh design.scad`: STL (binary) + side/tail preview PNGs + checks.
+- `tools/check_stl.py part.stl`: watertight, max diameter vs 38 mm, mass, CG.
+- `tools/stability.py design.scad part.stl`: Barrowman CP estimate and stability
+  margin (Mk1-style geometry; adapt for other layouts).
+- `tools/strength.py a.stl b.stl`: weakest-layer bending section modulus, for
+  comparing designs.
+- `tools/section.py part.stl out.png --angle DEG`: true lengthwise cross-section.
+- Use `-D '$fn=36' -D profile_steps=24` for fast low-res iterations (~13 s).
