@@ -49,8 +49,9 @@ update this file in the same commit as the design change.
 
 ## Proposed, not yet confirmed
 
-- **Length:** Gemini's Rev 15 dart is 115 mm. Russ said that length or a little
-  longer is fine; 115–125 mm is the working range.
+- **Length:** Both darts are now ~133–135 mm. Russ approved lengthening past the
+  original 115–125 mm range to move the CG forward relative to the fins
+  (stability went from ~+0.62 to ~+0.75 cal).
 - **Bearing diameter:** 38.5 mm (Russ's call). Not yet confirmed: the fit-test
   rings (38.2 / 38.5 / 38.8) will show which size slides with no play once
   printed in PCTG. Set `body_d` to the winner.
@@ -73,6 +74,9 @@ update this file in the same commit as the design change.
 ## Designs
 
 - `designs/mk1/`: Mk1 Ducted-Tail Dart (current). See its README for numbers.
+- Weight distribution: without metal, adding plastic near the middle (thicker
+  walls) doesn't move the CG forward. What works: a longer body (fins farther
+  back), a shorter/lighter tail ring, and keeping hollow space behind the CG.
 - `designs/mk1w/`: Mk1-W Screaming Dart, Mk1 with a ram-air death whistle inside.
   Rev A (2.8 mm holes, from a mis-measurement) was silent. Rev B copies whistle
   test piece D's internals. Waiting on Russ's print/blow test.

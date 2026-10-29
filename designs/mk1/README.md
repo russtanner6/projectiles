@@ -7,13 +7,13 @@ nose-first, within the 38 mm limit, printed in PCTG with no metal.
 
 | | Mk1 | Gemini Rev 15 (reference) |
 |---|---|---|
-| Length | 125 mm | 115 mm |
+| Length | 135 mm | 115 mm |
 | Max diameter | 38.50 mm | 38.00 mm |
-| Mass (solid PCTG) | ~118 g | ~93 g |
-| CG from tip | 59.3 mm (47%) | 56.8 mm (49%) |
+| Mass (solid PCTG) | ~131 g | ~93 g |
+| CG from tip | 62.6 mm (46%) | 56.8 mm (49%) |
 | Weakest layer, section modulus | **2135 mm³** | 733 mm³ |
-| Stability margin (est., fins only) | +0.50 cal | +0.77 cal |
-| Stability margin (est., incl. duct/ring) | +0.62 cal | ~+0.8 cal |
+| Stability margin (est., fins only) | +0.63 cal | +0.77 cal |
+| Stability margin (est., incl. duct/ring) | +0.76 cal | ~+0.8 cal |
 
 ## How it works
 
@@ -25,8 +25,8 @@ nose-first, within the 38 mm limit, printed in PCTG with no metal.
   the tail tube), so the solid nose and bearing band carry most of the mass and
   the CG sits forward. The cavity stops behind the CG; hollowing further forward
   moves the CG backward.
-- **Fit in the barrel.** Two full-diameter (38.5 mm) bearing surfaces about 85 mm
-  apart: the 40 mm band behind the nose and the duct ring at the base. The fin
+- **Fit in the barrel.** Two full-diameter (38.5 mm) bearing surfaces about 95 mm
+  apart: the 50 mm band behind the nose and the 16 mm duct ring at the base. The fin
   tips also reach full diameter between them.
 - **Spin.** Fins are helical, about 6° at the tips. Ideal roll rate is about
   53 RPM per m/s of velocity (≈3,200 RPM at 60 m/s); expect less in practice.

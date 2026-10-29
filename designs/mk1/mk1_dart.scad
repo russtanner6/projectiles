@@ -19,19 +19,19 @@
 /* [Global] */
 max_width      = 38.5;   // hard project limit, checked below
 body_d         = 38.5;   // bearing diameter
-total_length   = 125.0;
+total_length   = 135.0;  // lengthened from 125 to move the CG forward relative to the fins
 
 /* [Nose] */
 nose_length    = 30.0;   // ellipsoidal nose
 nose_tip_d     = 6.0;    // small flat-ish blunt at the tip (0 = pointed ellipse)
 
 /* [Body] */
-bearing_length = 40.0;   // full-diameter band behind the nose
+bearing_length = 50.0;   // full-diameter band behind the nose
 flare_length   = 22.0;   // smooth S-curve from body_d down to boom_d
 
 /* [Tail] */
 boom_d         = 16.0;   // outer diameter of the tail tube
-duct_length    = 22.0;   // full-diameter ring around the fins, from the base
+duct_length    = 16.0;   // full-diameter ring around the fins, from the base
 duct_wall      = 3.0;    // thick enough to survive glancing hits
 fin_count      = 8;
 fin_thickness  = 4.2;    // thicker for glancing hits

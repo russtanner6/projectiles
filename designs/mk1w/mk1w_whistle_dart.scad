@@ -23,19 +23,19 @@
 /* [Global] */
 max_width      = 38.5;   // hard project limit, checked below
 body_d         = 38.5;
-total_length   = 125.0;
+total_length   = 135.0;  // lengthened from 125 to move the CG forward relative to the fins
 
 /* [Nose] */
 nose_length    = 30.0;
 mouth_r        = 2.5;    // rounding where the nose curves into the inlet (no lip or edge)
 
 /* [Body] */
-bearing_length = 40.0;
+bearing_length = 50.0;   // full-diameter band behind the nose
 flare_length   = 22.0;
 
 /* [Tail] */
 boom_d         = 16.0;
-duct_length    = 22.0;
+duct_length    = 16.0;   // full-diameter ring around the fins, from the base
 duct_wall      = 3.0;    // thick enough to survive glancing hits
 fin_count      = 8;
 fin_thickness  = 4.2;    // thicker for glancing hits

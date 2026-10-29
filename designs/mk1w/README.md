@@ -16,7 +16,8 @@ Mk1.
 - **Rev B** (this version) copies test piece D's internals. Later fixes: ball
   supports now meet the ball's tip (Bambu flagged a floating region), supports
   moved between the outlet slots, rounded nose mouth with no lip, 38.5 mm width,
-  3 mm duct ring and 4.2 mm fins for glancing hits.
+  3 mm duct ring and 4.2 mm fins for glancing hits,
+  body lengthened 10 mm and tail ring shortened to 16 mm to move the CG forward.
 
 ## How it makes noise
 
@@ -48,12 +49,12 @@ it does not pull layers apart. The nose has no lip: the outside curves smoothly 
 | | Mk1-W Rev B | Mk1 |
 |---|---|---|
 | Max diameter | 38.50 mm | 38.50 mm |
-| Length | 122.8 mm (rounded nose mouth) | 125 mm |
-| Mass (100% PCTG) | ~97 g | ~118 g |
-| CG from tip | 59.3 mm | 59.3 mm |
+| Length | 132.8 mm (rounded nose mouth) | 135 mm |
+| Mass (100% PCTG) | ~101 g | ~131 g |
+| CG from tip | 63.0 mm | 62.6 mm |
 | CG off-axis | 0.000 mm | 0.000 mm |
-| Stability margin (est., fins only / with duct) | +0.50 / +0.62 cal | +0.50 / +0.62 cal |
-| Weakest layer, section modulus | 2097 mm³ (Z = 43 mm) | 2135 mm³ (Z = 37 mm) |
+| Stability margin (est., fins only / with duct) | +0.62 / +0.75 cal | +0.63 / +0.76 cal |
+| Weakest layer, section modulus | 2018 mm³ (Z = 43 mm) | 2135 mm³ (Z = 37 mm) |
 | Supports needed / floating regions | None / none | None / none |
 
 ## Printing and use
