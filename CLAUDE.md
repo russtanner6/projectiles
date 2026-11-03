@@ -87,13 +87,18 @@ update this file in the same commit as the design change.
 - `designs/chain-shot/`: two identical solid 38 mm balls joined by a metal chain
   or cable (store-bought).
   - As round as a supportless print allows: the only flat is a small spot on the bottom, with a 47 deg cone.
-  - Chain anchor: the end link goes up a hole from the bottom flat. A printed
-    house-section cross pin goes in through a side hole and through the link;
-    its ends are trimmed flush to the ball. A pull loads the ball in compression.
+  - Anchor: the cable loop (or chain end link) goes up an 8.5 mm hole from the
+    bottom flat. A thick (7 mm) house-section snap pin pushes in through the
+    side hole and the loop.
+    - Its head stops it going further in.
+    - Its split end's two hooks spring out past a square ledge so it can't back out.
+    - To remove it, squeeze the hooks with pliers through the far opening and push.
+    - Prong strain on snapping is ~2%. A pull loads the ball in compression.
+    - Steel cable (1/16-3/32 in., crimped loops) is recommended. A chain's end link
+      needs an inside opening of at least ~8 x 11 mm.
   - `chain_shot_mine.scad`: sea-mine version with thick 8 mm horns. A ring of 5 points
     55 deg up, plus 1 on top; horns on the underside can't print without support.
     It stays inside the 38 mm width.
-  - Pin and hole sizes depend on the chain chosen.
 - `designs/wad/`: wad cup fired behind the dart: 38.0 mm, 5 mm pusher disc,
   22 mm skirt with a thin flared lip that pressure seals against the barrel.
   The long skirt keeps it from cocking or flipping. Prints disc-down, no supports.
