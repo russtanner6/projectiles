@@ -4,7 +4,7 @@
 // and settings as the darts, including elephant's-foot compensation, so the fit
 // matches what a dart's tail ring and body will do.
 
-sizes   = [38.2, 38.5, 38.8];   // outer diameters to test
+sizes   = [38.5, 38.8, 39.0, 39.2];   // outer diameters to test (barrel is about 39 mm)
 height  = 6.0;
 hole_d  = 22.0;                 // big center hole keeps them quick to print
 spacing = 45;

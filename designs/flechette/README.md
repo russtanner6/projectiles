@@ -13,7 +13,7 @@ three-petal printed sabot that falls away at the muzzle.
 | Fin tail | `tail_fins.stl` | 3.9 g | 4 swept fins, 2 deg cant, 30 mm span |
 | Basket tail | `tail_basket.stl` | 5.3 g | flared windowed cone, no fins to snap |
 | Spinning basket tail | `tail_basket_spin.stl` | 5.3 g | same, inner vanes twisted 16 deg like fan blades for gentle spin |
-| Sabot petal (print 3) | `sabot_petal.stl` | 12.2 g each | 36.6 g per sabot; solid 4 mm base |
+| Sabot petal (print 3) | `sabot_petal.stl` | 12.7 g each | 38.1 g per sabot; solid 4 mm base; bands 38.8 mm to fit the ~39 mm barrel |
 
 Finished flechette: about 65-67 g and 178-184 mm long. Estimated stability
 margin +2.3 to +3.9 cal (Barrowman, rough): very stable.

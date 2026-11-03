@@ -29,8 +29,12 @@
 $fn = 160;
 
 part        = "petal";      // "petal", "all" (3 petals, closed), "assembly", "open"
-max_width   = 38.0;
-D           = 38.0;
+// The two bearing bands are sized to Russ's barrel (about 39 mm inside), not
+// the 38.0 mm projectile limit, so the barrel squeezes the petals closed and
+// centered. Only the bands touch the barrel; Russ approved this exception.
+band_d      = 38.8;         // snug in a ~39.0 mm bore; confirm with the 38.8 fit ring
+max_width   = 39.0;
+D           = band_d;
 n_petals    = 3;
 
 // flechette (must match flechette_parts.scad)

@@ -41,6 +41,9 @@ When there are action items:
   or width, fins and rings included. Verify this from the generated STL, not just
   from the parameters. (Was briefly 38.5 after a dart slid in with a little play;
   Russ set it back to 38.0. A wad behind the dart takes up the seal.)
+  **Exception (Russ approved):** the flechette sabot's two bearing bands are
+  sized to the barrel (about 39 mm inside), currently 38.8 mm, so the barrel
+  squeezes the petals closed and centered. Check them with `--max-width 38.8`.
 - **Material: PCTG.** Use PCTG for all mass, CG, and strength calculations
   (density about 1.23–1.27 g/cm³; use 1.25 unless a measured print weight says
   otherwise).
@@ -142,8 +145,8 @@ When there are action items:
 - `designs/wad/`: wad cup fired behind the dart: 38.0 mm, 5 mm pusher disc,
   22 mm skirt with a thin flared lip that pressure seals against the barrel.
   The long skirt keeps it from cocking or flipping. Prints disc-down, no supports.
-- `designs/fit-test/`: barrel fit rings at 38.2 / 38.5 / 38.8 mm (from the
-  38.5 mm period; the darts are now 38.0 mm).
+- `designs/fit-test/`: barrel fit rings at 38.5 / 38.8 / 39.0 / 39.2 mm, for
+  measuring the barrel's real inside diameter (Russ estimates ~39 mm).
 - `designs/whistle-tests/`: four short test pieces. Results: A (skull copy) and
   D (dart-size + 22 mm × 8 mm inlet channel) scream like the skull; B and C (no
   channel) make sound but too high-pitched. The inlet channel is what gives the
