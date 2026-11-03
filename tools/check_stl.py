@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Check a projectile STL against project rules and report its mass properties.
 
-Usage: check_stl.py part.stl [--density 1.25] [--max-width 38.5] [--binary]
+Usage: check_stl.py part.stl [--density 1.25] [--max-width 38.0] [--binary]
 
 Assumes the part is modeled nose-up along +Z with the base at Z = 0, and that
 it prints at uniform density (so the solid's centroid is the CG).
@@ -18,7 +18,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("stl")
     ap.add_argument("--density", type=float, default=1.25, help="g/cm^3 (PCTG ~1.23-1.27)")
-    ap.add_argument("--max-width", type=float, default=38.5, help="mm")
+    ap.add_argument("--max-width", type=float, default=38.0, help="mm")
     ap.add_argument("--binary", action="store_true", help="rewrite as binary STL")
     args = ap.parse_args()
 

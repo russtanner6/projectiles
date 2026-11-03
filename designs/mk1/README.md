@@ -8,24 +8,24 @@ nose-first, within the 38 mm limit, printed in PCTG with no metal.
 | | Mk1 | Gemini Rev 15 (reference) |
 |---|---|---|
 | Length | 135 mm | 115 mm |
-| Max diameter | 38.50 mm | 38.00 mm |
-| Mass (solid PCTG) | ~131 g | ~93 g |
-| CG from tip | 62.6 mm (46%) | 56.8 mm (49%) |
-| Weakest layer, section modulus | **2135 mm³** | 733 mm³ |
-| Stability margin (est., fins only) | +0.63 cal | +0.77 cal |
+| Max diameter | 38.00 mm | 38.00 mm |
+| Mass (solid PCTG) | ~128 g | ~93 g |
+| CG from tip | 62.8 mm (47%) | 56.8 mm (49%) |
+| Weakest layer, section modulus | **1981 mm³** | 733 mm³ |
+| Stability margin (est., fins only) | +0.62 cal | +0.77 cal |
 | Stability margin (est., incl. duct/ring) | +0.76 cal | ~+0.8 cal |
 
 ## How it works
 
 - **Strength.** No skinny neck. The tail is a hollow 16 mm tube joined by 8 fins
   (4.2 mm thick) to a full-diameter duct ring (3 mm wall), so every layer has a wide, well-spread cross-section.
-  The weakest layer (Z ≈ 37 mm, top of the tail tube) resists bending about
-  2.9x better than Rev 15's weakest layer.
+  The weakest layer (Z ≈ 126 mm, just behind the nose tip) resists bending about
+  2.7x better than Rev 15's weakest layer.
 - **Stability without metal.** The aft body is hollow (open at the base through
   the tail tube), so the solid nose and bearing band carry most of the mass and
   the CG sits forward. The cavity stops behind the CG; hollowing further forward
   moves the CG backward.
-- **Fit in the barrel.** Two full-diameter (38.5 mm) bearing surfaces about 95 mm
+- **Fit in the barrel.** Two full-diameter (38.0 mm) bearing surfaces about 95 mm
   apart: the 50 mm band behind the nose and the 16 mm duct ring at the base. The fin
   tips also reach full diameter between them.
 - **Spin.** Fins are helical, about 6° at the tips. Ideal roll rate is about

@@ -15,7 +15,7 @@ Mk1.
   but were too high-pitched.
 - **Rev B** (this version) copies test piece D's internals. Later fixes: ball
   supports now meet the ball's tip (Bambu flagged a floating region), supports
-  moved between the outlet slots, rounded nose mouth with no lip, 38.5 mm width,
+  moved between the outlet slots, rounded nose mouth with no lip, 38.0 mm width (was 38.5),
   3 mm duct ring and 4.2 mm fins for glancing hits,
   body lengthened 10 mm and tail ring shortened to 16 mm to move the CG forward.
 
@@ -27,7 +27,7 @@ Mk1.
 | Blow hole | 6 mm × 3 mm | 6 mm × 3 mm |
 | Blow hole to ball hole | 5.4 mm | 5.4 mm |
 | Ball | 24.2 mm cone-ended capsule, 1.2 mm shell, 7 mm hole | Same |
-| Gap around ball | 3.5 mm | 4.1 mm (same ball, body now 38.5 mm) |
+| Gap around ball | 3.5 mm | 3.85 mm (same ball, body now 38.0 mm) |
 | Ball held by | Pedestal on the bed | Four 2.4 mm gussets under the ball |
 | Exits | Open bottom | 8 slots between the fins (~220 mm²) + open tail tube (~80 mm²) |
 
@@ -48,7 +48,7 @@ it does not pull layers apart. The nose has no lip: the outside curves smoothly 
 
 | | Mk1-W Rev B | Mk1 |
 |---|---|---|
-| Max diameter | 38.50 mm | 38.50 mm |
+| Max diameter | 38.50 mm | 38.00 mm |
 | Length | 132.8 mm (rounded nose mouth) | 135 mm |
 | Mass (100% PCTG) | ~101 g | ~131 g |
 | CG from tip | 63.0 mm | 62.6 mm |

@@ -9,10 +9,10 @@ update this file in the same commit as the design change.
 
 ## Hard constraints
 
-- **Max width: 38.5 mm.** No part of any projectile may exceed 38.5 mm in diameter
+- **Max width: 38.0 mm.** No part of any projectile may exceed 38.0 mm in diameter
   or width, fins and rings included. Verify this from the generated STL, not just
-  from the parameters. (Raised from 38.0 after Russ's first barrel test: a dart
-  slid in with a tiny bit of play. Confirm with `designs/fit-test/` rings.)
+  from the parameters. (Was briefly 38.5 after a dart slid in with a little play;
+  Russ set it back to 38.0. A wad behind the dart takes up the seal.)
 - **Material: PCTG.** Use PCTG for all mass, CG, and strength calculations
   (density about 1.23–1.27 g/cm³; use 1.25 unless a measured print weight says
   otherwise).
@@ -52,9 +52,7 @@ update this file in the same commit as the design change.
 - **Length:** Both darts are now ~133–135 mm. Russ approved lengthening past the
   original 115–125 mm range to move the CG forward relative to the fins
   (stability went from ~+0.62 to ~+0.75 cal).
-- **Bearing diameter:** 38.5 mm (Russ's call). Not yet confirmed: the fit-test
-  rings (38.2 / 38.5 / 38.8) will show which size slides with no play once
-  printed in PCTG. Set `body_d` to the winner.
+- **Bearing diameter:** 38.0 mm (Russ's call), fired behind a wad (`designs/wad/`).
 - **Barrel contact:** projectiles must bear on the barrel wall at two widely
   spaced full-diameter surfaces (e.g. a body band and a tail ring) so they don't
   wobble or tip in the barrel. Russ asked for this explicitly.
@@ -69,7 +67,6 @@ update this file in the same commit as the design change.
 
 - Cannon specs: barrel inner diameter, barrel length, chamber volume, firing
   pressure. Needed for velocity, spin, and range estimates.
-- Whether darts are fired bare or behind a wad or sabot.
 
 ## Designs
 
@@ -84,7 +81,11 @@ update this file in the same commit as the design change.
   test piece D's internals; Russ: it sounds like a sports whistle, not menacing.
   Untried ideas for a Rev C: outlets right under the ball, seal off the long
   tail tube, ~3.5 mm ball gap.
-- `designs/fit-test/`: barrel fit rings at 38.2 / 38.5 / 38.8 mm.
+- `designs/wad/`: wad cup fired behind the dart: 38.0 mm, 5 mm pusher disc,
+  22 mm skirt with a thin flared lip that pressure seals against the barrel.
+  The long skirt keeps it from cocking or flipping. Prints disc-down, no supports.
+- `designs/fit-test/`: barrel fit rings at 38.2 / 38.5 / 38.8 mm (from the
+  38.5 mm period; the darts are now 38.0 mm).
 - `designs/whistle-tests/`: four short test pieces. Results: A (skull copy) and
   D (dart-size + 22 mm × 8 mm inlet channel) scream like the skull; B and C (no
   channel) make sound but too high-pitched. The inlet channel is what gives the
@@ -106,7 +107,7 @@ update this file in the same commit as the design change.
 - Designs are parametric OpenSCAD (`.scad`), with all key dimensions as named
   parameters at the top of the file.
 - For every design change: render the STL, check it's watertight, check max width
-  ≤ 38.5 mm, report volume and estimated PCTG mass, and render preview PNGs for
+  ≤ 38.0 mm, report volume and estimated PCTG mass, and render preview PNGs for
   Russ to review.
 - Record each revision in git with a commit message describing what changed and
   why. Note print settings that matter (pause layer, infill, walls) in the design
@@ -120,7 +121,7 @@ Setup in a fresh cloud container:
 `apt-get install -y openscad xvfb && pip install trimesh scipy shapely rtree networkx matplotlib`
 
 - `tools/render.sh design.scad`: STL (binary) + side/tail preview PNGs + checks.
-- `tools/check_stl.py part.stl`: watertight, max diameter vs 38.5 mm, mass, CG.
+- `tools/check_stl.py part.stl`: watertight, max diameter vs 38.0 mm, mass, CG.
 - `tools/overhangs.py part.stl`: finds surfaces that would need supports.
 - `tools/islands.py part.stl`: finds floating regions (layers starting in mid-air),
   the thing Bambu Studio warns about. Strict by default; Bambu flags even tiny ones.

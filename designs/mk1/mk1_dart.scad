@@ -17,8 +17,8 @@
 // and low part-cooling fan for layer adhesion, dry filament.
 
 /* [Global] */
-max_width      = 38.5;   // hard project limit, checked below
-body_d         = 38.5;   // bearing diameter
+max_width      = 38.0;   // hard project limit, checked below
+body_d         = 38.0;   // bearing diameter
 total_length   = 135.0;  // lengthened from 125 to move the CG forward relative to the fins
 
 /* [Nose] */

@@ -1,6 +1,6 @@
 # projectiles
 
-Parametric, 3D-printable projectiles for a 38.5 mm air-powered potato cannon.
+Parametric, 3D-printable projectiles for a 38 mm air-powered potato cannon.
 Designs are OpenSCAD source files that generate STLs for Bambu Studio, printed in
 PCTG.
 
