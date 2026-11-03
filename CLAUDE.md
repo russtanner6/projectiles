@@ -99,6 +99,13 @@ update this file in the same commit as the design change.
   - `chain_shot_mine.scad`: sea-mine version with thick 8 mm horns. A ring of 5 points
     55 deg up, plus 1 on top; horns on the underside can't print without support.
     It stays inside the 38 mm width.
+- `designs/flechette/`: steel flechette, an 8 x 150 mm hardened linear rod (59 g),
+  with push-on printed parts (very tight crush-rib sockets, no glue).
+  - Noses: spike or ogive. Tails: 4 fins or a windowed basket.
+  - Three-petal sabot (34.5 g): 38 mm rear band and front band ~95 mm apart,
+    hollow fin cavity, slim waist, front ring scoop that opens it at the muzzle.
+  - The tail sits on the sabot base: air pushes base -> tail -> rod.
+  - 150 mm rod chosen over 100 or 200 mm (see the README).
 - `designs/wad/`: wad cup fired behind the dart: 38.0 mm, 5 mm pusher disc,
   22 mm skirt with a thin flared lip that pressure seals against the barrel.
   The long skirt keeps it from cocking or flipping. Prints disc-down, no supports.
