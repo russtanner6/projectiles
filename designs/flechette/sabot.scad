@@ -43,7 +43,7 @@ hub_d       = 11.6;
 nose_sock   = 14.0;
 
 // sabot
-base_t      = 2.0;          // base the tail sits on
+base_t      = 4.0;          // base the tail sits on (thick: it takes the air blast and the tail's push)
 rear_band   = 10.0;         // length of the rear bearing band
 fin_clr     = 0.8;          // clearance around the fins
 bore_clr    = 0.15;         // rod bore clearance (rod slides out freely)

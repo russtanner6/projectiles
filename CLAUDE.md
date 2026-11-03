@@ -130,7 +130,7 @@ immediately, and stalls on vague or open-ended instructions. Every response:
   with push-on printed parts (very tight crush-rib sockets, no glue).
   - Noses: spike or ogive (ogive is the default: it's best at subsonic speeds and tougher). Tails: 4 fins, a windowed basket, or the basket with
     twisted inner vanes for gentle spin.
-  - Three-petal sabot (34.5 g): 38 mm rear band and front band ~95 mm apart,
+  - Three-petal sabot (36.6 g, solid 4 mm base): 38 mm rear band and front band ~95 mm apart,
     hollow fin cavity, slim waist, front ring scoop that opens it at the muzzle.
     Radial V-key ridges and grooves align the petals without stopping separation.
   - The tail sits on the sabot base: air pushes base -> tail -> rod.
