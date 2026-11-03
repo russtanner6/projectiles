@@ -81,9 +81,28 @@ in the same commit.
   - make swapping it a 2-minute job
   - keep a spare
 
+## Test results
+
+- **Rev 4 (waist_0.8, 50 deg slot, 0.8 mm):** pump worked, but water dribbled out
+  all round, much harder on one side; no outward sheet at all. Causes:
+  - the slot was larger in area than the leg channel, so there was no speed or pressure at the slot
+  - the 50 deg downward exit hugged the lip
+  - the low point of the V and a slightly tilted seat took most of the flow
+- **Rev 5 (`slot_test5.py`, r5_*.stl):** changes:
+  - 0.4 mm gap
+  - 15 deg exit
+  - flat seat, so the top half sits level
+  - taller ring chamber taking up the V
+  - 10 feed holes, 6 mm leg channel, 7 mm base channel
+  - straight band plus a 0.6 mm undercut under a sharp lip
+  - 4x taller stem (60 mm) on a wide base plate
+
+  Passes the overhang, islands and leak checks. Awaiting Russ's test.
+
 ## Test pieces (fountain/test_pieces)
 
-- `waist_0.8_lower.stl` + `waist_0.8_upper.stl`: **current.**
+- `r5_lower.stl` + `r5_upper.stl`: **current** (see Test results). Print at 0.08-0.12 mm layers.
+- `waist_0.8_lower.stl` + `waist_0.8_upper.stl`: rev 4, dribbled.
   - her real outline under the belt
   - slot follows the waistband V, 0.8 mm wide
   - snap-together
