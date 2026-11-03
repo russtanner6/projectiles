@@ -148,7 +148,10 @@ When there are action items:
   `12.7mm/` (149 g rod), built by `build.sh` from `flechette_dims.scad`.
   - 1/2 in. version: bigger hub, 6 longer fins (4 would be about neutral);
     the basket tail is its recommended tail (~28 mm vs ~12 mm stability margin).
-  - Noses: spike or ogive (ogive is the default: it's best at subsonic speeds and tougher). Tails: 4 fins, a windowed basket, or the basket with
+  - Noses: spike or ogive (ogive is the default: it's best at subsonic speeds and tougher). Both have a tapered
+    tail running ~20 mm back down the rod (Russ's idea): no step from nose to rod,
+    longer grip; ribs only in the sleeve. Print with a brim. A nose wider than the
+    hub was evaluated and rejected: more nose lift and drag cancel its weight gain. Tails: 4 fins, a windowed basket, or the basket with
     twisted inner vanes for gentle spin.
   - Basket windows are narrow diamonds (4.5 mm wide) so the bridges between them
     are 3.5-5 mm thick; Russ found the first version's ~0.2-1 mm bridges too skinny.

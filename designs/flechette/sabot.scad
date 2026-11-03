@@ -66,7 +66,7 @@ band0  = front_top - front_band;
 flare0 = band0 - (R - waist_r) * T50;            // front flare (widens upward at 50 deg)
 
 assert(flare0 > waist0 + 5, "waist too short");
-assert(front_top < base_t + tail_floor + rod_len - nose_sock - 3, "sabot would reach the nose sleeve");
+assert(front_top < base_t + tail_floor + rod_len - nose_sock - nose_taper - 2, "sabot would reach the nose");
 key_z2      = 96.0;
 keys        = [[6.0, 16.3, 18.5], [key_z2, rod_d / 2 + bore_clr + 1.05, waist_r + (key_z2 - flare0) / T50 - 1.4]];   // [height, inner r, outer r]
 

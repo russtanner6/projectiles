@@ -19,7 +19,8 @@
 // is too tight to start, run a rod-size drill bit into the first few mm by hand.
 //
 // Print (all supports off, 100% infill or 6+ walls):
-//   noses: tip up (socket opens on the bed; its top is a pointed cone)
+//   noses: tip up (socket opens on the bed; its top is a pointed cone).
+//          Use a brim: they stand on the narrow end of the taper.
 //   tails: base down (socket opens upward; the rod end sits on its floor)
 // The tails fit inside a 38 mm sabot: fin span 30 mm.
 
@@ -28,7 +29,7 @@ $fn = 96;
 part        = "assembly";
 include <flechette_dims.scad>
 
-module socket(depth, from_top = false) {
+module socket(depth, rib_from = 0) {
     // straight bore with crush ribs; pointed (50 deg) end so no flat ceiling
     difference() {
         union() {
@@ -36,20 +37,34 @@ module socket(depth, from_top = false) {
             translate([0, 0, depth - 0.3]) cylinder(h = sock_d / 2 * T50 + 0.3, d1 = sock_d, d2 = 0.01);
         }
         for (a = [45 : 90 : 315]) rotate([0, 0, a])
-            translate([rib_r, -rib_w / 2, 0]) cube([sock_d, rib_w, depth - 1.0]);   // ribs stop short of the pointed top
+            hull() {   // ribs stop short of the pointed top; a rib starting mid-bore gets a 50 deg sloped start
+                translate([rib_r, -rib_w / 2, rib_from + (rib_from > 0 ? (sock_d / 2 - rib_r) * T50 + 0.1 : 0)])
+                    cube([sock_d, rib_w, depth - 1.0 - rib_from - (rib_from > 0 ? (sock_d / 2 - rib_r) * T50 + 0.1 : 0)]);
+                translate([sock_d / 2 + 0.05, -rib_w / 2, rib_from]) cube([sock_d, rib_w, 0.01]);
+            }
     }
 }
 
-// noses: a straight sleeve holds the rod; the shaped tip starts above it,
-// so the socket never comes near the outside
+// noses: a tapered tail (Russ's idea) runs back down the rod from the
+// sleeve, so there's no abrupt step from the nose to the rod: cleaner airflow,
+// and the longer grip keeps the nose straight. The taper part is a plain
+// sliding fit; the crush ribs are only in the sleeve, so it presses on no
+// harder than before. Above the sleeve is the shaped tip, so the socket never
+// comes near the outside.
+module nose_base() {
+    // taper (z 0..nose_taper, 1 mm wall at its end) + straight sleeve
+    rotate_extrude() polygon([[0, 0], [taper_end_r, 0], [hub_d / 2, nose_taper],
+                              [hub_d / 2, nose_taper + nose_sock], [0, nose_taper + nose_sock]]);
+}
+
 module nose_spike() {
     difference() {
         union() {
-            cylinder(h = nose_sock, d = hub_d);
-            translate([0, 0, nose_sock - 0.01])
+            nose_base();
+            translate([0, 0, nose_taper + nose_sock - 0.01])
                 rotate_extrude() polygon([[0, 0], [hub_d / 2, 0], [0.3, spike_len], [0, spike_len]]);
         }
-        translate([0, 0, -0.01]) socket(nose_sock);
+        translate([0, 0, -0.01]) socket(nose_taper + nose_sock, nose_taper);
     }
 }
 
@@ -61,13 +76,13 @@ module nose_ogive() {
     pts = [for (i = [0 : 40]) let(x = L * i / 40, y = sqrt(rho * rho - pow(L - x, 2)) + Rb - rho) [max(y, 0), L - x]];
     difference() {
         union() {
-            cylinder(h = nose_sock, d = hub_d);
-            translate([0, 0, nose_sock - 0.01]) hull() {
+            nose_base();
+            translate([0, 0, nose_taper + nose_sock - 0.01]) hull() {
                 rotate_extrude() polygon(concat([[0, 0]], [for (i = [40 : -1 : 0]) if (pts[i][1] < L - ogive_tip_r) pts[i]], [[0, L - ogive_tip_r]]));
                 translate([0, 0, L - ogive_tip_r * 1.6]) sphere(r = ogive_tip_r);
             }
         }
-        translate([0, 0, -0.01]) socket(nose_sock);
+        translate([0, 0, -0.01]) socket(nose_taper + nose_sock, nose_taper);
     }
 }
 
@@ -148,7 +163,7 @@ else if (part == "tail_basket_spin") tail_basket(basket_twist);
 else {
     // two finished flechettes side by side, nose up
     translate([-28, 0, 0]) { tail_fins(); translate([0, 0, tail_floor]) rod();
-        translate([0, 0, tail_floor + rod_len - nose_sock]) nose_spike(); }
+        translate([0, 0, tail_floor + rod_len - nose_sock - nose_taper]) nose_spike(); }
     translate([28, 0, 0]) { tail_basket(0); translate([0, 0, tail_floor]) rod();
-        translate([0, 0, tail_floor + rod_len - nose_sock]) nose_ogive(); }
+        translate([0, 0, tail_floor + rod_len - nose_sock - nose_taper]) nose_ogive(); }
 }

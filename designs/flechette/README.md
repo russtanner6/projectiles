@@ -24,14 +24,20 @@ Rod choice:
 
 | Part | File (in each folder) | 8 mm | 1/2 in. | Notes |
 |---|---|---|---|---|
-| Spike nose | `nose_spike.stl` | 2.2 g | 5.6 g | sleekest; chips on hard hits |
-| Ogive nose (default) | `nose_ogive.stl` | 2.6 g | 6.7 g | rounded bullet tip (~28% of hub radius), tougher; best at subsonic speeds |
+| Spike nose | `nose_spike.stl` | 3.3 g | 7.5 g | sleekest; chips on hard hits |
+| Ogive nose (default) | `nose_ogive.stl` | 3.6 g | 8.5 g | rounded bullet tip (~28% of hub radius), tougher; best at subsonic speeds |
 | Fin tail | `tail_fins.stl` | 3.9 g | 6.7 g | 30 mm span, 2 deg cant; 4 fins (8 mm), 6 longer fins (1/2 in.) |
 | Basket tail | `tail_basket.stl` | 5.3 g | 7.3 g | flared windowed cone, no fins to snap |
 | Spinning basket tail | `tail_basket_spin.stl` | 5.3 g | 7.3 g | inner vanes twisted 16 deg for gentle spin |
 | Sabot petal (print 3) | `sabot_petal.stl` | 12.7 g | 13.3 g | solid 4 mm base; bands 38.8 mm to fit the ~39 mm barrel |
 
-Finished flechette: about 65-67 g (8 mm) or 162-165 g (1/2 in.), 177-185 mm long.
+Both noses have a tapered tail (Russ's idea) that runs 20 mm (8 mm) or 22 mm
+(1/2 in.) back down the rod from the full-width sleeve, ending in a 1 mm wall.
+No abrupt step from nose to rod: cleaner airflow, and the longer grip keeps
+the nose straight. The taper section slides on; crush ribs are only in the
+sleeve, so pressing on is no harder.
+
+Finished flechette: about 66-68 g (8 mm) or 164-167 g (1/2 in.), 177-185 mm long.
 
 Stability (Barrowman, rough; distance the center of pressure sits behind the CG):
 - 8 mm: about 38 mm (fins) to 49 mm (basket). Very stable.
@@ -66,7 +72,7 @@ supports. The bridges between windows are about 3.5-4 mm wide (8 mm) and
   around the rod; once the first band is in the barrel, the barrel holds them. Fire with a wad behind it to seal the petal seams.
 
 **Print:** supports off, 100% infill or 6+ walls.
-- noses: tip up
+- noses: tip up, with a brim (they stand on the narrow end of the taper)
 - tails: base down
 - petals: standing on their rear face
 

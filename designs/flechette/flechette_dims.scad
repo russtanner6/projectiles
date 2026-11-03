@@ -23,6 +23,8 @@ nose_sock   = big ? 18.0 : 14.0;    // socket depth
 spike_len   = big ? 40.0 : 30.0;    // shaped tip length above the sleeve
 ogive_len   = big ? 32.0 : 24.0;
 ogive_tip_r = big ? 2.3 : 1.6;      // ~28% of the hub radius: rounded, chip-resistant
+nose_taper  = big ? 22.0 : 20.0;    // tapered tail behind the sleeve, down toward the rod (1/2 in.: sabot clearance limits it)
+taper_end_r = sock_d / 2 + 1.0;     // 1 mm wall at the taper's end (no feather edge)
 
 // tails
 tail_sock   = big ? 30.0 : 26.0;
