@@ -82,8 +82,8 @@ module body() {
         // fin cavity with a 50 deg roof down to the rod bore
         translate([0, 0, base_t]) cylinder(h = cav_top - base_t, r = fc_r);
         translate([0, 0, cav_top - 0.01]) cylinder(h = cone_top - cav_top + 0.02, r1 = fc_r + 0.05, r2 = bore_r);
-        // rod bore
-        cylinder(h = front_top + 1, r = bore_r);
+        // rod bore (starts above the base, so the base stays solid)
+        translate([0, 0, base_t]) cylinder(h = front_top + 1, r = bore_r);
         // front scoop: ring cup open to the front, floor sloping outward/down
         translate([0, 0, front_top - scoop_depth])
             rotate_extrude() polygon([[scoop_in_r, scoop_depth * 0.35], [R - scoop_wall, 0],
