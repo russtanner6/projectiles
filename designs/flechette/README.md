@@ -9,7 +9,7 @@ three-petal printed sabot that falls away at the muzzle.
 | Part | File | Mass | Notes |
 |---|---|---|---|
 | Spike nose | `nose_spike.stl` | 2.2 g | sleekest; chips on hard hits |
-| Ogive nose | `nose_ogive.stl` | 2.6 g | rounded bullet tip, tougher |
+| Ogive nose (default) | `nose_ogive.stl` | 2.6 g | rounded bullet tip, tougher; best at subsonic potato-cannon speeds |
 | Fin tail | `tail_fins.stl` | 3.9 g | 4 swept fins, 2 deg cant, 30 mm span |
 | Basket tail | `tail_basket.stl` | 5.3 g | flared windowed cone, no fins to snap |
 | Spinning basket tail | `tail_basket_spin.stl` | 5.3 g | same, inner vanes twisted 16 deg like fan blades for gentle spin |

@@ -128,7 +128,7 @@ immediately, and stalls on vague or open-ended instructions. Every response:
     It stays inside the 38 mm width.
 - `designs/flechette/`: steel flechette, an 8 x 150 mm hardened linear rod (59 g),
   with push-on printed parts (very tight crush-rib sockets, no glue).
-  - Noses: spike or ogive. Tails: 4 fins, a windowed basket, or the basket with
+  - Noses: spike or ogive (ogive is the default: it's best at subsonic speeds and tougher). Tails: 4 fins, a windowed basket, or the basket with
     twisted inner vanes for gentle spin.
   - Three-petal sabot (34.5 g): 38 mm rear band and front band ~95 mm apart,
     hollow fin cavity, slim waist, front ring scoop that opens it at the muzzle.
