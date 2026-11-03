@@ -10,7 +10,11 @@ update this file in the same commit as the design change.
 ## How to work with Russ (his rules for every response)
 
 Russ has ADHD: he's very productive when a task is set up so he can start
-immediately, and stalls on vague or open-ended instructions. Every response:
+immediately, and stalls on vague or open-ended instructions. Use discretion:
+these rules are for responses where he has something to do (print, click,
+buy, decide). When he's only asking a question and there's nothing for him to
+act on, just answer it plainly and briefly, without the "Do this next" format.
+When there are action items:
 
 1. Start with "Do this next:" and one specific action, or "Nothing for you to
    do right now" and why.
