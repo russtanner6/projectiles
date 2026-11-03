@@ -7,6 +7,8 @@
 //        "tail_fins"    4 swept fins with a slight cant for gentle spin
 //        "tail_basket"  flared, windowed drag cone (like a shuttlecock /
 //                       the military tail Russ found); no fins to snap
+//        "tail_basket_spin"  same, with the 4 inner vanes twisted like fan
+//                       blades so air through the cone spins it gently
 //        "assembly"     preview with the rod (not for printing)
 //
 // Fit: very tight, no glue. Sockets are 8.2 mm with 4 thin crush ribs that
@@ -48,6 +50,7 @@ basket_d    = 30.0;         // flared tail, outer diameter at the base
 basket_len  = 30.0;
 basket_wall = 1.6;
 windows     = 8;
+basket_twist = 16;          // deg the inner vanes turn over the cone length (~5 deg blade angle)
 
 T50 = tan(50);
 
@@ -117,7 +120,17 @@ module tail_fins() {
     }
 }
 
-module tail_basket() {
+module basket_vanes(twist) {
+    // 4 thin vanes tying the cone to the hub; twisted = gentle spin
+    rb = basket_d / 2; rt = hub_d / 2;
+    intersection() {
+        linear_extrude(height = basket_len, twist = twist, slices = 60)
+            for (a = [0 : 90 : 270]) rotate([0, 0, a + 22.5]) translate([0, -0.8]) square([rb, 1.6]);
+        cylinder(h = basket_len, r1 = rb - 0.3, r2 = rt);
+    }
+}
+
+module tail_basket(twist = 0) {
     h = tail_floor + tail_sock;
     rb = basket_d / 2; rt = hub_d / 2;
     difference() {
@@ -128,18 +141,19 @@ module tail_basket() {
                 cylinder(h = basket_len, r1 = rb, r2 = rt);
                 translate([0, 0, -0.01]) cylinder(h = basket_len - 2, r1 = rb - basket_wall, r2 = rt - 0.2);
             }
-            // 4 thin vanes inside tie the cone to the hub (stiffness)
-            for (a = [0 : 90 : 270]) rotate([0, 0, a + 22.5])
-                intersection() {
-                    translate([0, -0.8, 0]) cube([rb, 1.6, basket_len]);
-                    cylinder(h = basket_len, r1 = rb - 0.3, r2 = rt);
-                }
+            basket_vanes(twist);
         }
         translate([0, 0, tail_floor]) cylinder(h = h, d = sock_d);
-        // diamond windows (pointed tops print without support)
-        for (i = [0 : windows - 1]) rotate([0, 0, 360 * i / windows])
-            translate([hub_d / 2 + 1.0, 0, basket_len * 0.42]) rotate([0, 90, 0])
-                linear_extrude(height = rb + 2) scale([1.6, 1]) rotate([0, 0, 45]) square(5.2, center = true);
+        // diamond windows (pointed tops print without support), cut through the cone wall only
+        intersection() {
+            for (i = [0 : windows - 1]) rotate([0, 0, 360 * i / windows])
+                translate([hub_d / 2 + 1.0, 0, basket_len * 0.42]) rotate([0, 90, 0])
+                    linear_extrude(height = rb + 2) scale([1.6, 1]) rotate([0, 0, 45]) square(5.2, center = true);
+            difference() {
+                translate([0, 0, -0.01]) cylinder(h = basket_len + 0.02, r1 = rb + 1, r2 = rt + 1);
+                translate([0, 0, -0.02]) cylinder(h = basket_len - 2, r1 = rb - basket_wall - 0.4, r2 = rt - 0.6);
+            }
+        }
     }
     intersection() {
         for (a = [45 : 90 : 315]) rotate([0, 0, a]) translate([rib_r, -rib_w / 2, tail_floor]) cube([sock_d / 2 - rib_r + 0.3, rib_w, tail_sock]);
@@ -152,11 +166,12 @@ module rod() { color("silver") cylinder(h = rod_len, d = rod_d); }
 if (part == "nose_spike") nose_spike();
 else if (part == "nose_ogive") nose_ogive();
 else if (part == "tail_fins") tail_fins();
-else if (part == "tail_basket") tail_basket();
+else if (part == "tail_basket") tail_basket(0);
+else if (part == "tail_basket_spin") tail_basket(basket_twist);
 else {
     // two finished flechettes side by side, nose up
     translate([-25, 0, 0]) { tail_fins(); translate([0, 0, tail_floor]) rod();
         translate([0, 0, tail_floor + rod_len - nose_sock]) nose_spike(); }
-    translate([25, 0, 0]) { tail_basket(); translate([0, 0, tail_floor]) rod();
+    translate([25, 0, 0]) { tail_basket(0); translate([0, 0, tail_floor]) rod();
         translate([0, 0, tail_floor + rod_len - nose_sock]) nose_ogive(); }
 }
