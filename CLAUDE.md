@@ -96,6 +96,9 @@ update this file in the same commit as the design change.
     - Prong strain on snapping is ~2%. A pull loads the ball in compression.
     - Steel cable (1/16-3/32 in., crimped loops) is recommended. A chain's end link
       needs an inside opening of at least ~8 x 11 mm.
+  - `chain_shot_slug.scad`: 38 x 38 mm cylinder (49 g). It has no overhangs, so it prints
+    clean; Russ's round balls came out fuzzy on their underside. Same snap pin,
+    with ends trimmed flat (`chain_shot_slug_pin.stl`).
   - `chain_shot_mine.scad`: sea-mine version with thick 8 mm horns. A ring of 5 points
     55 deg up, plus 1 on top; horns on the underside can't print without support.
     It stays inside the 38 mm width.

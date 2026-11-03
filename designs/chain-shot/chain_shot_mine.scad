@@ -33,6 +33,8 @@
 $fn = 160;
 
 part        = "ball";   // "ball", "pin", or "both"
+shape       = "ball";   // "ball" (round) or "slug" (38 x 38 mm cylinder: no overhangs, ~70% heavier)
+slug_round  = 2.0;      // slug: rounded top edge
 horns       = true;     // true = sea-mine version with thick horns on the upper half
 horn_n      = 5;
 horn_elev   = 55;       // ring horns point this far above level (>= 45 to print unsupported)
@@ -77,11 +79,19 @@ module along_x(x0, x1) {                // extrude a profile (y, z) along X from
 }
 
 module ball_shape() {
-    intersection() {
+    if (shape == "slug") {
+        // straight walls and a flat top: nothing overhangs, so it prints clean
+        rotate_extrude() hull() {
+            square([R, 0.01]);
+            square([0.01, ball_d]);
+            translate([R - slug_round, ball_d - slug_round]) circle(r = slug_round, $fn = 48);
+            translate([R - 0.01, 0]) square([0.01, ball_d - slug_round]);
+        }
+    } else intersection() {
         translate([0, 0, zc]) sphere(r = R);
         translate([0, 0, zt]) cylinder(h = 2 * R, r = R + 1);
     }
-    cylinder(h = zt + 0.6, r1 = rb, r2 = rb + (zt + 0.6) / tan(cone_a));
+    if (shape != "slug") cylinder(h = zt + 0.6, r1 = rb, r2 = rb + (zt + 0.6) / tan(cone_a));
 }
 
 module horn(len) {
@@ -134,7 +144,11 @@ module pin_raw() {
     }
 }
 module pin() {
-    intersection() { pin_raw(); sphere(r = R - 0.15); }
+    // ends trimmed flush to the outside: a sphere for the ball, a cylinder for the slug
+    intersection() {
+        pin_raw();
+        if (shape == "slug") translate([0, 0, -R]) cylinder(h = ball_d, r = R - 0.15); else sphere(r = R - 0.15);
+    }
 }
 
 if (part == "ball") ball();
