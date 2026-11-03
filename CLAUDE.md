@@ -16,8 +16,11 @@ update this file in the same commit as the design change.
 - **Material: PCTG.** Use PCTG for all mass, CG, and strength calculations
   (density about 1.23–1.27 g/cm³; use 1.25 unless a measured print weight says
   otherwise).
-- **Printing only. No metal inserts.** No bolts, nuts, steel balls, or other
-  non-printed parts. Every piece must be printable in PCTG.
+- **Mostly printed; metal only where Russ says.** The default is still
+  all-printed PCTG. Approved exceptions: a metal chain or steel cable joining
+  the chain-shot balls; a steel rod down the middle of some dart variants
+  (3/8 in. plain steel round rod, cut to length); non-printed parts (fabric,
+  rubber band) for a parachute or streamer on the high-altitude projectile.
 - **Slicer: Bambu Studio.** Output STL files that import cleanly into it.
 - **No supports.** Every design must print nose-up with supports turned off,
   internal cavities included. No downward-facing surface may be flatter than
@@ -81,6 +84,11 @@ update this file in the same commit as the design change.
   test piece D's internals; Russ: it sounds like a sports whistle, not menacing.
   Untried ideas for a Rev C: outlets right under the ball, seal off the long
   tail tube, ~3.5 mm ball gap.
+- `designs/chain-shot/`: two identical 38 mm solid balls joined by a metal chain
+  or cable (store-bought). Underside is a 54 deg cone to a small flat so it
+  prints supportless. Chain anchor: the end link goes up an 8 mm axial hole and
+  a printed pin through it rests in a cradle in a pocket on top, so a pull puts
+  the ball in compression. Pin and hole sizes depend on the chain chosen.
 - `designs/wad/`: wad cup fired behind the dart: 38.0 mm, 5 mm pusher disc,
   22 mm skirt with a thin flared lip that pressure seals against the barrel.
   The long skirt keeps it from cocking or flipping. Prints disc-down, no supports.
