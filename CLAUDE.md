@@ -84,11 +84,16 @@ update this file in the same commit as the design change.
   test piece D's internals; Russ: it sounds like a sports whistle, not menacing.
   Untried ideas for a Rev C: outlets right under the ball, seal off the long
   tail tube, ~3.5 mm ball gap.
-- `designs/chain-shot/`: two identical 38 mm solid balls joined by a metal chain
-  or cable (store-bought). Underside is a 54 deg cone to a small flat so it
-  prints supportless. Chain anchor: the end link goes up an 8 mm axial hole and
-  a printed pin through it rests in a cradle in a pocket on top, so a pull puts
-  the ball in compression. Pin and hole sizes depend on the chain chosen.
+- `designs/chain-shot/`: two identical solid 38 mm balls joined by a metal chain
+  or cable (store-bought).
+  - As round as a supportless print allows: the only flat is a small spot on the bottom, with a 47 deg cone.
+  - Chain anchor: the end link goes up a hole from the bottom flat. A printed
+    house-section cross pin goes in through a side hole and through the link;
+    its ends are trimmed flush to the ball. A pull loads the ball in compression.
+  - `chain_shot_mine.scad`: sea-mine version with thick 8 mm horns. A ring of 5 points
+    55 deg up, plus 1 on top; horns on the underside can't print without support.
+    It stays inside the 38 mm width.
+  - Pin and hole sizes depend on the chain chosen.
 - `designs/wad/`: wad cup fired behind the dart: 38.0 mm, 5 mm pusher disc,
   22 mm skirt with a thin flared lip that pressure seals against the barrel.
   The long skirt keeps it from cocking or flipping. Prints disc-down, no supports.
