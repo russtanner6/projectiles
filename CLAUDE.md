@@ -49,9 +49,19 @@ When there are action items:
   otherwise).
 - **Mostly printed; metal only where Russ says.** The default is still
   all-printed PCTG. Approved exceptions: a metal chain or steel cable joining
-  the chain-shot balls; a steel rod down the middle of some dart variants
-  (3/8 in. plain steel round rod, cut to length); non-printed parts (fabric,
-  rubber band) for a parachute or streamer on the high-altitude projectile.
+  the chain-shot balls; a steel rod down the middle of flechettes and some
+  dart variants; non-printed parts (fabric, rubber band) for a parachute or
+  streamer on the high-altitude projectile.
+- **Two rod sizes, always (Russ's rule).** Everything designed around a steel
+  rod must come in both sizes, as a `rod_d` parameter with both STL sets built:
+  - **8 mm**: hardened linear rod, or 5/16 in. (7.94 mm) Home Depot plain steel
+    rod, which fits the same parts. The penetrator.
+  - **1/2 in. (12.7 mm)**: Home Depot plain steel rod (or a 1/2 in. linear
+    shaft). The heavy hitter, ~2.5x the mass. Metric 12 mm would be loose in
+    these parts (rebuild with `rod_d=12` if Russ buys those).
+  Home Depot rod is mild steel: cheap practice rods that bend more easily on
+  rocks or concrete; hardened rods are for real targets. Check stability for
+  each size: a fatter rod weakens the fins (their span is capped by the sabot).
 - **Slicer: Bambu Studio.** Output STL files that import cleanly into it.
 - **No supports.** Every design must print nose-up with supports turned off,
   internal cavities included. No downward-facing surface may be flatter than
@@ -133,11 +143,16 @@ When there are action items:
   - `chain_shot_mine.scad`: sea-mine version with thick 8 mm horns. A ring of 5 points
     55 deg up, plus 1 on top; horns on the underside can't print without support.
     It stays inside the 38 mm width.
-- `designs/flechette/`: steel flechette, an 8 x 150 mm hardened linear rod (59 g),
-  with push-on printed parts (very tight crush-rib sockets, no glue).
+- `designs/flechette/`: steel flechette, a 150 mm rod with push-on printed parts
+  (very tight crush-rib sockets, no glue). Both rod sizes: `8mm/` (59 g rod) and
+  `12.7mm/` (149 g rod), built by `build.sh` from `flechette_dims.scad`.
+  - 1/2 in. version: bigger hub, 6 longer fins (4 would be about neutral);
+    the basket tail is its recommended tail (~28 mm vs ~12 mm stability margin).
   - Noses: spike or ogive (ogive is the default: it's best at subsonic speeds and tougher). Tails: 4 fins, a windowed basket, or the basket with
     twisted inner vanes for gentle spin.
-  - Three-petal sabot (36.6 g, solid 4 mm base): 38 mm rear band and front band ~95 mm apart,
+  - Basket windows are narrow diamonds (4.5 mm wide) so the bridges between them
+    are 3.5-5 mm thick; Russ found the first version's ~0.2-1 mm bridges too skinny.
+  - Three-petal sabot (38-40 g, solid 4 mm base): 38.8 mm rear band and front band ~95 mm apart,
     hollow fin cavity, slim waist, front ring scoop that opens it at the muzzle.
     Radial V-key ridges and grooves align the petals without stopping separation.
   - The tail sits on the sabot base: air pushes base -> tail -> rod.

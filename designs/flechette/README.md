@@ -2,29 +2,58 @@
 
 ![overview](previews/flechette_overview.png)
 
-A store-bought **8 mm x 150 mm hardened steel rod** (3D-printer linear rod,
-59 g) with a printed nose and tail pushed on (no glue), fired inside a
-three-petal printed sabot that falls away at the muzzle.
+![both rod sizes: 8 mm parts (back row) and 1/2 in. parts (front row)](previews/parts_both_sizes.png)
 
-| Part | File | Mass | Notes |
+A store-bought **150 mm steel rod** with a printed nose and tail pushed on
+(no glue), fired inside a three-petal printed sabot that falls away at the
+muzzle. Every part comes in **two rod sizes** (Russ's rule):
+
+| Folder | Rod | Rod weight | Role |
 |---|---|---|---|
-| Spike nose | `nose_spike.stl` | 2.2 g | sleekest; chips on hard hits |
-| Ogive nose (default) | `nose_ogive.stl` | 2.6 g | rounded bullet tip, tougher; best at subsonic potato-cannon speeds |
-| Fin tail | `tail_fins.stl` | 3.9 g | 4 swept fins, 2 deg cant, 30 mm span |
-| Basket tail | `tail_basket.stl` | 5.3 g | flared windowed cone, no fins to snap |
-| Spinning basket tail | `tail_basket_spin.stl` | 5.3 g | same, inner vanes twisted 16 deg like fan blades for gentle spin |
-| Sabot petal (print 3) | `sabot_petal.stl` | 12.7 g each | 38.1 g per sabot; solid 4 mm base; bands 38.8 mm to fit the ~39 mm barrel |
+| `8mm/` | 8 mm hardened linear rod, or 5/16 in. Home Depot plain steel rod (7.94 mm, same parts) | 59 g | penetrator: fastest, flattest, deepest into wood |
+| `12.7mm/` | 1/2 in. Home Depot plain steel rod (or a 1/2 in. linear shaft) | 149 g | heavy hitter: about 2.5x the mass, roughly twice the momentum at the same energy |
 
-Finished flechette: about 65-67 g and 178-184 mm long. Estimated stability
-margin +2.3 to +3.9 cal (Barrowman, rough): very stable.
+A metric 12 mm rod is too loose for the `12.7mm/` parts; rebuild with
+`-D rod_d=12` if you buy those. Build everything with `./build.sh`.
+
+Rod choice:
+- Hardened linear rod: stays straight, holds a ground point; best for real targets.
+- Home Depot plain (mild) steel: cheap, cut 150 mm (5.9 in.) pieces with a
+  hacksaw and square/deburr the ends. Bends more easily on rocks or concrete;
+  roll it on a flat table before shooting, and retire any that wobble.
+
+| Part | File (in each folder) | 8 mm | 1/2 in. | Notes |
+|---|---|---|---|---|
+| Spike nose | `nose_spike.stl` | 2.2 g | 5.6 g | sleekest; chips on hard hits |
+| Ogive nose (default) | `nose_ogive.stl` | 2.6 g | 6.7 g | rounded bullet tip (~28% of hub radius), tougher; best at subsonic speeds |
+| Fin tail | `tail_fins.stl` | 3.9 g | 6.7 g | 30 mm span, 2 deg cant; 4 fins (8 mm), 6 longer fins (1/2 in.) |
+| Basket tail | `tail_basket.stl` | 5.3 g | 7.3 g | flared windowed cone, no fins to snap |
+| Spinning basket tail | `tail_basket_spin.stl` | 5.3 g | 7.3 g | inner vanes twisted 16 deg for gentle spin |
+| Sabot petal (print 3) | `sabot_petal.stl` | 12.7 g | 13.3 g | solid 4 mm base; bands 38.8 mm to fit the ~39 mm barrel |
+
+Finished flechette: about 65-67 g (8 mm) or 162-165 g (1/2 in.), 177-185 mm long.
+
+Stability (Barrowman, rough; distance the center of pressure sits behind the CG):
+- 8 mm: about 38 mm (fins) to 49 mm (basket). Very stable.
+- 1/2 in.: about 12 mm with 6 fins, 28 mm with the basket. The heavy rod's
+  fat hub weakens the fins and their span is capped by the sabot, which is
+  why it gets 6 fins; 4 would be about neutral. **Use the basket tail on the
+  1/2 in. rod** unless the fins prove themselves in testing.
+
+Basket windows: the diamonds let air flow through the cone (less weight and
+drag than a solid cone, like a shuttlecock); the pointed tops print without
+supports. The bridges between windows are about 3.5-4 mm wide (8 mm) and
+4.5-5 mm (1/2 in.).
 
 **Fit:** very tight, no glue.
-- Sockets are 8.2 mm with 4 crush ribs that the rod shaves as it goes in
-  (0.25 mm interference per rib).
+- Sockets are 0.2 mm over the rod (8.2 or 12.9 mm) with 4 crush ribs that
+  the rod shaves as it goes in (0.25 mm interference per rib).
 - Press on with a vise, or tap with a mallet against a wood block.
-- If a batch is too tight to start, run an 8 mm drill bit into the mouth by hand.
+- If a batch is too tight to start, run a rod-size drill bit into the mouth by hand.
 
 **Sabot:**
+- Same outside for both rod sizes; the 1/2 in. version has a thicker waist
+  and collar around the bigger rod and a deeper tail cavity for the longer fins.
 - Two 38 mm touch points about 95 mm apart: the rear band, and the front band
   with its scoop.
 - A hollow rear cavity holds the tail fins. The tail sits on the sabot's base, so
@@ -33,8 +62,8 @@ margin +2.3 to +3.9 cal (Barrowman, rough): very stable.
   outward evenly.
 - V-shaped alignment keys between the petals (a ridge on one face, a groove on the
   next) stop them sliding or twisting against each other but let them pull
-  straight apart. Hold the petals together for loading with one turn of tape or a
-  thin rubber band at the waist. Fire with a wad behind it to seal the petal seams.
+  straight apart. For loading, hold the petals together by pinching the waist
+  around the rod; once the first band is in the barrel, the barrel holds them. Fire with a wad behind it to seal the petal seams.
 
 **Print:** supports off, 100% infill or 6+ walls.
 - noses: tip up

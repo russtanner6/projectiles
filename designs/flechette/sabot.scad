@@ -1,4 +1,5 @@
-// Sabot for the 8 mm x 150 mm steel flechette (rod + printed nose + tail).
+// Sabot for the 150 mm steel flechette (rod + printed nose + tail), 8 mm or
+// 1/2 in. rod: set rod_d (see flechette_dims.scad), e.g. -D rod_d=12.7.
 //
 // Three identical petals close around the flechette and fill the 38 mm
 // barrel. Air pushes the base; the base pushes the tail; the tail's floor
@@ -18,9 +19,8 @@
 // flare). The ridges run outward from the centre, so they stop the petals
 // sliding lengthwise or twisting against each other but let them pull
 // straight apart at the muzzle. Their faces slope 50 deg, so they print fine.
-// The barrel holds the petals together while firing. To load, hold them
-// together with one turn of tape or a thin rubber band at the waist (it
-// tears or slips off at the muzzle). Fire it with a wad behind it to seal
+// The barrel holds the petals together while firing. To load, pinch them
+// around the rod at the waist; once the first band is in, the barrel holds them. Fire it with a wad behind it to seal
 // the petal seams.
 //
 // Print 3 petals (part = "petal"), each standing on its rear face, supports
@@ -37,14 +37,7 @@ max_width   = 39.0;
 D           = band_d;
 n_petals    = 3;
 
-// flechette (must match flechette_parts.scad)
-rod_d       = 8.0;
-rod_len     = 150.0;
-tail_len    = 30.0;         // tail base to fin tops
-tail_floor  = 3.0;
-fin_span    = 30.0;
-hub_d       = 11.6;
-nose_sock   = 14.0;
+include <flechette_dims.scad>     // rod size (rod_d) and tail/nose sizes, shared with the parts
 
 // sabot
 base_t      = 4.0;          // base the tail sits on (thick: it takes the air blast and the tail's push)
@@ -52,20 +45,17 @@ rear_band   = 10.0;         // length of the rear bearing band
 fin_clr     = 0.8;          // clearance around the fins
 bore_clr    = 0.15;         // rod bore clearance (rod slides out freely)
 cav_wall    = 1.6;
-waist_r     = 7.5;          // 3.3 mm of wall around the rod at the waist
+waist_r     = rod_d / 2 + bore_clr + 3.35;   // 3.35 mm of wall around the rod at the waist (7.5 / 9.85)
 front_top   = 112.0;        // front end of the sabot (rod's front 40+ mm and nose stick out)
 front_band  = 10.0;
 scoop_depth = 9.0;
-scoop_in_r  = 7.0;
+scoop_in_r  = rod_d / 2 + bore_clr + 2.85;   // collar around the rod (7.0 / 9.35)
 scoop_wall  = 1.6;
 key_d       = 0.9;          // how far a ridge sticks out of the face
 key_h       = key_d * tan(50);   // half-height (faces at 50 deg)
 key_clr     = 0.2;
-keys        = [[6.0, 16.3, 18.5], [96.0, 5.2, 13.0]];   // [height, inner r, outer r]
-
 assert(D <= max_width);
 R  = D / 2;
-T50 = tan(50);
 fc_r   = fin_span / 2 + fin_clr;                 // fin cavity radius
 cav_top = base_t + tail_len + 1.0;               // top of the straight fin cavity
 bore_r = rod_d / 2 + bore_clr;
@@ -77,6 +67,9 @@ flare0 = band0 - (R - waist_r) * T50;            // front flare (widens upward a
 
 assert(flare0 > waist0 + 5, "waist too short");
 assert(front_top < base_t + tail_floor + rod_len - nose_sock - 3, "sabot would reach the nose sleeve");
+key_z2      = 96.0;
+keys        = [[6.0, 16.3, 18.5], [key_z2, rod_d / 2 + bore_clr + 1.05, waist_r + (key_z2 - flare0) / T50 - 1.4]];   // [height, inner r, outer r]
+
 
 module body() {
     difference() {

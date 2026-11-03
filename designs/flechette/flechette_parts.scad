@@ -1,20 +1,22 @@
 // Flechette parts: printed noses and tails that push onto a store-bought
-// 8 mm x 150 mm hardened steel rod (3D-printer linear rod). The rod is the
-// reusable payload; noses and tails are cheap replaceables.
+// 150 mm steel rod. The rod is the reusable payload; noses and tails are
+// cheap replaceables. Two rod sizes (set rod_d, see flechette_dims.scad):
+//   8 mm hardened linear rod or 5/16 in. plain steel rod (default)
+//   1/2 in. (12.7 mm) rod: -D rod_d=12.7 (6 fins instead of 4, bigger hub)
 //
 // part = "nose_spike"   sharp cone, sleekest, least drag (chips easily)
 //        "nose_ogive"   rounded bullet nose, tougher
-//        "tail_fins"    4 swept fins with a slight cant for gentle spin
+//        "tail_fins"    4 (8 mm) or 6 (1/2 in.) swept fins with a slight cant for gentle spin
 //        "tail_basket"  flared, windowed drag cone (like a shuttlecock /
 //                       the military tail Russ found); no fins to snap
 //        "tail_basket_spin"  same, with the 4 inner vanes twisted like fan
 //                       blades so air through the cone spins it gently
 //        "assembly"     preview with the rod (not for printing)
 //
-// Fit: very tight, no glue. Sockets are 8.2 mm with 4 thin crush ribs that
+// Fit: very tight, no glue. Sockets are 0.2 mm over the rod with 4 thin crush ribs that
 // the rod shaves down as it's pressed in (0.25 mm interference per rib).
 // Press on with a vise or tap with a mallet against a wood block. If a batch
-// is too tight to start, run an 8 mm drill bit into the first few mm by hand.
+// is too tight to start, run a rod-size drill bit into the first few mm by hand.
 //
 // Print (all supports off, 100% infill or 6+ walls):
 //   noses: tip up (socket opens on the bed; its top is a pointed cone)
@@ -24,35 +26,7 @@
 $fn = 96;
 
 part        = "assembly";
-rod_d       = 8.0;
-rod_len     = 150.0;
-sock_d      = 8.2;          // socket bore before ribs
-rib_r       = 3.75;         // ribs reach this radius (rod radius 4.0): very tight, ribs crush as it goes on
-rib_w       = 1.0;
-wall        = 1.7;          // socket wall
-hub_d       = sock_d + 2 * wall;    // 11.7 mm
-
-// noses
-nose_sock   = 14.0;         // socket depth
-spike_len   = 30.0;         // shaped tip length above the sleeve
-ogive_len   = 24.0;         // shaped tip length above the sleeve
-ogive_tip_r = 1.6;
-
-// tails
-tail_sock   = 26.0;         // socket depth (long, so it can only go on straight)
-tail_floor  = 3.0;          // solid floor under the rod end
-fin_span    = 30.0;         // tip to tip (fits inside the sabot)
-fin_t       = 1.8;          // fin thickness
-fin_root    = 30.0;         // fin length along the hub
-fin_tip     = 13.0;         // fin length at the tip
-fin_cant    = 2.0;          // deg, gentle spin
-basket_d    = 30.0;         // flared tail, outer diameter at the base
-basket_len  = 30.0;
-basket_wall = 1.6;
-windows     = 8;
-basket_twist = 16;          // deg the inner vanes turn over the cone length (~5 deg blade angle)
-
-T50 = tan(50);
+include <flechette_dims.scad>
 
 module socket(depth, from_top = false) {
     // straight bore with crush ribs; pointed (50 deg) end so no flat ceiling
@@ -107,9 +81,12 @@ module fin() {
 module tail_fins() {
     h = tail_floor + tail_sock;
     difference() {
-        union() {
+        intersection() {   // flat bottom: the canted fins would poke a sliver below the bed
+          cylinder(h = h + 20, r = 40);
+          union() {
             cylinder(h = h, d = hub_d);
-            for (a = [0 : 90 : 270]) rotate([0, 0, a]) rotate([fin_cant, 0, 0]) fin();
+            for (i = [0 : fin_n - 1]) rotate([0, 0, 360 * i / fin_n + 180 / $fn]) rotate([fin_cant, 0, 0]) fin();   // offset half a facet: avoids a mesh sliver
+          }
         }
         translate([0, 0, tail_floor]) cylinder(h = h, d = sock_d);
     }
@@ -148,7 +125,7 @@ module tail_basket(twist = 0) {
         intersection() {
             for (i = [0 : windows - 1]) rotate([0, 0, 360 * i / windows])
                 translate([hub_d / 2 + 1.0, 0, basket_len * 0.42]) rotate([0, 90, 0])
-                    linear_extrude(height = rb + 2) scale([1.6, 1]) rotate([0, 0, 45]) square(5.2, center = true);
+                    linear_extrude(height = rb + 2) polygon([[window_h / 2, 0], [0, window_w / 2], [-window_h / 2, 0], [0, -window_w / 2]]);
             difference() {
                 translate([0, 0, -0.01]) cylinder(h = basket_len + 0.02, r1 = rb + 1, r2 = rt + 1);
                 translate([0, 0, -0.02]) cylinder(h = basket_len - 2, r1 = rb - basket_wall - 0.4, r2 = rt - 0.6);
@@ -170,8 +147,8 @@ else if (part == "tail_basket") tail_basket(0);
 else if (part == "tail_basket_spin") tail_basket(basket_twist);
 else {
     // two finished flechettes side by side, nose up
-    translate([-25, 0, 0]) { tail_fins(); translate([0, 0, tail_floor]) rod();
+    translate([-28, 0, 0]) { tail_fins(); translate([0, 0, tail_floor]) rod();
         translate([0, 0, tail_floor + rod_len - nose_sock]) nose_spike(); }
-    translate([25, 0, 0]) { tail_basket(0); translate([0, 0, tail_floor]) rod();
+    translate([28, 0, 0]) { tail_basket(0); translate([0, 0, tail_floor]) rod();
         translate([0, 0, tail_floor + rod_len - nose_sock]) nose_ogive(); }
 }
