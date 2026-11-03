@@ -77,9 +77,13 @@ update this file in the same commit as the design change.
 - Weight distribution: without metal, adding plastic near the middle (thicker
   walls) doesn't move the CG forward. What works: a longer body (fins farther
   back), a shorter/lighter tail ring, and keeping hollow space behind the CG.
+- **Whistle work is parked (Russ's call).** Focus is non-whistle projectiles.
+  Russ may revisit the death whistle later; the notes below keep what was learned.
 - `designs/mk1w/`: Mk1-W Screaming Dart, Mk1 with a ram-air death whistle inside.
   Rev A (2.8 mm holes, from a mis-measurement) was silent. Rev B copies whistle
-  test piece D's internals. Waiting on Russ's print/blow test.
+  test piece D's internals; Russ: it sounds like a sports whistle, not menacing.
+  Untried ideas for a Rev C: outlets right under the ball, seal off the long
+  tail tube, ~3.5 mm ball gap.
 - `designs/fit-test/`: barrel fit rings at 38.2 / 38.5 / 38.8 mm.
 - `designs/whistle-tests/`: four short test pieces. Results: A (skull copy) and
   D (dart-size + 22 mm × 8 mm inlet channel) scream like the skull; B and C (no
