@@ -7,6 +7,30 @@ sliced in Bambu Studio and printed.
 These are the current agreed rules. They can change: when Russ changes one,
 update this file in the same commit as the design change.
 
+## How to work with Russ (his rules for every response)
+
+Russ has ADHD: he's very productive when a task is set up so he can start
+immediately, and stalls on vague or open-ended instructions. Every response:
+
+1. Start with "Do this next:" and one specific action, or "Nothing for you to
+   do right now" and why.
+2. Numbered steps, one action per step. Never two actions in one step.
+3. Exact link for every place he needs to go (the specific page, not the home
+   page). Name the exact button, menu, tab or setting as it appears on screen.
+4. After each step, say what he should see if it worked.
+5. A time estimate for each task (e.g. "about 5 minutes").
+6. End each task with "You're done when you see…".
+7. Decisions: recommend one option and why in one or two sentences, so he can
+   reply "yes". Several decisions go in one short numbered list.
+8. Keep it short. Background goes at the bottom under a "Background" label.
+9. Never say "check the dashboard", "update the settings" or "configure it"
+   without the exact location and the exact name of the thing to change.
+10. If unsure where something is in an app (layouts change), say so and tell
+    him exactly what to look for by name.
+11. If something is missing, ask one clear question at a time.
+12. Do everything that can be done without him; only bring him in for what
+    truly needs him.
+
 ## Hard constraints
 
 - **Max width: 38.0 mm.** No part of any projectile may exceed 38.0 mm in diameter
