@@ -108,6 +108,7 @@ update this file in the same commit as the design change.
     twisted inner vanes for gentle spin.
   - Three-petal sabot (34.5 g): 38 mm rear band and front band ~95 mm apart,
     hollow fin cavity, slim waist, front ring scoop that opens it at the muzzle.
+    Radial V-key ridges and grooves align the petals without stopping separation.
   - The tail sits on the sabot base: air pushes base -> tail -> rod.
   - 150 mm rod chosen over 100 or 200 mm (see the README).
 - `designs/wad/`: wad cup fired behind the dart: 38.0 mm, 5 mm pusher disc,

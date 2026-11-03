@@ -31,8 +31,10 @@ margin +2.3 to +3.9 cal (Barrowman, rough): very stable.
   air pushes base -> tail -> rod.
 - At the muzzle, air fills the front ring scoop and pushes the three petals
   outward evenly.
-- Hold the petals together for loading with one turn of tape or a thin rubber band
-  at the waist. Fire with a wad behind it to seal the petal seams.
+- V-shaped alignment keys between the petals (a ridge on one face, a groove on the
+  next) stop them sliding or twisting against each other but let them pull
+  straight apart. Hold the petals together for loading with one turn of tape or a
+  thin rubber band at the waist. Fire with a wad behind it to seal the petal seams.
 
 **Print:** supports off, 100% infill or 6+ walls.
 - noses: tip up

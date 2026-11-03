@@ -58,11 +58,11 @@ module socket(depth, from_top = false) {
     // straight bore with crush ribs; pointed (50 deg) end so no flat ceiling
     difference() {
         union() {
-            cylinder(h = depth, d = sock_d);
-            translate([0, 0, depth - 0.01]) cylinder(h = sock_d / 2 * T50, d1 = sock_d, d2 = 0.01);
+            cylinder(h = depth - 0.3, d = sock_d);
+            translate([0, 0, depth - 0.3]) cylinder(h = sock_d / 2 * T50 + 0.3, d1 = sock_d, d2 = 0.01);
         }
         for (a = [45 : 90 : 315]) rotate([0, 0, a])
-            translate([rib_r, -rib_w / 2, 0]) cube([sock_d, rib_w, depth]);
+            translate([rib_r, -rib_w / 2, 0]) cube([sock_d, rib_w, depth - 1.0]);   // ribs stop short of the pointed top
     }
 }
 

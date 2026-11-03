@@ -13,6 +13,11 @@
 //   - front scoop: an open ring-shaped cup. Leaving the muzzle, oncoming air
 //     fills it and pushes the three petals outward and back, evenly, so the
 //     flechette isn't knocked off line.
+// Alignment keys: each petal has a V ridge on one side face that drops into
+// a V groove on its neighbor (one near the rear band, one at the front
+// flare). The ridges run outward from the centre, so they stop the petals
+// sliding lengthwise or twisting against each other but let them pull
+// straight apart at the muzzle. Their faces slope 50 deg, so they print fine.
 // The barrel holds the petals together while firing. To load, hold them
 // together with one turn of tape or a thin rubber band at the waist (it
 // tears or slips off at the muzzle). Fire it with a wad behind it to seal
@@ -49,6 +54,10 @@ front_band  = 10.0;
 scoop_depth = 9.0;
 scoop_in_r  = 7.0;
 scoop_wall  = 1.6;
+key_d       = 0.9;          // how far a ridge sticks out of the face
+key_h       = key_d * tan(50);   // half-height (faces at 50 deg)
+key_clr     = 0.2;
+keys        = [[6.0, 16.3, 18.5], [96.0, 5.2, 13.0]];   // [height, inner r, outer r]
 
 assert(D <= max_width);
 R  = D / 2;
@@ -82,12 +91,25 @@ module body() {
     }
 }
 
+module key(grow = 0) {
+    // V ridge on the face y = 0, sticking out toward -y, running radially along +x
+    for (k = keys) translate([k[1] - grow, 0, k[0]]) rotate([90, 0, 90])
+        linear_extrude(height = k[2] - k[1] + 2 * grow)
+            polygon([[grow, -key_h - grow * 1.6], [-key_d - grow, 0], [grow, key_h + grow * 1.6]]);
+}
+
 module petal(i = 0) {
     a0 = 360 / n_petals * i;
-    intersection() {
-        body();
-        rotate([0, 0, a0]) linear_extrude(height = front_top + 1)
-            polygon([[0, 0], [2 * R, 0], [2 * R * cos(360 / n_petals), 2 * R * sin(360 / n_petals)]]);
+    difference() {
+        union() {
+            intersection() {
+                body();
+                rotate([0, 0, a0]) linear_extrude(height = front_top + 1)
+                    polygon([[0, 0], [2 * R, 0], [2 * R * cos(360 / n_petals), 2 * R * sin(360 / n_petals)]]);
+            }
+            rotate([0, 0, a0]) key(0);                               // ridges on the start face
+        }
+        rotate([0, 0, a0 + 360 / n_petals]) key(key_clr);            // grooves on the end face
     }
 }
 
