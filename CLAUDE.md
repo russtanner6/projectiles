@@ -57,8 +57,8 @@ When there are action items:
   - **8 mm**: hardened linear rod, or 5/16 in. (7.94 mm) Home Depot plain steel
     rod, which fits the same parts. The penetrator.
   - **1/2 in. (12.7 mm)**: Home Depot plain steel rod (or a 1/2 in. linear
-    shaft). The heavy hitter, ~2.5x the mass. Metric 12 mm would be loose in
-    these parts (rebuild with `rod_d=12` if Russ buys those).
+    shaft). The heavy hitter, ~2.5x the mass. Metric 12 mm is 0.7 mm thinner
+    and would be loose in these, so a 12 mm set (`12mm/`) is built too.
   Home Depot rod is mild steel: cheap practice rods that bend more easily on
   rocks or concrete; hardened rods are for real targets. Check stability for
   each size: a fatter rod weakens the fins (their span is capped by the sabot).
@@ -145,7 +145,9 @@ When there are action items:
     It stays inside the 38 mm width.
 - `designs/flechette/`: steel flechette, a 150 mm rod with push-on printed parts
   (very tight crush-rib sockets, no glue). Both rod sizes: `8mm/` (59 g rod) and
-  `12.7mm/` (149 g rod), built by `build.sh` from `flechette_dims.scad`.
+  `12.7mm/` (149 g rod), plus `12mm/` for metric 12 mm rod, built by `build.sh`
+  from `flechette_dims.scad`. `Flechette Print Packet.zip` holds every printable
+  part per size, the wad and a print sheet; rebuild it when parts change.
   - 1/2 in. version: bigger hub, 6 longer fins (4 would be about neutral);
     the basket tail is its recommended tail (~28 mm vs ~12 mm stability margin).
   - Noses: spike or ogive (ogive is the default: it's best at subsonic speeds and tougher). Both have a tapered

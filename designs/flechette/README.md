@@ -13,8 +13,9 @@ muzzle. Every part comes in **two rod sizes** (Russ's rule):
 | `8mm/` | 8 mm hardened linear rod, or 5/16 in. Home Depot plain steel rod (7.94 mm, same parts) | 59 g | penetrator: fastest, flattest, deepest into wood |
 | `12.7mm/` | 1/2 in. Home Depot plain steel rod (or a 1/2 in. linear shaft) | 149 g | heavy hitter: about 2.5x the mass, roughly twice the momentum at the same energy |
 
-A metric 12 mm rod is too loose for the `12.7mm/` parts; rebuild with
-`-D rod_d=12` if you buy those. Build everything with `./build.sh`.
+A metric 12 mm rod is too loose for the `12.7mm/` parts; use the `12mm/` set
+for those. Build everything with `./build.sh`. Everything to print, per rod
+size, plus the wad and a print sheet, is in `Flechette Print Packet.zip`.
 
 Rod choice:
 - Hardened linear rod: stays straight, holds a ground point; best for real targets.

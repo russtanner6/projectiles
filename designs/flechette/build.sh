@@ -4,7 +4,7 @@
 set -uo pipefail
 cd "$(dirname "$0")"
 T=../../tools
-for size in 8 12.7; do
+for size in 8 12.7 12; do
   out="${size}mm"; mkdir -p "$out"
   for part in nose_ogive nose_spike tail_fins tail_basket tail_basket_spin; do
     openscad -q -o "$out/$part.stl" -D rod_d=$size -D "part=\"$part\"" "$@" flechette_parts.scad
