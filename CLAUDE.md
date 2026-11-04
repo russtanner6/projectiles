@@ -162,8 +162,12 @@ When there are action items:
     twisted inner vanes for gentle spin.
   - Basket windows are narrow diamonds (4.5 mm wide) so the bridges between them
     are 3.5-5 mm thick; Russ found the first version's ~0.2-1 mm bridges too skinny.
-  - Three-petal sabot (38-40 g, solid 4 mm base): 38.8 mm rear band and front band ~95 mm apart,
-    hollow fin cavity, slim waist, front ring scoop that opens it at the muzzle.
+  - Three-petal sabot (64-68 g, solid 5 mm base): 38.8 mm rear band and front band ~95 mm apart,
+    hollow fin cavity, thick waist (r 13-13.5 mm), front ring scoop that opens it at the muzzle.
+    Rev 2: Russ's first petals all snapped at the bottom of the slim waist near the end of
+    the print (3.35 mm sliver, ~1.6 mm over the cavity roof, 112 mm tall). Now the waist,
+    cavity wall (2.4 mm), scoop walls and collar are thicker and the outer taper starts
+    5 mm above the cavity: thinnest section 84 mm² (was 23). Costs ~27 g of sabot.
     Radial V-key ridges and grooves align the petals without stopping separation.
   - The tail sits on the sabot base: air pushes base -> tail -> rod.
   - 150 mm rod chosen over 100 or 200 mm (see the README).

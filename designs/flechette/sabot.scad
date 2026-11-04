@@ -40,17 +40,20 @@ n_petals    = 3;
 include <flechette_dims.scad>     // rod size (rod_d) and tail/nose sizes, shared with the parts
 
 // sabot
-base_t      = 4.0;          // base the tail sits on (thick: it takes the air blast and the tail's push)
+base_t      = 5.0;          // base the tail sits on (thick: it takes the air blast and the tail's push)
 rear_band   = 10.0;         // length of the rear bearing band
 fin_clr     = 0.8;          // clearance around the fins
 bore_clr    = 0.15;         // rod bore clearance (rod slides out freely)
-cav_wall    = 1.6;
-waist_r     = rod_d / 2 + bore_clr + 3.35;   // 3.35 mm of wall around the rod at the waist (7.5 / 9.85)
+cav_wall    = 2.4;          // wall around the tail cavity
+// Rev 2 (Russ's first print snapped every petal at the bottom of the waist
+// at ~90%: each petal's waist was a 3.35 mm sliver, down to ~1.6 mm where it
+// met the cavity roof, standing 112 mm tall). Now a thick waist.
+waist_r     = max(13.0, rod_d / 2 + bore_clr + 7.0);   // 13.0 (8 mm rod) / 13.5 (1/2 in.)
 front_top   = 112.0;        // front end of the sabot (rod's front 40+ mm and nose stick out)
 front_band  = 10.0;
 scoop_depth = 9.0;
-scoop_in_r  = rod_d / 2 + bore_clr + 2.85;   // collar around the rod (7.0 / 9.35)
-scoop_wall  = 1.6;
+scoop_in_r  = rod_d / 2 + bore_clr + 4.0;    // collar around the rod (8.15 / 10.5)
+scoop_wall  = 2.4;
 key_d       = 0.9;          // how far a ridge sticks out of the face
 key_h       = key_d * tan(50);   // half-height (faces at 50 deg)
 key_clr     = 0.2;
@@ -61,7 +64,9 @@ cav_top = base_t + tail_len + 1.0;               // top of the straight fin cavi
 bore_r = rod_d / 2 + bore_clr;
 cone_top = cav_top + (fc_r - bore_r) * T50;      // cavity roof cone (50 deg) down to the rod bore
 mid_r  = fc_r + cav_wall;                        // outer radius around the fin cavity
-waist0 = cav_top + (mid_r - waist_r) * T50;      // outer cone reaches the waist here
+taper_delay = 5.0;                               // outer taper starts this far above the cavity top, so the wall
+                                                 // over the cavity's 50 deg roof is ~6.6 mm instead of 2.4
+waist0 = cav_top + taper_delay + (mid_r - waist_r) * T50;   // outer cone reaches the waist here
 band0  = front_top - front_band;
 flare0 = band0 - (R - waist_r) * T50;            // front flare (widens upward at 50 deg)
 
@@ -74,7 +79,7 @@ keys        = [[6.0, 16.3, 18.5], [key_z2, rod_d / 2 + bore_clr + 1.05, waist_r 
 module body() {
     difference() {
         rotate_extrude() polygon([
-            [0, 0], [R, 0], [R, rear_band], [mid_r, rear_band + (R - mid_r)], [mid_r, cav_top],
+            [0, 0], [R, 0], [R, rear_band], [mid_r, rear_band + (R - mid_r)], [mid_r, cav_top], [mid_r, cav_top + taper_delay],
             [waist_r, waist0], [waist_r, flare0], [R, band0], [R, front_top], [0, front_top]]);
         // fin cavity with a 50 deg roof down to the rod bore
         translate([0, 0, base_t]) cylinder(h = cav_top - base_t, r = fc_r);
