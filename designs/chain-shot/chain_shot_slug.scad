@@ -7,25 +7,29 @@
 // whose only non-round spot is a small flat on the bottom (with a short 47 deg
 // cone), where the cable leaves. Optional sea-mine horns (set horns = true).
 //
-// Cable/chain anchor: a thick snap-in cross pin.
-//   - A hole runs up from the bottom flat to the middle. Push the cable's loop
-//     (or the chain's end link) up it.
-//   - The pin goes in through the side hole marked by the wide counterbore (the
-//     "head" side), through the loop, until its split end snaps into the pocket
+// Cable/chain anchor: a thick snap-in cross pin with a channel around it.
+//   - Pin first: push it in through the side hole marked by the wide
+//     counterbore (the "head" side) until its split end snaps into the pocket
 //     on the far side. It takes a firm push.
-//   - Locked both ways: the head stops it going further in; two hooks on the
-//     split end catch a square ledge so it can't back out.
-//   - To remove: squeeze the two hooks together with needle-nose pliers through
-//     the far-side opening and push the pin back out the head side.
+//   - Then the cable: push one end up the channel from the bottom flat on one
+//     side of the pin. The peaked ceiling steers it over the top of the pin
+//     and back down the other side and out the bottom. Pull it through and
+//     crimp a loop (or join the two ends) outside the ball.
+//   - Locked both ways: the head stops the pin going further in; two hooks on
+//     the split end catch a square ledge so it can't back out.
+//   - To remove: squeeze the two hooks together through the wide far-side
+//     opening (pliers or fingertips) and push the pin back out the head side.
 //   - The cable's pull presses the pin down onto solid plastic (compression).
 // Pin and hole have a "house" profile (flat floor, straight sides, 50 deg
 // roof): the hole prints with no support, the pin prints lying on its floor,
 // and it can't spin.
 //
-// Cable: 1/16 in. or 3/32 in. galvanized/stainless wire rope, a crimped loop
-// (ferrule/sleeve) at each end. The loop must pass the 8.5 mm hole and wrap
-// the pin (7 mm wide x ~10 mm tall). Chain: its end link needs an inside
-// opening of at least ~8 x 11 mm, and its outside must fit chain_hole.
+// Cable: 1/8 in. 7x19 galvanized or stainless wire rope (about 1,700-2,000 lb
+// breaking strength), stronger than the printed pin, so the cable is not the
+// weak link. The channel leaves 4 mm around the pin for it (1/16 or 3/32 in.
+// cable also fits). Chain: a link wire up to ~3.5 mm thick fits the channel,
+// but a chain can't be threaded around an installed pin: open the end link or
+// use a quick link through the channel instead.
 //
 // Print: ball flat side down, 100% infill. Pin flat side down, 100% infill,
 // 5+ walls. Supports off.
@@ -45,7 +49,11 @@ top_horn    = 9.0;
 max_width   = 38.0;
 ball_d      = 38.0;
 cone_a      = 47;       // underside slope from horizontal
-chain_hole  = 8.5;      // hole up from the bottom flat (cable loop or chain link)
+// cable channel: up from the bottom flat, with room for the cable to run up
+// one side of the installed pin, over its peaked top and down the other side
+cable_gap   = 4.0;      // room for the cable each side of / above the pin (1/8 in. cable = 3.2 mm)
+chan_t      = 7.0;      // channel thickness (along the pin)
+release_w   = 16.0;     // width of the far-side opening where you pinch the hooks (pliers room)
 
 // snap pin
 pin_w       = 7.0;      // pin width (thick)
@@ -66,6 +74,7 @@ rb = rt - zt / tan(cone_a);
 T50 = tan(50);
 
 // x positions along the pin axis (ball centre = 0); head on -X, prongs on +X
+chan_w    = pin_w + 2 * clr + 2 * cable_gap;   // channel width across the pin (15.4 mm)
 x_head_in = -R + head_len + 1.5;        // inner face of the head = counterbore shoulder
 x_ledge   = R - 6.0;                    // square ledge the hooks catch on
 x_tip     = sqrt(R * R - pow(pin_w / 2 + barb, 2)) - 0.3;   // pin end, inside the ball surface
@@ -114,16 +123,27 @@ module ball() {
     roof_top = floor_z + pin_side + pin_w / 2 * T50;
     difference() {
         union() { ball_shape(); if (horns) horns_all(); }
-        // cable hole: bottom flat up past the pin's roof, pointed top
-        translate([0, 0, -1]) cylinder(h = zc + roof_top + 2.5, d = chain_hole);
-        translate([0, 0, zc + roof_top + 1.5]) cylinder(h = chain_hole / 2 * 1.4, d1 = chain_hole, d2 = 0.01);
+        // cable channel: the pin's own house shape grown by cable_gap all
+        // round, so the ceiling runs parallel to the pin's 50 deg roof and
+        // steers a cable pushed up one side over the top and down the other.
+        // Open at the bottom flat; walls vertical, ceiling 50 deg (no supports).
+        translate([0, 0, zc]) {
+            pin_peak = floor_z - clr + pin_side + 2 * clr + (pin_w / 2 + clr) * T50;
+            ch_peak  = pin_peak + cable_gap / cos(50);
+            ch_side  = ch_peak - chan_w / 2 * T50;
+            translate([-chan_t / 2, 0, 0]) rotate([90, 0, 90]) linear_extrude(height = chan_t)
+                polygon([[-chan_w / 2, -zc - 1], [chan_w / 2, -zc - 1], [chan_w / 2, ch_side],
+                         [0, ch_peak], [-chan_w / 2, ch_side]]);
+        }
         translate([0, 0, zc]) {
             // pin hole through the middle
             along_x(x_head_in - 0.01, x_ledge + 0.01) house(pin_w + 2 * clr, pin_side + 2 * clr, floor_z - clr);
-            // entry counterbore for the head
-            along_x(-R - 2, x_head_in) house(head_w + 2 * clr, pin_side + 2 * clr, floor_z - clr);
-            // exit pocket the hooks spring into (open to the surface for pliers)
-            along_x(x_ledge, R + 2) house(pin_w + 2 * barb + 2 * clr + 0.6, pin_side + 2 * clr, floor_z - clr);
+            // entry opening for the head: as wide as the release opening on the
+            // far side, so the ball stays balanced (the pin body centres the head)
+            along_x(-R - 2, x_head_in) house(release_w, pin_side + 2 * clr, floor_z - clr);
+            // exit pocket the hooks spring into, open to the surface and wide
+            // enough to get pliers (or fingertips) on both hooks
+            along_x(x_ledge, R + 2) house(release_w, pin_side + 2 * clr, floor_z - clr);
         }
     }
 }

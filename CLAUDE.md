@@ -128,15 +128,20 @@ When there are action items:
 - `designs/chain-shot/`: two identical solid 38 mm balls joined by a metal chain
   or cable (store-bought).
   - As round as a supportless print allows: the only flat is a small spot on the bottom, with a 47 deg cone.
-  - Anchor: the cable loop (or chain end link) goes up an 8.5 mm hole from the
-    bottom flat. A thick (7 mm) house-section snap pin pushes in through the
-    side hole and the loop.
+  - Anchor: a thick (7 mm) house-section snap pin goes in first, through the
+    side hole. Then the cable threads up a channel from the bottom flat, up one
+    side of the pin, over its peaked top and down the other side, and out; its
+    loop is crimped outside the ball. The channel is the pin's house shape grown
+    4 mm all round (Russ found the first 8.5 mm hole left no room around the pin).
     - Its head stops it going further in.
     - Its split end's two hooks spring out past a square ledge so it can't back out.
-    - To remove it, squeeze the hooks with pliers through the far opening and push.
+    - To remove it, squeeze the hooks with pliers or fingertips through the wide
+      (16 mm) far-side opening and push. The head-side opening is equally wide
+      so the ball stays balanced.
     - Prong strain on snapping is ~2%. A pull loads the ball in compression.
-    - Steel cable (1/16-3/32 in., crimped loops) is recommended. A chain's end link
-      needs an inside opening of at least ~8 x 11 mm.
+    - Cable: 1/8 in. 7x19 galvanized or stainless (~1,700-2,000 lb), stronger
+      than the printed pin, so the cable isn't the weak link. A chain can't be
+      threaded around an installed pin (use a quick link).
   - `chain_shot_slug.scad`: 38 x 38 mm cylinder (49 g). It has no overhangs, so it prints
     clean; Russ's round balls came out fuzzy on their underside. Same snap pin,
     with ends trimmed flat (`chain_shot_slug_pin.stl`).
