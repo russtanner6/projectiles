@@ -42,8 +42,9 @@ When there are action items:
   from the parameters. (Was briefly 38.5 after a dart slid in with a little play;
   Russ set it back to 38.0. A wad behind the dart takes up the seal.)
   **Exception (Russ approved):** the flechette sabot's two bearing bands are
-  sized to the barrel (about 39 mm inside), currently 38.8 mm, so the barrel
-  squeezes the petals closed and centered. Check them with `--max-width 38.8`.
+  sized to the barrel, currently 39.5 mm (Russ's call after his brother-in-law
+  measured the barrel at ~40.1 mm inside with calipers), so the barrel holds
+  the petals closed and centered. Check them with `--max-width 39.5`.
 - **Material: PCTG.** Use PCTG for all mass, CG, and strength calculations
   (density about 1.23–1.27 g/cm³; use 1.25 unless a measured print weight says
   otherwise).
@@ -109,7 +110,7 @@ When there are action items:
 
 ## Open questions
 
-- Cannon specs: barrel inner diameter, barrel length, chamber volume, firing
+- Cannon specs: barrel inner diameter (caliper: ~40.1 mm), barrel length, chamber volume, firing
   pressure. Needed for velocity, spin, and range estimates.
 
 ## Designs
@@ -162,7 +163,7 @@ When there are action items:
     twisted inner vanes for gentle spin.
   - Basket windows are narrow diamonds (4.5 mm wide) so the bridges between them
     are 3.5-5 mm thick; Russ found the first version's ~0.2-1 mm bridges too skinny.
-  - Three-petal sabot (64-68 g, solid 5 mm base): 38.8 mm rear band and front band ~95 mm apart,
+  - Three-petal sabot (64-69 g, solid 5 mm base): 39.5 mm rear band and front band ~95 mm apart,
     hollow fin cavity, thick waist (r 13-13.5 mm), front ring scoop that opens it at the muzzle.
     Rev 2: Russ's first petals all snapped at the bottom of the slim waist near the end of
     the print (3.35 mm sliver, ~1.6 mm over the cavity roof, 112 mm tall). Now the waist,

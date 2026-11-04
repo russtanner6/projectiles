@@ -30,7 +30,7 @@ Rod choice:
 | Fin tail | `tail_fins.stl` | 3.9 g | 6.7 g | 30 mm span, 2 deg cant; 4 fins (8 mm), 6 longer fins (1/2 in.) |
 | Basket tail | `tail_basket.stl` | 5.3 g | 7.3 g | flared windowed cone, no fins to snap |
 | Spinning basket tail | `tail_basket_spin.stl` | 5.3 g | 7.3 g | inner vanes twisted 16 deg for gentle spin |
-| Sabot petal (print 3) | `sabot_petal.stl` | 22.6 g | 21.4 g | thick waist (rev 2), solid 5 mm base; bands 38.8 mm to fit the ~39 mm barrel |
+| Sabot petal (print 3) | `sabot_petal.stl` | 23.0 g | 21.7 g | thick waist (rev 2), solid 5 mm base; bands 39.5 mm for the ~40.1 mm barrel |
 
 Both noses have a tapered tail (Russ's idea) that runs 20 mm (8 mm) or 22 mm
 (1/2 in.) back down the rod from the full-width sleeve, ending in a 1 mm wall.
