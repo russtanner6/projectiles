@@ -13,10 +13,11 @@
 //                       blades so air through the cone spins it gently
 //        "assembly"     preview with the rod (not for printing)
 //
-// Fit: very tight, no glue. Sockets are 0.2 mm over the rod with 4 thin crush ribs that
-// the rod shaves down as it's pressed in (0.25 mm interference per rib).
-// Press on with a vise or tap with a mallet against a wood block. If a batch
-// is too tight to start, run a rod-size drill bit into the first few mm by hand.
+// Fit: snug press fit, no glue, no crush ribs (rev 2: PCTG ribs didn't crush).
+// A plain round grip section (rod + grip_fit, 0.1 mm) holds the part; the rest
+// of the bore is looser so it only grips where it should. Tails have a lead-in
+// chamfer. Press on by hand or with a vise. Tune grip_fit with the socket fit
+// gauge (socket_fit_gauge.scad).
 //
 // Print (all supports off, 100% infill or 6+ walls):
 //   noses: tip up (socket opens on the bed; its top is a pointed cone).
@@ -29,27 +30,29 @@ $fn = 96;
 part        = "assembly";
 include <flechette_dims.scad>
 
-module socket(depth, rib_from = 0) {
-    // straight bore with crush ribs; pointed (50 deg) end so no flat ceiling
-    difference() {
-        union() {
-            cylinder(h = depth - 0.3, d = sock_d);
-            translate([0, 0, depth - 0.3]) cylinder(h = sock_d / 2 * T50 + 0.3, d1 = sock_d, d2 = 0.01);
-        }
-        for (a = [45 : 90 : 315]) rotate([0, 0, a])
-            hull() {   // ribs stop short of the pointed top; a rib starting mid-bore gets a 50 deg sloped start
-                translate([rib_r, -rib_w / 2, rib_from + (rib_from > 0 ? (sock_d / 2 - rib_r) * T50 + 0.1 : 0)])
-                    cube([sock_d, rib_w, depth - 1.0 - rib_from - (rib_from > 0 ? (sock_d / 2 - rib_r) * T50 + 0.1 : 0)]);
-                translate([sock_d / 2 + 0.05, -rib_w / 2, rib_from]) cube([sock_d, rib_w, 0.01]);
-            }
-    }
+module nose_socket(depth, grip_from) {
+    // opens at the bed; loose below grip_from, snug grip above, pointed (50 deg) top
+    rc = clear_d / 2; rg = grip_d / 2;
+    translate([0, 0, -0.01]) rotate_extrude() polygon([
+        [0, 0], [rc, 0], [rc, grip_from], [rg, grip_from + (rc - rg) * T50],
+        [rg, depth], [0, depth + rg * T50]]);
+}
+
+module tail_socket(h) {
+    // opens at the top: lead-in chamfer, snug grip for grip_len, looser below
+    // down to the floor the rod end sits on. The step from loose to snug slopes
+    // at 50 deg so nothing overhangs.
+    rc = clear_d / 2; rg = grip_d / 2;
+    rotate_extrude() polygon([
+        [0, tail_floor], [rc, tail_floor], [rc, h - grip_len],
+        [rg, h - grip_len + (rc - rg) * T50], [rg, h - lead_in],
+        [rg + lead_in, h], [rg + lead_in, h + 1], [0, h + 1]]);
 }
 
 // noses: a tapered tail (Russ's idea) runs back down the rod from the
 // sleeve, so there's no abrupt step from the nose to the rod: cleaner airflow,
-// and the longer grip keeps the nose straight. The taper part is a plain
-// sliding fit; the crush ribs are only in the sleeve, so it presses on no
-// harder than before. Above the sleeve is the shaped tip, so the socket never
+// and the longer grip keeps the nose straight. The taper part is a loose
+// sliding fit; only the sleeve grips. Above the sleeve is the shaped tip, so the socket never
 // comes near the outside.
 module nose_base() {
     // taper (z 0..nose_taper, 1 mm wall at its end) + straight sleeve
@@ -64,7 +67,7 @@ module nose_spike() {
             translate([0, 0, nose_taper + nose_sock - 0.01])
                 rotate_extrude() polygon([[0, 0], [hub_d / 2, 0], [0.3, spike_len], [0, spike_len]]);
         }
-        translate([0, 0, -0.01]) socket(nose_taper + nose_sock, nose_taper);
+        nose_socket(nose_taper + nose_sock, nose_taper);
     }
 }
 
@@ -82,7 +85,7 @@ module nose_ogive() {
                 translate([0, 0, L - ogive_tip_r * 1.6]) sphere(r = ogive_tip_r);
             }
         }
-        translate([0, 0, -0.01]) socket(nose_taper + nose_sock, nose_taper);
+        nose_socket(nose_taper + nose_sock, nose_taper);
     }
 }
 
@@ -103,12 +106,7 @@ module tail_fins() {
             for (i = [0 : fin_n - 1]) rotate([0, 0, 360 * i / fin_n + 180 / $fn]) rotate([fin_cant, 0, 0]) fin();   // offset half a facet: avoids a mesh sliver
           }
         }
-        translate([0, 0, tail_floor]) cylinder(h = h, d = sock_d);
-    }
-    // crush ribs inside the open socket
-    intersection() {
-        for (a = [45 : 90 : 315]) rotate([0, 0, a]) translate([rib_r, -rib_w / 2, tail_floor]) cube([sock_d / 2 - rib_r + 0.3, rib_w, tail_sock]);
-        cylinder(h = h, d = sock_d + 0.2);
+        tail_socket(h);
     }
 }
 
@@ -135,7 +133,7 @@ module tail_basket(twist = 0) {
             }
             basket_vanes(twist);
         }
-        translate([0, 0, tail_floor]) cylinder(h = h, d = sock_d);
+        tail_socket(h);
         // diamond windows (pointed tops print without support), cut through the cone wall only
         intersection() {
             for (i = [0 : windows - 1]) rotate([0, 0, 360 * i / windows])
@@ -146,10 +144,6 @@ module tail_basket(twist = 0) {
                 translate([0, 0, -0.02]) cylinder(h = basket_len - 2, r1 = rb - basket_wall - 0.4, r2 = rt - 0.6);
             }
         }
-    }
-    intersection() {
-        for (a = [45 : 90 : 315]) rotate([0, 0, a]) translate([rib_r, -rib_w / 2, tail_floor]) cube([sock_d / 2 - rib_r + 0.3, rib_w, tail_sock]);
-        cylinder(h = h, d = sock_d + 0.2);
     }
 }
 

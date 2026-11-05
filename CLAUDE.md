@@ -150,7 +150,11 @@ When there are action items:
     55 deg up, plus 1 on top; horns on the underside can't print without support.
     It stays inside the 38 mm width.
 - `designs/flechette/`: steel flechette, a 150 mm rod with push-on printed parts
-  (very tight crush-rib sockets, no glue). Both rod sizes: `8mm/` (59 g rod) and
+  (snug press fit, no glue). Sockets rev 2: no crush ribs (Russ: PCTG ribs don't
+  crush, tails wouldn't go on; noses at +0.2 mm were a bit loose). A plain grip
+  bore of rod + `grip_fit` (0.10 mm) over 12-14 mm, rod + 0.25 mm elsewhere, a
+  lead-in chamfer on tails. Tune `grip_fit` with `socket_fit_gauge.scad`
+  (holes at rod +0.00 to +0.25 mm). Russ's Amazon 8 mm rods are 150 mm (6 in.). Both rod sizes: `8mm/` (59 g rod) and
   `12.7mm/` (149 g rod), plus `12mm/` for metric 12 mm rod, built by `build.sh`
   from `flechette_dims.scad`. `Flechette Print Packet.zip` holds every printable
   part per size, the wad and a print sheet; rebuild it when parts change.
@@ -158,7 +162,7 @@ When there are action items:
     the basket tail is its recommended tail (~28 mm vs ~12 mm stability margin).
   - Noses: spike or ogive (ogive is the default: it's best at subsonic speeds and tougher). Both have a tapered
     tail running ~20 mm back down the rod (Russ's idea): no step from nose to rod,
-    longer grip; ribs only in the sleeve. Print with a brim. A nose wider than the
+    longer grip; only the sleeve grips. Print with a brim. A nose wider than the
     hub was evaluated and rejected: more nose lift and drag cancel its weight gain. Tails: 4 fins, a windowed basket, or the basket with
     twisted inner vanes for gentle spin.
   - Basket windows are narrow diamonds (4.5 mm wide) so the bridges between them

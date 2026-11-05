@@ -11,10 +11,18 @@ rod_d       = 8.0;
 big         = rod_d > 10;
 rod_len     = 150.0;
 
-// push-on sockets: bore 0.2 mm over the rod, 4 crush ribs 0.25 mm into the rod
-sock_d      = rod_d + 0.2;
-rib_r       = rod_d / 2 - 0.25;
-rib_w       = 1.0;
+// push-on sockets (rev 2, no crush ribs: Russ found PCTG ribs don't crush, so
+// the tails wouldn't go on, while the noses were a bit loose):
+//   a plain round grip section, 12-14 mm long, sized for a snug press fit,
+//   a slightly looser bore elsewhere, and a lead-in chamfer at the tail mouth.
+// grip_d is the number to tune: use the socket fit gauge (socket_fit_gauge.scad)
+// to find the hole that feels right on your rods, then set grip_fit to it.
+sock_d      = rod_d + 0.2;          // reference size for the hub wall
+grip_fit    = 0.10;                 // grip bore = rod + this (nose felt ~0.1 mm loose at +0.2)
+grip_d      = rod_d + grip_fit;
+clear_d     = rod_d + 0.25;         // non-gripping parts of the bore: slides freely
+grip_len    = 12.0;                 // tail: gripping length at the mouth
+lead_in     = 0.6;                  // 45 deg chamfer at the tail mouth
 wall        = big ? 2.0 : 1.7;      // socket wall (thicker for the 3x heavier rod)
 hub_d       = sock_d + 2 * wall;    // 11.6 / 16.9 mm
 

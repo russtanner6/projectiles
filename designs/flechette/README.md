@@ -52,11 +52,15 @@ drag than a solid cone, like a shuttlecock); the pointed tops print without
 supports. The bridges between windows are about 3.5-4 mm wide (8 mm) and
 4.5-5 mm (1/2 in.).
 
-**Fit:** very tight, no glue.
-- Sockets are 0.2 mm over the rod (8.2 or 12.9 mm) with 4 crush ribs that
-  the rod shaves as it goes in (0.25 mm interference per rib).
-- Press on with a vise, or tap with a mallet against a wood block.
-- If a batch is too tight to start, run a rod-size drill bit into the mouth by hand.
+**Fit (rev 2):** snug press fit, no glue, no crush ribs.
+- Russ found the PCTG crush ribs don't crush (tails wouldn't go on), while the
+  noses at +0.2 mm were a little loose.
+- Each socket now has a plain round grip section (rod + 0.10 mm: 8.10 / 12.80 mm)
+  12-14 mm long, a looser bore elsewhere (rod + 0.25 mm), and tails have a
+  chamfered mouth to start the rod straight.
+- To dial it in, print `socket_fit_gauge.stl` from your rod-size folder: six
+  holes from rod +0.00 to +0.25 mm, labeled. The hole that takes a firm push
+  and then holds is the grip size; set `grip_fit` in `flechette_dims.scad`.
 
 **Sabot:**
 - Same outside for both rod sizes; the 1/2 in. version has a thicker waist
