@@ -14,7 +14,7 @@
 //        "assembly"     preview with the rod (not for printing)
 //
 // Fit: snug press fit, no glue, no crush ribs (rev 2: PCTG ribs didn't crush).
-// A plain round grip section (rod + grip_fit, 0.1 mm) holds the part; the rest
+// A plain round grip section (rod + grip_fit, now 0.00 mm) holds the part; the rest
 // of the bore is looser so it only grips where it should. Tails have a lead-in
 // chamfer. Press on by hand or with a vise. Tune grip_fit with the socket fit
 // gauge (socket_fit_gauge.scad).

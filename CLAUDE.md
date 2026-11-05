@@ -152,7 +152,7 @@ When there are action items:
 - `designs/flechette/`: steel flechette, a 150 mm rod with push-on printed parts
   (snug press fit, no glue). Sockets rev 2: no crush ribs (Russ: PCTG ribs don't
   crush, tails wouldn't go on; noses at +0.2 mm were a bit loose). A plain grip
-  bore of rod + `grip_fit` (0.10 mm) over 12-14 mm, rod + 0.25 mm elsewhere, a
+  bore of rod + `grip_fit` (0.00 mm: Russ's fit gauge, the rod-size hole fit best) over 12-14 mm, rod + 0.25 mm elsewhere, a
   lead-in chamfer on tails. Tune `grip_fit` with `socket_fit_gauge.scad`
   (holes at rod +0.00 to +0.25 mm). Russ's Amazon 8 mm rods are 150 mm (6 in.). Both rod sizes: `8mm/` (59 g rod) and
   `12.7mm/` (149 g rod), plus `12mm/` for metric 12 mm rod, built by `build.sh`

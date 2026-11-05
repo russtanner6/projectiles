@@ -55,7 +55,8 @@ supports. The bridges between windows are about 3.5-4 mm wide (8 mm) and
 **Fit (rev 2):** snug press fit, no glue, no crush ribs.
 - Russ found the PCTG crush ribs don't crush (tails wouldn't go on), while the
   noses at +0.2 mm were a little loose.
-- Each socket now has a plain round grip section (rod + 0.10 mm: 8.10 / 12.80 mm)
+- Each socket now has a plain round grip section modeled at exactly rod size
+  (8.00 / 12.70 mm: Russ's fit gauge showed the +0.00 hole fits best, printed holes come out a bit over size)
   12-14 mm long, a looser bore elsewhere (rod + 0.25 mm), and tails have a
   chamfered mouth to start the rod straight.
 - To dial it in, print `socket_fit_gauge.stl` from your rod-size folder: six

@@ -18,7 +18,7 @@ rod_len     = 150.0;
 // grip_d is the number to tune: use the socket fit gauge (socket_fit_gauge.scad)
 // to find the hole that feels right on your rods, then set grip_fit to it.
 sock_d      = rod_d + 0.2;          // reference size for the hub wall
-grip_fit    = 0.10;                 // grip bore = rod + this (nose felt ~0.1 mm loose at +0.2)
+grip_fit    = 0.00;                 // grip bore = rod + this. Russ's fit gauge: the +0.00 hole fit best (8 mm rod)
 grip_d      = rod_d + grip_fit;
 clear_d     = rod_d + 0.25;         // non-gripping parts of the bore: slides freely
 grip_len    = 12.0;                 // tail: gripping length at the mouth
