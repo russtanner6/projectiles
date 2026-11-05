@@ -71,10 +71,20 @@ module nose_spike() {
     }
 }
 
+// ogive nose socket depth: the rod runs up into the ogive until its end is
+// nose_gap below the tip, but stops where the ogive wall around it would drop
+// under 1.5 mm
+og_rho     = (pow(hub_d / 2, 2) + ogive_len * ogive_len) / hub_d;
+og_tip_top = ogive_len - 0.6 * ogive_tip_r;                       // tip height above the ogive base
+og_h_max   = sqrt(og_rho * og_rho - pow(og_rho - hub_d / 2 + grip_d / 2 + 1.5, 2));
+og_h_rod   = max(0, min(og_tip_top - nose_gap, og_h_max));      // rod end height above the ogive base
+ogive_sock = nose_taper + nose_sock + og_h_rod;                    // total socket depth
+echo(str("ogive nose: rod end ", og_tip_top - og_h_rod, " mm below the tip; socket depth ", ogive_sock));
+
 module nose_ogive() {
-    // tangent ogive from the sleeve to a rounded tip
+    // tangent ogive from the sleeve to a rounded, bullet-like tip
     Rb = hub_d / 2; L = ogive_len;
-    rho = (Rb * Rb + L * L) / (2 * Rb);
+    rho = og_rho;
     // x = distance from the tip; profile point = [radius, height above the ogive base]
     pts = [for (i = [0 : 40]) let(x = L * i / 40, y = sqrt(rho * rho - pow(L - x, 2)) + Rb - rho) [max(y, 0), L - x]];
     difference() {
@@ -85,7 +95,7 @@ module nose_ogive() {
                 translate([0, 0, L - ogive_tip_r * 1.6]) sphere(r = ogive_tip_r);
             }
         }
-        nose_socket(nose_taper + nose_sock, nose_taper);
+        nose_socket(ogive_sock, nose_taper);
     }
 }
 
@@ -159,5 +169,5 @@ else {
     translate([-28, 0, 0]) { tail_fins(); translate([0, 0, tail_floor]) rod();
         translate([0, 0, tail_floor + rod_len - nose_sock - nose_taper]) nose_spike(); }
     translate([28, 0, 0]) { tail_basket(0); translate([0, 0, tail_floor]) rod();
-        translate([0, 0, tail_floor + rod_len - nose_sock - nose_taper]) nose_ogive(); }
+        translate([0, 0, tail_floor + rod_len - ogive_sock]) nose_ogive(); }
 }

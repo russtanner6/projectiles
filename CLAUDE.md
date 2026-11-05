@@ -42,9 +42,9 @@ When there are action items:
   from the parameters. (Was briefly 38.5 after a dart slid in with a little play;
   Russ set it back to 38.0. A wad behind the dart takes up the seal.)
   **Exception (Russ approved):** the flechette sabot's two bearing bands are
-  sized to the barrel, currently 39.5 mm (Russ's call after his brother-in-law
+  sized to the barrel, currently 39.7 mm (Russ's call after his brother-in-law
   measured the barrel at ~40.1 mm inside with calipers), so the barrel holds
-  the petals closed and centered. Check them with `--max-width 39.5`.
+  the petals closed and centered. Check them with `--max-width 39.7`.
 - **Material: PCTG.** Use PCTG for all mass, CG, and strength calculations
   (density about 1.23–1.27 g/cm³; use 1.25 unless a measured print weight says
   otherwise).
@@ -157,22 +157,28 @@ When there are action items:
   (holes at rod +0.00 to +0.25 mm). Russ's Amazon 8 mm rods are 150 mm (6 in.). Both rod sizes: `8mm/` (59 g rod) and
   `12.7mm/` (149 g rod), plus `12mm/` for metric 12 mm rod, built by `build.sh`
   from `flechette_dims.scad`. `Flechette Print Packet.zip` holds every printable
-  part per size, the wad and a print sheet; rebuild it when parts change.
+  part per size, the wad and a print sheet; `Flechette 8mm Packet.zip` is Russ's
+  short set (bullet nose, spinning basket, petal). Rebuild both when parts change.
   - 1/2 in. version: bigger hub, 6 longer fins (4 would be about neutral);
     the basket tail is its recommended tail (~28 mm vs ~12 mm stability margin).
-  - Noses: spike or ogive (ogive is the default: it's best at subsonic speeds and tougher). Both have a tapered
+  - Noses: spike or ogive (ogive is the default: it's best at subsonic speeds and tougher).
+    Ogive rev 2 (Russ): more bullet-shaped (ogive 18 mm / 26 mm, tip radius 2.4 / 3.4 mm)
+    and the rod runs up into it to ~1/2 in. (12.7 mm) below the tip on 8 mm; 16.7 mm on
+    1/2 in., where 1.5 mm minimum wall around the rod end limits it. Both have a tapered
     tail running ~20 mm back down the rod (Russ's idea): no step from nose to rod,
     longer grip; only the sleeve grips. Print with a brim. A nose wider than the
     hub was evaluated and rejected: more nose lift and drag cancel its weight gain. Tails: 4 fins, a windowed basket, or the basket with
     twisted inner vanes for gentle spin.
   - Basket windows are narrow diamonds (4.5 mm wide) so the bridges between them
     are 3.5-5 mm thick; Russ found the first version's ~0.2-1 mm bridges too skinny.
-  - Three-petal sabot (64-69 g, solid 5 mm base): 39.5 mm rear band and front band ~95 mm apart,
+  - Three-petal sabot (71-75 g, solid 5 mm base): 39.7 mm rear band and front band ~95 mm apart,
     hollow fin cavity, thick waist (r 13-13.5 mm), front ring scoop that opens it at the muzzle.
     Rev 2: Russ's first petals all snapped at the bottom of the slim waist near the end of
     the print (3.35 mm sliver, ~1.6 mm over the cavity roof, 112 mm tall). Now the waist,
     cavity wall (2.4 mm), scoop walls and collar are thicker and the outer taper starts
     5 mm above the cavity: thinnest section 84 mm² (was 23). Costs ~27 g of sabot.
+    Rev 3: bands 39.7 mm; cavity wall 2.4 -> 3.4 mm and scoop wall 2.4 -> 3.0 mm after
+    Russ snapped a rev 2 petal by hand-bending it at the cavity wall.
     Radial V-key ridges and grooves align the petals without stopping separation.
   - The tail sits on the sabot base: air pushes base -> tail -> rod.
   - 150 mm rod chosen over 100 or 200 mm (see the README).

@@ -29,9 +29,11 @@ hub_d       = sock_d + 2 * wall;    // 11.6 / 16.9 mm
 // noses
 nose_sock   = big ? 18.0 : 14.0;    // socket depth
 spike_len   = big ? 40.0 : 30.0;    // shaped tip length above the sleeve
-ogive_len   = big ? 32.0 : 24.0;
-ogive_tip_r = big ? 2.3 : 1.6;      // ~28% of the hub radius: rounded, chip-resistant
-nose_taper  = big ? 22.0 : 20.0;    // tapered tail behind the sleeve, down toward the rod (1/2 in.: sabot clearance limits it)
+ogive_len   = big ? 26.0 : 18.0;    // rev 2: shorter, more bullet-shaped (about 1.5 hub diameters; was 32 / 24)
+ogive_tip_r = big ? 3.4 : 2.4;      // rev 2: rounder tip, ~40% of the hub radius (was 2.3 / 1.6)
+nose_gap    = 12.7;                 // rod end sits this far below the nose tip (Russ: about 1/2 in.),
+                                    // unless that would leave less than 1.5 mm of wall (the 1/2 in. rod)
+nose_taper  = big ? 18.0 : 20.0;    // tapered tail behind the sleeve, down toward the rod (1/2 in.: sabot clearance limits it)
 taper_end_r = sock_d / 2 + 1.0;     // 1 mm wall at the taper's end (no feather edge)
 
 // tails

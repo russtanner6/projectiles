@@ -32,7 +32,7 @@ part        = "petal";      // "petal", "all" (3 petals, closed), "assembly", "o
 // The two bearing bands are sized to Russ's barrel (about 39 mm inside), not
 // the 38.0 mm projectile limit, so the barrel squeezes the petals closed and
 // centered. Only the bands touch the barrel; Russ approved this exception.
-band_d      = 39.5;         // Russ: barrel measured ~40.1 mm inside (caliper); petals close to 39.5 mm
+band_d      = 39.7;         // Russ: barrel measured ~40.1 mm inside (caliper); petals close to 39.7 mm
 max_width   = 40.0;
 D           = band_d;
 n_petals    = 3;
@@ -44,7 +44,7 @@ base_t      = 5.0;          // base the tail sits on (thick: it takes the air bl
 rear_band   = 10.0;         // length of the rear bearing band
 fin_clr     = 0.8;          // clearance around the fins
 bore_clr    = 0.15;         // rod bore clearance (rod slides out freely)
-cav_wall    = 2.4;          // wall around the tail cavity
+cav_wall    = 3.4;          // wall around the tail cavity (rev 3: was 2.4, Russ snapped one bending it)
 // Rev 2 (Russ's first print snapped every petal at the bottom of the waist
 // at ~90%: each petal's waist was a 3.35 mm sliver, down to ~1.6 mm where it
 // met the cavity roof, standing 112 mm tall). Now a thick waist.
@@ -53,7 +53,7 @@ front_top   = 112.0;        // front end of the sabot (rod's front 40+ mm and no
 front_band  = 10.0;
 scoop_depth = 9.0;
 scoop_in_r  = rod_d / 2 + bore_clr + 4.0;    // collar around the rod (8.15 / 10.5)
-scoop_wall  = 2.4;
+scoop_wall  = 3.0;
 key_d       = 0.9;          // how far a ridge sticks out of the face
 key_h       = key_d * tan(50);   // half-height (faces at 50 deg)
 key_clr     = 0.2;
@@ -71,7 +71,9 @@ band0  = front_top - front_band;
 flare0 = band0 - (R - waist_r) * T50;            // front flare (widens upward at 50 deg)
 
 assert(flare0 > waist0 + 5, "waist too short");
-assert(front_top < base_t + tail_floor + rod_len - nose_sock - nose_taper - 2, "sabot would reach the nose");
+og_rho_s   = (pow(hub_d / 2, 2) + ogive_len * ogive_len) / hub_d;
+og_h_rod_s = max(0, min(ogive_len - 0.6 * ogive_tip_r - nose_gap, sqrt(og_rho_s * og_rho_s - pow(og_rho_s - hub_d / 2 + grip_d / 2 + 1.5, 2))));
+assert(front_top < base_t + tail_floor + rod_len - nose_sock - nose_taper - og_h_rod_s - 2, "sabot would reach the nose");
 key_z2      = 96.0;
 keys        = [[6.0, 16.3, 18.5], [key_z2, rod_d / 2 + bore_clr + 1.05, waist_r + (key_z2 - flare0) / T50 - 1.4]];   // [height, inner r, outer r]
 
