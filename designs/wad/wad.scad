@@ -7,16 +7,18 @@
 // tilt by about (clearance / skirt length).
 //
 // Print: pusher face down on the bed, skirt pointing up. No supports.
-// Settings: 3-4 walls, any infill (the disc is thin enough to be nearly
-// solid anyway). Load it skirt-first toward the air chamber, flat face
+// Settings: 100% infill (matches the other parts). Load it skirt-first toward the air chamber, flat face
 // against the dart's tail.
 
 $fn = 180;
 
-max_width   = 38.0;   // hard project limit
-wad_d       = 38.0;   // outer diameter
-disc_t      = 5.0;    // pusher disc thickness (was thinner before; Russ asked for thicker)
-skirt_len   = 22.0;   // skirt length behind the disc (~0.6 x bore keeps it from cocking)
+// Rev 2 (Russ): sized to the barrel like the sabot (barrel ~40.1 mm inside), in
+// the same three sizes as the sabot: 39.7, 39.0 and 38.6 mm (-D wad_d=...).
+// Base 1 mm thicker and skirt longer, so it's stronger and can't cock or fold.
+max_width   = 40.0;   // barrel-sized part (Russ approved), like the sabot bands
+wad_d       = 39.0;   // outer diameter: 39.7 / 39.0 / 38.6
+disc_t      = 6.0;    // pusher disc thickness (rev 2: was 5.0)
+skirt_len   = 28.0;   // skirt length behind the disc (rev 2: was 22; ~0.7 x bore)
 skirt_wall  = 1.8;    // skirt wall at the disc
 lip_wall    = 0.9;    // thin feather edge at the open end, flares out under pressure to seal
 taper_len   = 8.0;    // length over which the wall thins to the lip

@@ -45,6 +45,7 @@ When there are action items:
   sized to the barrel, currently 39.0 mm, with a 38.6 mm variant to compare (Russ's
   call; his brother-in-law measured the barrel at ~40.1 mm inside with calipers),
   so the barrel holds the petals closed and centered. Check with `--max-width 39.0`.
+  The wad is barrel-sized too, in the same sizes (39.7 / 39.0 / 38.6 mm).
 - **Material: PCTG.** Use PCTG for all mass, CG, and strength calculations
   (density about 1.23–1.27 g/cm³; use 1.25 unless a measured print weight says
   otherwise).
@@ -184,9 +185,11 @@ When there are action items:
     Radial V-key ridges and grooves align the petals without stopping separation.
   - The tail sits on the sabot base: air pushes base -> tail -> rod.
   - 150 mm rod chosen over 100 or 200 mm (see the README).
-- `designs/wad/`: wad cup fired behind the dart: 38.0 mm, 5 mm pusher disc,
-  22 mm skirt with a thin flared lip that pressure seals against the barrel.
-  The long skirt keeps it from cocking or flipping. Prints disc-down, no supports.
+- `designs/wad/`: wad cup fired behind the projectile, rev 2 (Russ): barrel-sized like
+  the sabot, in the same three sizes (`wad_39.7.stl`, `wad_39.0.stl`, `wad_38.6.stl`),
+  6 mm pusher disc (was 5), 28 mm skirt (was 22; 34 mm overall), thin flared lip that
+  pressure seals against the barrel. The long skirt keeps it from cocking or folding.
+  Prints disc-down, no supports, 100% infill.
 - `designs/fit-test/`: barrel fit rings at 38.5 / 38.8 / 39.0 / 39.2 mm, for
   measuring the barrel's real inside diameter (Russ estimates ~39 mm).
 - `designs/whistle-tests/`: four short test pieces. Results: A (skull copy) and
