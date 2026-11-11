@@ -45,7 +45,7 @@ When there are action items:
   sized to the barrel, currently 39.0 mm, with a 38.6 mm variant to compare (Russ's
   call; his brother-in-law measured the barrel at ~40.1 mm inside with calipers),
   so the barrel holds the petals closed and centered. Check with `--max-width 39.0`.
-  The wad is barrel-sized too, in the same sizes (39.7 / 39.0 / 38.6 mm).
+  The wad and the Mk1 dart are barrel-sized too, in the same sizes (39.7 / 39.0 / 38.6 mm).
 - **Material: PCTG.** Use PCTG for all mass, CG, and strength calculations
   (density about 1.23–1.27 g/cm³; use 1.25 unless a measured print weight says
   otherwise).
@@ -117,6 +117,8 @@ When there are action items:
 ## Designs
 
 - `designs/mk1/`: Mk1 Ducted-Tail Dart (current). See its README for numbers.
+  Now barrel-sized in the same three sizes as the sabot and wad (Russ):
+  `mk1_dart_39.7.stl`, `_39.0`, `_38.6` (`-D body_d=...`), 131-137 g, margin +0.76 cal.
 - Weight distribution: without metal, adding plastic near the middle (thicker
   walls) doesn't move the CG forward. What works: a longer body (fins farther
   back), a shorter/lighter tail ring, and keeping hollow space behind the CG.

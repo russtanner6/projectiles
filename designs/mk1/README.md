@@ -2,7 +2,7 @@
 
 ![side](previews/mk1_dart_side.png)
 
-Claude's first from-scratch design. The goal is the strongest dart that still flies
+Claude's first from-scratch design. Now built in three barrel sizes (39.7 / 39.0 / 38.6 mm) to match the sabot and wad: `mk1_dart_39.7.stl`, `mk1_dart_39.0.stl`, `mk1_dart_38.6.stl`. The table below is from the original 38.0 mm version. The goal is the strongest dart that still flies
 nose-first, within the 38 mm limit, printed in PCTG with no metal.
 
 | | Mk1 | Gemini Rev 15 (reference) |
