@@ -2,7 +2,7 @@
 // inside the front by a one-way snap plug (Russ's design). Generated from
 // mk1_dart.scad plus the rod channel and plug below; edit the rod/plug section here.
 //
-// Rod: 8 mm steel, rod_len (49 mm: a 150 mm rod cut in three), slid in from the
+// Rod: 8 mm steel, rod_len (45 mm: three from a 150 mm rod), slid in from the
 // base until it stops at the top of the channel, 10 mm below the nose tip.
 // Channel bore 8.15 mm (Russ's fit-gauge pick for a sliding fit).
 // Plug: pushed in from the base with any stick (a rod offcut works). Its two
@@ -155,7 +155,8 @@ module mk1_dart() {
 // Rod channel, ratchet and snap plug
 rod_d        = 8.0;
 rod_bore     = 8.15;      // Russ's fit gauge, 4th hole: slides in, no slop
-rod_len      = 49.0;      // nominal rod length (three per 150 mm rod)
+rod_len      = 45.0;      // nominal rod length (three per 150 mm rod; the 15 mm offcut is the plug pusher).
+                          // 45 (not 49) so the plug's spring tip sits 4 mm up inside the channel, centered
 rod_top_gap  = 10.0;      // channel top (rod end) this far below the nose tip
 rat_z0       = 0.0;       // ratchet teeth start at the base
 rat_n        = 10;
