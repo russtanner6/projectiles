@@ -120,18 +120,20 @@ When there are action items:
   Now barrel-sized in the same three sizes as the sabot and wad (Russ):
   `mk1_dart_39.7.stl`, `_39.0`, `_38.6` (`-D body_d=...`), 131-137 g, margin +0.76 cal.
 - `designs/mk1/mk1r_dart.scad`: Mk1-R Rod Dart (Russ's design): the Mk1 shape with an
-  8 mm steel rod (45 mm, three from a 150 mm rod; aim within ~1 mm) in a 8.15 mm center
-  channel (Russ's fit-gauge pick) ending 10 mm below the tip. Rod length chosen for the
+  8 mm steel rod (36.5 mm, four from a 150 mm rod; aim within ~1 mm) in a 8.15 mm center
+  channel (Russ's fit-gauge pick) ending 18.5 mm below the tip (rev 3, Russ: was 10 mm,
+  45 mm rod; now ~13.6 mm of solid over the channel point so hard hits don't crack the nose;
+  rod bottom and plug unchanged; stability +0.80 vs +0.82). Rod length chosen for the
   best stability: 40-60 mm all give ~+0.82-0.85 cal (vs +0.76 without); longer rods
   reach behind the CG and stability drops. A one-way snap plug (printed flat) pushes up
   from the base: two thick arms cammed in by ramps catch a 10-tooth ratchet near the
   base, and a 4-beam spring on its tip preloads the rod (~1.5 mm) so it can't rattle.
-  Rod 45 (not 49) so the plug's tip sits ~4 mm up inside the channel and is centered
+  The rod bottom sits at 80 mm so the plug's tip is ~4 mm up inside the channel, centered
   at both ends (Russ worried the post would wander in the open cavity).
   Plug rev 2: round except one flat it prints on (side play ~0.7 mm per side, was ~1.5);
   hooks only on the sides so they fold in fully (arms squeeze 0.9 mm; slot allows 1.1).
   Three widths: `mk1r_dart_39.7/39.0/38.6.stl`, plug `mk1r_plug.stl`; packet
-  `Mk1-R Rod Dart Packet.zip`. ~151 g assembled (39.0), CG 60 mm from tip, +0.82 cal.
+  `Mk1-R Rod Dart Packet.zip`. ~149 g assembled (39.0), CG 61 mm from tip, +0.80 cal.
 - Weight distribution: without metal, adding plastic near the middle (thicker
   walls) doesn't move the CG forward. What works: a longer body (fins farther
   back), a shorter/lighter tail ring, and keeping hollow space behind the CG.
