@@ -42,7 +42,7 @@ When there are action items:
   from the parameters. (Was briefly 38.5 after a dart slid in with a little play;
   Russ set it back to 38.0. A wad behind the dart takes up the seal.)
   **Exception (Russ approved):** the flechette sabot's two bearing bands are
-  sized to the barrel, currently 39.0 mm, with a 38.6 mm variant to compare (Russ's
+  sized to the barrel, currently 39.0 mm, with 39.7 and 38.6 mm variants (Russ's
   call; his brother-in-law measured the barrel at ~40.1 mm inside with calipers),
   so the barrel holds the petals closed and centered. Check with `--max-width 39.0`.
   The wad and the Mk1 dart are barrel-sized too, in the same sizes (39.7 / 39.0 / 38.6 mm).
@@ -192,7 +192,7 @@ When there are action items:
     Rev 3: bands 39.7 mm; cavity wall 2.4 -> 3.4 mm and scoop wall 2.4 -> 3.0 mm after
     Russ snapped a rev 2 petal by hand-bending it at the cavity wall.
     Rev 4: 39.0 mm, and the tail-cavity section is full width (`cav_full`), so the
-    cavity wall is 3.7 mm. A 38.6 mm variant is in `variants/` (`-D band_d=38.6`).
+    cavity wall is 3.7 mm. 39.7 and 38.6 mm variants are in `variants/` (`-D band_d=...`).
     Radial V-key ridges and grooves align the petals without stopping separation.
   - The tail sits on the sabot base: air pushes base -> tail -> rod.
   - 150 mm rod chosen over 100 or 200 mm (see the README).
