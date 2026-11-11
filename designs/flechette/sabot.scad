@@ -32,7 +32,8 @@ part        = "petal";      // "petal", "all" (3 petals, closed), "assembly", "o
 // The two bearing bands are sized to Russ's barrel (about 39 mm inside), not
 // the 38.0 mm projectile limit, so the barrel squeezes the petals closed and
 // centered. Only the bands touch the barrel; Russ approved this exception.
-band_d      = 39.7;         // Russ: barrel measured ~40.1 mm inside (caliper); petals close to 39.7 mm
+band_d      = 39.0;         // Russ: barrel measured ~40.1 mm inside (caliper); closed sabot 39.0 mm (rev 4; was 39.7)
+cav_full    = true;         // rev 4 (Russ): the tail-cavity section is full width, same as the bands
 max_width   = 40.0;
 D           = band_d;
 n_petals    = 3;
@@ -63,7 +64,7 @@ fc_r   = fin_span / 2 + fin_clr;                 // fin cavity radius
 cav_top = base_t + tail_len + 1.0;               // top of the straight fin cavity
 bore_r = rod_d / 2 + bore_clr;
 cone_top = cav_top + (fc_r - bore_r) * T50;      // cavity roof cone (50 deg) down to the rod bore
-mid_r  = fc_r + cav_wall;                        // outer radius around the fin cavity
+mid_r  = cav_full ? R : fc_r + cav_wall;         // outer radius around the fin cavity
 taper_delay = 5.0;                               // outer taper starts this far above the cavity top, so the wall
                                                  // over the cavity's 50 deg roof is ~6.6 mm instead of 2.4
 waist0 = cav_top + taper_delay + (mid_r - waist_r) * T50;   // outer cone reaches the waist here
@@ -81,7 +82,7 @@ keys        = [[6.0, 16.3, 18.5], [key_z2, rod_d / 2 + bore_clr + 1.05, waist_r 
 module body() {
     difference() {
         rotate_extrude() polygon([
-            [0, 0], [R, 0], [R, rear_band], [mid_r, rear_band + (R - mid_r)], [mid_r, cav_top], [mid_r, cav_top + taper_delay],
+            [0, 0], [R, 0], each (cav_full ? [] : [[R, rear_band], [mid_r, rear_band + (R - mid_r)]]), [mid_r, cav_top], [mid_r, cav_top + taper_delay],
             [waist_r, waist0], [waist_r, flare0], [R, band0], [R, front_top], [0, front_top]]);
         // fin cavity with a 50 deg roof down to the rod bore
         translate([0, 0, base_t]) cylinder(h = cav_top - base_t, r = fc_r);

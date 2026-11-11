@@ -14,7 +14,7 @@ for size in 8 12.7 12; do
   openscad -q -o "$out/sabot_all.stl" -D rod_d=$size -D 'part="all"' "$@" sabot.scad
   for f in "$out"/*.stl; do
     echo "== $f"
-    mw=38.0; [[ $f == *sabot* ]] && mw=39.7
+    mw=38.0; [[ $f == *sabot* ]] && mw=39.0
     python3 $T/check_stl.py "$f" --binary --max-width $mw
     [[ $f == *sabot_all* ]] && continue
     python3 $T/overhangs.py "$f" || echo "(overhang report above)"
