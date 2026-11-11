@@ -11,7 +11,7 @@
 // back out. A small spring stack on the plug's top presses the rod up against
 // the channel top (no rattle); the ratchet and spring absorb +/-5 mm of rod
 // length error, so the hacksaw cut doesn't have to be exact.
-// Print the plug lying flat on one of its flat sides (part = "plug").
+// Print the plug lying on its one flat side (part = "plug"); it is round everywhere else.
 //
 // Base dart: 38 mm-class potato-cannon projectile, PCTG, printed nose-up (base on the bed).
 //
@@ -163,7 +163,8 @@ rat_n        = 10;
 rat_pitch    = 1.3;
 rat_depth    = 0.8;       // tooth depth (radial)
 plug_r       = 3.95;      // plug body radius (slides in the 8.15 bore)
-plug_flat    = 2.6;       // plug is flat-sided: |y| <= plug_flat (prints lying down)
+plug_flat    = 2.75;      // plug has ONE flat (y = -plug_flat) to print on; the rest is round
+                          // (rev 2: was flat on both sides, which left ~1.5 mm of side play)
 arm_len      = 16.0;      // springy arms (split by a slot)
 arm_slot     = 2.2;
 barb_n       = 2;
@@ -205,7 +206,7 @@ module rod_dart() {
 
 // plug in the dart frame, at its nominal installed position (unsqueezed)
 module plug_section(h) {
-    linear_extrude(h) intersection() { circle(r = plug_r, $fn = 64); square([2 * plug_r + 2, 2 * plug_flat], center = true); }
+    linear_extrude(h) intersection() { circle(r = plug_r, $fn = 64); translate([-plug_r - 1, -plug_flat]) square([2 * plug_r + 2, plug_flat + plug_r + 1]); }
 }
 module plug() {
     zb = plug_bot; zs = plug_top - spring_h;
@@ -217,20 +218,22 @@ module plug() {
             intersection() {
                 for (k = [0 : barb_n - 1]) let(zc = zb + 1.0 + k * rat_pitch)
                     rotate_extrude($fn = 64) polygon([[plug_r - 0.3, zc], [barb_r, zc], [r_in - 0.1, zc + rat_pitch - 0.1], [plug_r - 0.3, zc + rat_pitch - 0.1]]);
-                translate([0, 0, zb]) linear_extrude(arm_len) square([2 * barb_r + 2, 2 * plug_flat], center = true);
+                // hooks only on the sides (within 30 deg of the arms' bending direction),
+                // so they fold fully inward when the arms squeeze
+                translate([0, 0, zb]) linear_extrude(arm_len) translate([-barb_r - 1, -plug_flat]) square([2 * barb_r + 2, plug_flat + barb_r * sin(30)]);   // down to the print flat (no overhang)
             }
         }
         // slot that splits the bottom into two arms
-        translate([-arm_slot / 2, -plug_flat - 1, zb - 1]) cube([arm_slot, 2 * plug_flat + 2, arm_len + 1]);
+        translate([-arm_slot / 2, -plug_flat - 1, zb - 1]) cube([arm_slot, plug_flat + plug_r + 3, arm_len + 1]);
     }
     // spring stack: beams joined at alternating ends, then a cap that meets the rod
     intersection() {
         union() {
             for (k = [0 : spring_beams]) let(z0 = zs + k * (spring_beam + spring_gap), side = (k % 2 == 0) ? 1 : -1)
-                translate([side > 0 ? plug_r - 1.2 : -plug_r - 0.5, -plug_flat, z0 - 0.01]) cube([1.7, 2 * plug_flat, spring_gap + 0.02]);
+                translate([side > 0 ? plug_r - 1.2 : -plug_r - 0.5, -plug_flat, z0 - 0.01]) cube([1.7, plug_flat + plug_r + 1, spring_gap + 0.02]);
             for (k = [0 : spring_beams - 1]) let(z0 = zs + spring_gap + k * (spring_beam + spring_gap))
-                translate([-plug_r - 1, -plug_flat, z0]) cube([2 * plug_r + 2, 2 * plug_flat, spring_beam]);
-            translate([-plug_r - 1, -plug_flat, plug_top - spring_cap]) cube([2 * plug_r + 2, 2 * plug_flat, spring_cap]);
+                translate([-plug_r - 1, -plug_flat, z0]) cube([2 * plug_r + 2, plug_flat + plug_r + 1, spring_beam]);
+            translate([-plug_r - 1, -plug_flat, plug_top - spring_cap]) cube([2 * plug_r + 2, plug_flat + plug_r + 1, spring_cap]);
         }
         translate([0, 0, zs - 0.02]) plug_section(spring_h + 0.04);
     }

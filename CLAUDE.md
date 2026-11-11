@@ -128,6 +128,8 @@ When there are action items:
   base, and a 4-beam spring on its tip preloads the rod (~1.5 mm) so it can't rattle.
   Rod 45 (not 49) so the plug's tip sits ~4 mm up inside the channel and is centered
   at both ends (Russ worried the post would wander in the open cavity).
+  Plug rev 2: round except one flat it prints on (side play ~0.7 mm per side, was ~1.5);
+  hooks only on the sides so they fold in fully (arms squeeze 0.9 mm; slot allows 1.1).
   Three widths: `mk1r_dart_39.7/39.0/38.6.stl`, plug `mk1r_plug.stl`; packet
   `Mk1-R Rod Dart Packet.zip`. ~151 g assembled (39.0), CG 60 mm from tip, +0.82 cal.
 - Weight distribution: without metal, adding plastic near the middle (thicker
