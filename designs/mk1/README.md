@@ -63,3 +63,20 @@ nose-first, within the 38 mm limit, printed in PCTG with no metal.
 Regenerate: `tools/render.sh designs/mk1/mk1_dart.scad`, then
 `tools/stability.py designs/mk1/mk1_dart.scad designs/mk1/mk1_dart.stl` and
 `tools/strength.py designs/mk1/mk1_dart.stl`.
+
+## Mk1-R Rod Dart (`mk1r_dart.scad`)
+
+![cutaway](previews/mk1r_cutaway.png)
+
+Same outside as Mk1, plus an 8 mm steel rod locked in the front with a one-way snap plug.
+
+- **Rod:** 8 mm steel, 49 mm long (three from one 150 mm rod; 45-54 mm all work), in an
+  8.15 mm channel up the center that ends 10 mm below the nose tip.
+- **Why 49 mm:** stability peaks for rods 40-60 mm long (about +0.82 to +0.85 cal vs
+  +0.76 without a rod). Longer rods put steel behind the balance point and stability drops.
+- **Plug:** printed lying flat. Two thick arms are squeezed inward by ramps inside the
+  channel as you push it in, then catch on a 10-tooth ratchet near the base: it can
+  never back out. A 4-beam spring on its tip presses the rod against the channel top,
+  so nothing rattles; ratchet + spring take up rod-length error.
+- **Sizes:** `mk1r_dart_39.7.stl`, `mk1r_dart_39.0.stl`, `mk1r_dart_38.6.stl` (128-134 g
+  printed), plug `mk1r_plug.stl` (3 g). Assembled (39.0): ~152 g, CG 60 mm from the tip.
