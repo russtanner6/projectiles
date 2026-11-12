@@ -60,13 +60,32 @@ module hatch_line() {   // shallow groove showing the hatch outline (concept onl
         difference() { cylinder(h = L, r = R + 1); cylinder(h = L, r = R - 0.5); }
     }
 }
+// solid column hanging from the hollow's roof that holds the rod: 2.5 mm walls,
+// a 5 mm solid floor under the rod, and a pointed (50 deg) bottom so it prints
+col_r   = rod_d / 2 + 2.5;
+col_bot = L - rod_gap - rod_len - 5;           // bottom of the solid floor
+module rod_column() {
+    translate([0, 0, col_bot]) cylinder(h = 40, r = col_r);
+    translate([0, 0, col_bot - col_r * tan(50)]) cylinder(h = col_r * tan(50) + 0.01, r1 = 0.01, r2 = col_r);
+}
+// electronics tray mount on the wall opposite the hatch: two rails and a
+// bottom ledge (wedge underneath so it prints) that the tray rests on
+tray_z = [74, 100];
+module tray_mount() {
+    for (sy = [-1, 1]) translate([-R + wall - 0.5, sy * 8 - 1, tray_z[0]]) cube([4, 2, tray_z[1] - tray_z[0]]);
+    hull() {
+        translate([-R + wall - 0.5, -9, tray_z[0] - 0.01]) cube([7, 18, 0.01]);
+        translate([-R + wall - 0.5, -9, tray_z[0] - 7 * tan(50)]) cube([0.5, 18, 0.01]);
+    }
+}
 module rod_pocket() { translate([0, 0, L - rod_gap - rod_len]) cylinder(h = rod_len + 0.5, d = rod_d, $fn = 48); }
 
 module airframe() {
     difference() {
         union() { outer(); intersection() { fins(); cylinder(h = L, r = R); }
+                  intersection() { rod_column(); outer(); }
                   difference() { cylinder(h = ring_len, r = R); translate([0, 0, -1]) cylinder(h = ring_len + 2, r = R - ring_wall); } }
-        inner(); hatch_line(); rod_pocket();
+        difference() { inner(); rod_column(); } hatch_line(); rod_pocket();
     }
 }
 if (part == "cutaway") difference() { airframe(); translate([-50, 0, -1]) cube([100, 50, 200]); }
