@@ -148,6 +148,13 @@ When there are action items:
   either of which can release the nose (redundant). Release by burning through a nylon
   holding line with nichrome (no moving parts), chosen over servos. LED for status/night,
   peak altitude logged. Range rules in `FIELD_CHECKLIST.md` are the real safety net.
+  Parts (Russ chose cheap parts, "but make sure they're still good"): per channel an
+  ESP32-C3 SuperMini, a BMP280 (GY-BMP280-3.3, 6-pin), a 1S 150 mAh 25C LiPo (drone type,
+  own USB charger), a D4184 MOSFET module, 32 AWG nichrome, slide switch, 3 mm LED.
+  Holding line 20 lb nylon mono; shock cord 80 lb braided line; DIY parachute (template).
+  Launch detected from the barometer (fast climb); apogee by barometer with a backup
+  timer. Quality plan: multi-packs for spares, a test program for every board/sensor,
+  repeated bench burn tests per channel. Russ and his brother-in-law will solder.
   `hf1_concept.scad` is the early mockup; `hf1.scad` is a superseded side-hatch draft.
 - Weight distribution: without metal, adding plastic near the middle (thicker
   walls) doesn't move the CG forward. What works: a longer body (fins farther
