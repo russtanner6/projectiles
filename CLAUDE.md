@@ -112,7 +112,9 @@ When there are action items:
 ## Open questions
 
 - Cannon specs: barrel inner diameter (caliper: ~40.1 mm), barrel length, chamber volume, firing
-  pressure. Needed for velocity, spin, and range estimates.
+  pressure. Needed for velocity, spin, and range estimates. Known: barrel ~4-5 ft;
+  air from a VEVOR 8 L tire bead blaster, 85-116 psi (120 max). Estimated 300-500 J
+  reaches the projectile (~1,000 J ideal).
 
 ## Designs
 
@@ -134,6 +136,19 @@ When there are action items:
   hooks only on the sides so they fold in fully (arms squeeze 0.9 mm; slot allows 1.1).
   Three widths: `mk1r_dart_39.7/39.0/38.6.stl`, plug `mk1r_plug.stl`; packet
   `Mk1-R Rod Dart Packet.zip`. ~149 g assembled (39.0), CG 61 mm from tip, +0.80 cal.
+- `designs/hf1/`: HF1 High-Flier, for maximum height with parachute recovery (Russ:
+  "no failure is an option"; robustness and reliability required for electronics and chute).
+  Agreed: full-bore dart (not a sabot), fired behind the wad, ~175-185 mm, three widths;
+  bullet nose with a 36.5 mm rod sealed in by a print pause; thin ring around 4 fins
+  (fins alone can't stabilize a light dart inside the barrel width); fins 3.2 mm with
+  root fillets; everything heavy on the axis (balance). Deployment: the nose pops off
+  (axial, symmetric), pushed by a steel spring, pulling the chute out; nose, chute and
+  body stay tied together by a Kevlar shock cord. Electronics approved (first in the
+  project): two independent channels, each a board + barometric altimeter + battery,
+  either of which can release the nose (redundant). Release by burning through a nylon
+  holding line with nichrome (no moving parts), chosen over servos. LED for status/night,
+  peak altitude logged. Range rules in `FIELD_CHECKLIST.md` are the real safety net.
+  `hf1_concept.scad` is the early mockup; `hf1.scad` is a superseded side-hatch draft.
 - Weight distribution: without metal, adding plastic near the middle (thicker
   walls) doesn't move the CG forward. What works: a longer body (fins farther
   back), a shorter/lighter tail ring, and keeping hollow space behind the CG.
