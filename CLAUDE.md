@@ -49,7 +49,7 @@ When there are action items:
 - **Mostly printed; metal only where Russ says.** The default is still
   all-printed PCTG. Approved exceptions: a metal chain or steel cable joining
   the chain-shot balls; a steel rod down the middle of flechettes and some
-  dart variants; steel balls (or nuts) as canister-shot payload; non-printed parts (fabric, rubber band) for a parachute or
+  dart variants; steel balls, nuts or lead shot as canister-shot payload; non-printed parts (fabric, rubber band) for a parachute or
   streamer on the high-altitude projectile.
 - **Two rod sizes, always (Russ's rule).** Everything designed around a steel
   rod must come in both sizes, as a `rod_d` parameter with both STL sets built:
@@ -231,13 +231,15 @@ When there are action items:
     Radial V-key ridges and grooves align the petals without stopping separation.
   - The tail sits on the sabot base: air pushes base -> tail -> rod.
   - 150 mm rod chosen over 100 or 200 mm (see the README).
-- `designs/canister/`: canister shot (Russ): 3 petals (like the sabot) around ~45 x 3/8 in.
-  steel balls (~160 g payload; any loose metal fits). Full 39.6 mm shell, 3 mm wall, solid
-  5 mm base, 40 mm cavity with a 50 deg cone roof and a 7 mm top hole (balls can't fall out),
-  a ring scoop at the front (wall runs 10 mm past the roof) so air throws the petals open at
-  the muzzle, a 0.4 mm tape groove at the base (one wrap of masking tape hinges the petals
-  for loading), V keys. Petal 11.9 g, 65.5 mm tall. Fired with the wad behind it.
-  Untested: whether the petals open cleanly and how wide the pattern spreads.
+- `designs/canister/`: canister shot (Russ). Current: `canister_cup.scad`, a one-piece
+  open-front cup like a shotgun wad cup (Russ found the 3-petal version flimsy-looking):
+  39.6 mm, 3 mm wall, solid 6 mm base, 33.6 x 48 mm cavity (~43 cm^3), fully rounded front
+  edge; plus a thin solid push-in lid (1.6 mm, 0.15 mm clearance, printed flat) that sits on
+  the shot. Firing presses the shot onto the base; past the muzzle drag slows the ~30 g cup
+  and the shot pushes the lid out and leaves within a few feet. Payload: any shot (Russ:
+  lead shot is fine). Steel 3/8 in. balls ~160 g full; lead ~280 g full, so fill lead ~2/3.
+  The petal version (`canister.scad`) stays in the repo as an alternative.
+  Untested: pattern width, and whether the lid always clears.
 - `designs/wad/`: wad cup fired behind the projectile, rev 2 (Russ): barrel-sized like
   the sabot: `wad.stl`, 39.6 mm (16 g),
   6 mm pusher disc (was 5), 28 mm skirt (was 22; 34 mm overall), thin flared lip that
