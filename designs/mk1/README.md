@@ -2,7 +2,7 @@
 
 ![side](previews/mk1_dart_side.png)
 
-Claude's first from-scratch design. Now built in three barrel sizes (39.7 / 39.0 / 38.6 mm) to match the sabot and wad: `mk1_dart_39.7.stl`, `mk1_dart_39.0.stl`, `mk1_dart_38.6.stl`. The table below is from the original 38.0 mm version. The goal is the strongest dart that still flies
+Claude's first from-scratch design. Now barrel-sized at 39.6 mm to match the sabot and wad: `mk1_dart.stl` (137 g). The table below is from the original 38.0 mm version. The goal is the strongest dart that still flies
 nose-first, within the 38 mm limit, printed in PCTG with no metal.
 
 | | Mk1 | Gemini Rev 15 (reference) |
@@ -79,5 +79,5 @@ Same outside as Mk1, plus an 8 mm steel rod locked in the front with a one-way s
   channel as you push it in, then catch on a 10-tooth ratchet near the base: it can
   never back out. A 4-beam spring on its tip presses the rod against the channel top,
   so nothing rattles; ratchet + spring take up rod-length error.
-- **Sizes:** `mk1r_dart_39.7.stl`, `mk1r_dart_39.0.stl`, `mk1r_dart_38.6.stl` (128-134 g
-  printed), plug `mk1r_plug.stl` (3.7 g). Assembled (39.0): ~149 g, CG 61 mm from the tip.
+- **Size:** `mk1r_dart.stl`, 39.6 mm (134 g printed), plug `mk1r_plug.stl` (3.7 g).
+  Assembled: ~150 g, CG 61 mm from the tip.

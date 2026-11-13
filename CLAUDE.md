@@ -42,11 +42,11 @@ When there are action items:
   from the parameters. (Was briefly 38.5 after a dart slid in with a little play;
   Russ set it back to 38.0. A wad behind the dart takes up the seal.)
   **Exception (Russ approved):** the flechette sabot's two bearing bands are
-  sized to the barrel, currently 39.7 mm (Russ: "39.7 works best" after testing all
-  three), with 39.0 and 38.6 mm variants (barrel measured ~40.1 mm inside with calipers),
-  so the barrel holds the petals closed and centered. Check with `--max-width 39.7`.
-  The wad and the Mk1 dart are barrel-sized too, in the same sizes (39.7 / 39.0 / 38.6 mm); 39.7 is the default
-  everywhere (`body_d`, `wad_d`, `band_d`), the others are `-D` builds.
+  sized to the barrel: 39.6 mm, one size only (Russ: 39.7 worked best of 39.7 / 39.0 /
+  38.6, then he picked 39.6 and dropped the other sizes; barrel ~40.1 mm by calipers),
+  so the barrel holds the petals closed and centered. Check with `--max-width 39.6`.
+  The wad, the Mk1 and Mk1-R darts and HF1 are barrel-sized too, all 39.6 mm
+  (`body_d`, `wad_d`, `band_d`). Build no other sizes unless Russ asks.
 - **Material: PCTG.** Use PCTG for all mass, CG, and strength calculations
   (density about 1.23–1.27 g/cm³; use 1.25 unless a measured print weight says
   otherwise).
@@ -120,8 +120,8 @@ When there are action items:
 ## Designs
 
 - `designs/mk1/`: Mk1 Ducted-Tail Dart (current). See its README for numbers.
-  Now barrel-sized in the same three sizes as the sabot and wad (Russ):
-  `mk1_dart_39.7.stl`, `_39.0`, `_38.6` (`-D body_d=...`), 131-137 g, margin +0.76 cal.
+  Now barrel-sized like the sabot and wad (Russ): `mk1_dart.stl`, 39.6 mm,
+  137 g, margin ~+0.76 cal.
 - `designs/mk1/mk1r_dart.scad`: Mk1-R Rod Dart (Russ's design): the Mk1 shape with an
   8 mm steel rod (36.5 mm, four from a 150 mm rod; aim within ~1 mm) in a 8.15 mm center
   channel (Russ's fit-gauge pick) ending 18.5 mm below the tip (rev 3, Russ: was 10 mm,
@@ -135,8 +135,8 @@ When there are action items:
   at both ends (Russ worried the post would wander in the open cavity).
   Plug rev 2: round except one flat it prints on (side play ~0.7 mm per side, was ~1.5);
   hooks only on the sides so they fold in fully (arms squeeze 0.9 mm; slot allows 1.1).
-  Three widths: `mk1r_dart_39.7/39.0/38.6.stl`, plug `mk1r_plug.stl`; packet
-  `Mk1-R Rod Dart Packet.zip`. ~149 g assembled (39.0; ~1 g more at 39.7), CG 61 mm from tip, +0.80 cal.
+  `mk1r_dart.stl` (39.6 mm, 134 g), plug `mk1r_plug.stl`; packet
+  `Mk1-R Rod Dart Packet.zip`. ~150 g assembled, CG 61 mm from tip, +0.80 cal.
 - `designs/hf1/`: HF1 High-Flier, for maximum height with parachute recovery (Russ:
   "no failure is an option"; robustness and reliability required for electronics and chute).
   Agreed: full-bore dart (not a sabot), fired behind the wad, ~175-185 mm, three widths;
@@ -198,8 +198,8 @@ When there are action items:
   (holes at rod +0.00 to +0.25 mm). Russ's Amazon 8 mm rods are 150 mm (6 in.). Both rod sizes: `8mm/` (59 g rod) and
   `12.7mm/` (149 g rod), plus `12mm/` for metric 12 mm rod, built by `build.sh`
   from `flechette_dims.scad`. `Flechette Print Packet.zip` holds every printable
-  part per size, the wad and a print sheet; `Flechette 8mm Packet - 39.7 sabot.zip`
-  (the one to use), `- 39.0 sabot.zip` and `- 38.6 sabot.zip` are Russ's short sets (bullet nose, spinning basket, petal). Rebuild both when parts change.
+  part per size, the wad and a print sheet; `Flechette 8mm Packet.zip`
+  is Russ's short set (bullet nose, spinning basket, petal, wad). Rebuild both when parts change.
   - 1/2 in. version: bigger hub, 6 longer fins (4 would be about neutral);
     the basket tail is its recommended tail (~28 mm vs ~12 mm stability margin).
   - Noses: spike or ogive (ogive is the default: it's best at subsonic speeds and tougher).
@@ -212,7 +212,7 @@ When there are action items:
     twisted inner vanes for gentle spin.
   - Basket windows are narrow diamonds (4.5 mm wide) so the bridges between them
     are 3.5-5 mm thick; Russ found the first version's ~0.2-1 mm bridges too skinny.
-  - Three-petal sabot (76-79 g, solid 5 mm base): 39.7 mm (rev 5 default), full width over the whole tail
+  - Three-petal sabot (75-79 g, solid 5 mm base): 39.6 mm (rev 6), full width over the whole tail
     section (rev 4, Russ) plus a front band ~95 mm up; hollow fin cavity, thick waist (r 13-13.5 mm), front ring scoop that opens it at the muzzle.
     Rev 2: Russ's first petals all snapped at the bottom of the slim waist near the end of
     the print (3.35 mm sliver, ~1.6 mm over the cavity roof, 112 mm tall). Now the waist,
@@ -221,13 +221,12 @@ When there are action items:
     Rev 3: bands 39.7 mm; cavity wall 2.4 -> 3.4 mm and scoop wall 2.4 -> 3.0 mm after
     Russ snapped a rev 2 petal by hand-bending it at the cavity wall.
     Rev 4: 39.0 mm, and the tail-cavity section is full width (`cav_full`), so the
-    cavity wall is 3.7 mm. Rev 5: default bands 39.7 mm (Russ: fits best); 39.0 and 38.6 mm
-    variants are in `variants/` (`-D band_d=...`).
+    cavity wall is 3.7 mm. Rev 5: 39.7 mm (Russ: fit best). Rev 6: 39.6 mm, the only size.
     Radial V-key ridges and grooves align the petals without stopping separation.
   - The tail sits on the sabot base: air pushes base -> tail -> rod.
   - 150 mm rod chosen over 100 or 200 mm (see the README).
 - `designs/wad/`: wad cup fired behind the projectile, rev 2 (Russ): barrel-sized like
-  the sabot, in the same three sizes (`wad_39.7.stl`, `wad_39.0.stl`, `wad_38.6.stl`),
+  the sabot: `wad.stl`, 39.6 mm (16 g),
   6 mm pusher disc (was 5), 28 mm skirt (was 22; 34 mm overall), thin flared lip that
   pressure seals against the barrel. The long skirt keeps it from cocking or folding.
   Prints disc-down, no supports, 100% infill.

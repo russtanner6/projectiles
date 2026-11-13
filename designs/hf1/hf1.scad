@@ -15,7 +15,7 @@
 
 $fn = 120;
 part     = "assembly";   // "body", "nose", "assembly", "assembly_closed", "cutaway"
-body_d   = 39.7;         // 39.7 / 39.0 / 38.6
+body_d   = 39.6;
 L        = 185;
 wall     = 1.6;
 // tail

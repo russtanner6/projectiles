@@ -13,10 +13,10 @@
 $fn = 180;
 
 // Rev 2 (Russ): sized to the barrel like the sabot (barrel ~40.1 mm inside), in
-// the same three sizes as the sabot: 39.7, 39.0 and 38.6 mm (-D wad_d=...).
+// one size, 39.6 mm, same as the sabot and darts (Russ).
 // Base 1 mm thicker and skirt longer, so it's stronger and can't cock or fold.
 max_width   = 40.0;   // barrel-sized part (Russ approved), like the sabot bands
-wad_d       = 39.7;   // outer diameter: 39.7 / 39.0 / 38.6
+wad_d       = 39.6;   // outer diameter (Russ: 39.6, the only size)
 disc_t      = 6.0;    // pusher disc thickness (rev 2: was 5.0)
 skirt_len   = 28.0;   // skirt length behind the disc (rev 2: was 22; ~0.7 x bore)
 skirt_wall  = 1.8;    // skirt wall at the disc
