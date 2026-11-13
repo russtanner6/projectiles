@@ -1,5 +1,5 @@
 // Mk1-W Screaming Dart, Rev B (death-whistle variant of the Mk1 Ducted-Tail Dart)
-// 38 mm potato-cannon projectile, PCTG, printed nose-up (base on the bed).
+// 39.6 mm potato-cannon projectile, PCTG, printed nose-up (base on the bed).
 //
 // Same outside as Mk1. Inside, a death-whistle sound system driven by ram air,
 // copied from whistle test piece D, which screamed like the skull whistle when
@@ -21,8 +21,8 @@
 // After landing, clear dirt from the nose inlet (a paper clip works).
 
 /* [Global] */
-max_width      = 38.0;   // hard project limit, checked below
-body_d         = 38.0;
+max_width      = 39.6;   // Russ: 39.6 for everything (barrel ~40.1 mm)
+body_d         = 39.6;
 total_length   = 135.0;  // lengthened from 125 to move the CG forward relative to the fins
 
 /* [Nose] */

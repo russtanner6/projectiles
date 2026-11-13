@@ -2,7 +2,7 @@
 // cable (recommended) or chain. Fired one behind the other with the cable
 // folded between them; in flight they spread and spin around each other.
 //
-// Shape: as round as a one-piece, support-free print allows. A 38 mm sphere
+// Shape: as round as a one-piece, support-free print allows. A 39.6 mm sphere
 // whose only non-round spot is a small flat on the bottom (with a short 47 deg
 // cone), where the cable leaves. Optional sea-mine horns (set horns = true).
 //
@@ -36,17 +36,17 @@
 $fn = 160;
 
 part        = "ball";   // "ball", "pin", or "both"
-shape       = "ball";   // "ball" (round) or "slug" (38 x 38 mm cylinder: no overhangs, ~70% heavier)
+shape       = "ball";   // "ball" (round) or "slug" (39.6 x 39.6 mm cylinder: no overhangs, ~70% heavier)
 slug_round  = 2.0;      // slug: rounded top edge
 horns       = false;    // true = sea-mine version with thick horns on the upper half
 horn_n      = 5;
 horn_elev   = 55;       // ring horns point this far above level (>= 45 to print unsupported)
 horn_d      = 8.0;
-horn_out    = 7.5;      // ring horns stick out this far (kept inside the 38 mm width)
+horn_out    = 7.5;      // ring horns stick out this far (kept inside the 39.6 mm width)
 top_horn    = 9.0;
 
-max_width   = 38.0;
-ball_d      = 38.0;
+max_width   = 39.6;
+ball_d      = 39.6;     // Russ: 39.6 for everything (barrel ~40.1 mm)
 cone_a      = 47;       // underside slope from horizontal
 // cable channel: up from the bottom flat, with room for the cable to run up
 // one side of the installed pin, over its peaked top and down the other side
