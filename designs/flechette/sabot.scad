@@ -32,7 +32,7 @@ part        = "petal";      // "petal", "all" (3 petals, closed), "assembly", "o
 // The two bearing bands are sized to Russ's barrel (about 39 mm inside), not
 // the 38.0 mm projectile limit, so the barrel squeezes the petals closed and
 // centered. Only the bands touch the barrel; Russ approved this exception.
-band_d      = 39.0;         // Russ: barrel measured ~40.1 mm inside (caliper); closed sabot 39.0 mm (rev 4; was 39.7)
+band_d      = 39.7;         // Russ: barrel ~40.1 mm inside (caliper); 39.7 fits best in testing (rev 5 default; 39.0 / 38.6 in variants/)
 cav_full    = true;         // rev 4 (Russ): the tail-cavity section is full width, same as the bands
 max_width   = 40.0;
 D           = band_d;

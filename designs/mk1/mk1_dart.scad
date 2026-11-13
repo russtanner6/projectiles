@@ -18,7 +18,7 @@
 
 /* [Global] */
 max_width      = 40.0;   // barrel-sized like the sabot and wad (Russ): 39.7 / 39.0 / 38.6
-body_d         = 39.0;   // bearing diameter: 39.7, 39.0 or 38.6 (-D body_d=...), barrel ~40.1 mm
+body_d         = 39.7;   // bearing diameter: 39.7, 39.0 or 38.6 (-D body_d=...), barrel ~40.1 mm
 total_length   = 135.0;  // lengthened from 125 to move the CG forward relative to the fins
 
 /* [Nose] */

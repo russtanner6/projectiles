@@ -7,7 +7,7 @@
 
 $fn = 120;
 part     = "all";       // "all", "cutaway"
-body_d   = 39.0;
+body_d   = 39.7;
 L        = 160;
 nose_len = 48;          // tangent ogive, ~1.2 diameters
 tip_r    = 3.0;

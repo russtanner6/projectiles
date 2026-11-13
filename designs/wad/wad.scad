@@ -16,7 +16,7 @@ $fn = 180;
 // the same three sizes as the sabot: 39.7, 39.0 and 38.6 mm (-D wad_d=...).
 // Base 1 mm thicker and skirt longer, so it's stronger and can't cock or fold.
 max_width   = 40.0;   // barrel-sized part (Russ approved), like the sabot bands
-wad_d       = 39.0;   // outer diameter: 39.7 / 39.0 / 38.6
+wad_d       = 39.7;   // outer diameter: 39.7 / 39.0 / 38.6
 disc_t      = 6.0;    // pusher disc thickness (rev 2: was 5.0)
 skirt_len   = 28.0;   // skirt length behind the disc (rev 2: was 22; ~0.7 x bore)
 skirt_wall  = 1.8;    // skirt wall at the disc
