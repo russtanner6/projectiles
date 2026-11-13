@@ -84,6 +84,8 @@ module balls() {
 }
 
 if (part == "petal") petal(0);
+else if (part == "p1") petal(1);
+else if (part == "p2") petal(2);
 else if (part == "all") for (i = [0 : n_petals - 1]) petal(i);
 else if (part == "open") for (i = [0 : n_petals - 1])
     rotate([0, 0, 360 / n_petals * (i + 0.5)]) translate([12, 0, 0]) rotate([0, 0, -360 / n_petals * (i + 0.5)]) petal(i);
