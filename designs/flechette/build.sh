@@ -21,3 +21,12 @@ for size in 8 12.7 12; do
     python3 $T/islands.py "$f" || echo "(island report above)"
   done
 done
+# XL tails (2 mm wider fins and basket) + the XL petal they need
+for size in 8 12.7 12; do
+  out="xl/${size}mm"; mkdir -p "$out"
+  for part in tail_fins tail_basket_spin; do
+    openscad -q -o "$out/${part}_xl.stl" -D rod_d=$size -D tail_xl=true -D "part=\"$part\"" "$@" flechette_parts.scad
+  done
+  openscad -q -o "$out/sabot_petal_xl.stl" -D rod_d=$size -D tail_xl=true -D 'part="petal"' "$@" sabot.scad
+  openscad -q -o "$out/sabot_all_xl.stl" -D rod_d=$size -D tail_xl=true -D 'part="all"' "$@" sabot.scad
+done

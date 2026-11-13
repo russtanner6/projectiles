@@ -76,7 +76,7 @@ og_rho_s   = (pow(hub_d / 2, 2) + ogive_len * ogive_len) / hub_d;
 og_h_rod_s = max(0, min(ogive_len - 0.6 * ogive_tip_r - nose_gap, sqrt(og_rho_s * og_rho_s - pow(og_rho_s - hub_d / 2 + grip_d / 2 + 1.5, 2))));
 assert(front_top < base_t + tail_floor + rod_len - nose_sock - nose_taper - og_h_rod_s - 2, "sabot would reach the nose");
 key_z2      = 96.0;
-keys        = [[6.0, 16.3, 18.5], [key_z2, rod_d / 2 + bore_clr + 1.05, waist_r + (key_z2 - flare0) / T50 - 1.4]];   // [height, inner r, outer r]
+keys        = [[6.0, max(16.3, fc_r + 0.6), max(18.5, fc_r + 2.0)], [key_z2, rod_d / 2 + bore_clr + 1.05, waist_r + (key_z2 - flare0) / T50 - 1.4]];   // [height, inner r, outer r]
 
 
 module body() {

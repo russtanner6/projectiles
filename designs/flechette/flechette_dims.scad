@@ -43,12 +43,13 @@ trocar_tip_flat = big ? 1.0 : 0.7;  // each face passes this far from the axis a
 tail_sock   = big ? 30.0 : 26.0;
 tail_floor  = 3.0;
 fin_n       = big ? 6 : 4;          // 1/2 in. rod needs 6 fins to stay stable (span is capped by the sabot)
-fin_span    = 30.0;                 // tip to tip, fits the sabot cavity
+tail_xl     = false;                // XL tails (Russ): 2 mm wider fins and basket, need the XL petal (-D tail_xl=true)
+fin_span    = tail_xl ? 32.0 : 30.0;   // tip to tip, fits the sabot cavity
 fin_t       = 1.8;
 fin_root    = big ? 36.0 : 30.0;
 fin_tip     = big ? 16.0 : 13.0;
 fin_cant    = 2.0;
-basket_d    = 30.0;
+basket_d    = fin_span;
 basket_len  = 30.0;
 basket_wall = 1.6;
 windows     = 8;

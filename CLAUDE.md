@@ -211,6 +211,11 @@ When there are action items:
     the rod with 1.5 mm wall, so the rod stops at its base (~13 mm below the tip on 8 mm)
     and the point is solid PCTG. Expect the tip to blunt on wood; glass chews it up. Tails: 4 fins, a windowed basket, or the basket with
     twisted inner vanes for gentle spin.
+  - XL tails (Russ): `-D tail_xl=true` makes fin span and basket 32 mm (was 30), built in
+    `xl/<size>/` with the XL petal they need (cavity 33.6 mm, wall 3.0 mm vs 4.0; the XL petal
+    also takes standard tails). Same socket. Barrowman estimates (CG/CP from the tip):
+    8 mm fins 35 -> 39 mm margin, basket 48 -> 49; 1/2 in. fins 19 -> 26, basket 26 -> 31.
+    8 mm is very stable either way; XL mostly helps the 1/2 in. fins.
   - Basket windows are narrow diamonds (4.5 mm wide) so the bridges between them
     are 3.5-5 mm thick; Russ found the first version's ~0.2-1 mm bridges too skinny.
   - Three-petal sabot (75-79 g, solid 5 mm base): 39.6 mm (rev 6), full width over the whole tail
