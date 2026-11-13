@@ -37,16 +37,12 @@ When there are action items:
 
 ## Hard constraints
 
-- **Max width: 38.0 mm.** No part of any projectile may exceed 38.0 mm in diameter
-  or width, fins and rings included. Verify this from the generated STL, not just
-  from the parameters. (Was briefly 38.5 after a dart slid in with a little play;
-  Russ set it back to 38.0. A wad behind the dart takes up the seal.)
-  **Exception (Russ approved):** the flechette sabot's two bearing bands are
-  sized to the barrel: 39.6 mm, one size only (Russ: 39.7 worked best of 39.7 / 39.0 /
-  38.6, then he picked 39.6 and dropped the other sizes; barrel ~40.1 mm by calipers),
-  so the barrel holds the petals closed and centered. Check with `--max-width 39.6`.
-  The wad, the Mk1 and Mk1-R darts and HF1 are barrel-sized too, all 39.6 mm
-  (`body_d`, `wad_d`, `band_d`). Build no other sizes unless Russ asks.
+- **Width: 39.6 mm, every projectile, one size only (Russ).** Sabot bands, wad, Mk1,
+  Mk1-R, Mk1-W, HF1 and the chain-shot ball, slug and mine are all 39.6 mm across
+  (barrel ~40.1 mm by calipers). History: 38.0 at first, a brief 38.5, then barrel-sized
+  parts at 39.7 / 39.0 / 38.6; 39.7 worked best and Russ settled on 39.6. Build no
+  other sizes unless he asks. Verify from the STL with `--max-width 39.6`.
+  Parts that ride inside the sabot (flechette noses and tails) stay sized to the sabot.
 - **Material: PCTG.** Use PCTG for all mass, CG, and strength calculations
   (density about 1.23–1.27 g/cm³; use 1.25 unless a measured print weight says
   otherwise).
@@ -99,7 +95,7 @@ When there are action items:
 - **Length:** Both darts are now ~133–135 mm. Russ approved lengthening past the
   original 115–125 mm range to move the CG forward relative to the fins
   (stability went from ~+0.62 to ~+0.75 cal).
-- **Bearing diameter:** 38.0 mm (Russ's call), fired behind a wad (`designs/wad/`).
+- **Bearing diameter:** 39.6 mm (Russ's call), fired behind a wad (`designs/wad/`).
 - **Barrel contact:** projectiles must bear on the barrel wall at two widely
   spaced full-diameter surfaces (e.g. a body band and a tail ring) so they don't
   wobble or tip in the barrel. Russ asked for this explicitly.
@@ -167,7 +163,7 @@ When there are action items:
   test piece D's internals; Russ: it sounds like a sports whistle, not menacing.
   Untried ideas for a Rev C: outlets right under the ball, seal off the long
   tail tube, ~3.5 mm ball gap.
-- `designs/chain-shot/`: two identical solid 38 mm balls joined by a metal chain
+- `designs/chain-shot/`: two identical solid 39.6 mm balls joined by a metal chain
   or cable (store-bought).
   - As round as a supportless print allows: the only flat is a small spot on the bottom, with a 47 deg cone.
   - Anchor: a thick (7 mm) house-section snap pin goes in first, through the
@@ -184,12 +180,12 @@ When there are action items:
     - Cable: 1/8 in. 7x19 galvanized or stainless (~1,700-2,000 lb), stronger
       than the printed pin, so the cable isn't the weak link. A chain can't be
       threaded around an installed pin (use a quick link).
-  - `chain_shot_slug.scad`: 38 x 38 mm cylinder (49 g). It has no overhangs, so it prints
+  - `chain_shot_slug.scad`: 39.6 x 39.6 mm cylinder (54 g). It has no overhangs, so it prints
     clean; Russ's round balls came out fuzzy on their underside. Same snap pin,
     with ends trimmed flat (`chain_shot_slug_pin.stl`).
   - `chain_shot_mine.scad`: sea-mine version with thick 8 mm horns. A ring of 5 points
     55 deg up, plus 1 on top; horns on the underside can't print without support.
-    It stays inside the 38 mm width.
+    It stays inside the 39.6 mm width.
 - `designs/flechette/`: steel flechette, a 150 mm rod with push-on printed parts
   (snug press fit, no glue). Sockets rev 2: no crush ribs (Russ: PCTG ribs don't
   crush, tails wouldn't go on; noses at +0.2 mm were a bit loose). A plain grip
@@ -253,7 +249,7 @@ When there are action items:
 - Designs are parametric OpenSCAD (`.scad`), with all key dimensions as named
   parameters at the top of the file.
 - For every design change: render the STL, check it's watertight, check max width
-  ≤ 38.0 mm, report volume and estimated PCTG mass, and render preview PNGs for
+  ≤ 39.6 mm, report volume and estimated PCTG mass, and render preview PNGs for
   Russ to review.
 - Record each revision in git with a commit message describing what changed and
   why. Note print settings that matter (pause layer, infill, walls) in the design
@@ -267,7 +263,7 @@ Setup in a fresh cloud container:
 `apt-get install -y openscad xvfb && pip install trimesh scipy shapely rtree networkx matplotlib`
 
 - `tools/render.sh design.scad`: STL (binary) + side/tail preview PNGs + checks.
-- `tools/check_stl.py part.stl`: watertight, max diameter vs 38.0 mm, mass, CG.
+- `tools/check_stl.py part.stl`: watertight, max diameter vs `--max-width` (use 39.6), mass, CG.
 - `tools/overhangs.py part.stl`: finds surfaces that would need supports.
 - `tools/islands.py part.stl`: finds floating regions (layers starting in mid-air),
   the thing Bambu Studio warns about. Strict by default; Bambu flags even tiny ones.
