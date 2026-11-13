@@ -204,7 +204,12 @@ When there are action items:
     1/2 in., where 1.5 mm minimum wall around the rod end limits it. Both have a tapered
     tail running ~20 mm back down the rod (Russ's idea): no step from nose to rod,
     longer grip; only the sleeve grips. Print with a brim. A nose wider than the
-    hub was evaluated and rejected: more nose lift and drag cancel its weight gain. Tails: 4 fins, a windowed basket, or the basket with
+    hub was evaluated and rejected: more nose lift and drag cancel its weight gain.
+    Trocar nose (`nose_trocar`, Russ's idea): a 3-sided point for plywood: three flat faces
+    ground into a fat ogive (12 mm long on 8 mm, 16 mm on 1/2 in.), thick rounded ridges,
+    blunt-ish tip (r 1.0 / 1.4). Stays within the hub width. The point is too slim to hold
+    the rod with 1.5 mm wall, so the rod stops at its base (~13 mm below the tip on 8 mm)
+    and the point is solid PCTG. Expect the tip to blunt on wood; glass chews it up. Tails: 4 fins, a windowed basket, or the basket with
     twisted inner vanes for gentle spin.
   - Basket windows are narrow diamonds (4.5 mm wide) so the bridges between them
     are 3.5-5 mm thick; Russ found the first version's ~0.2-1 mm bridges too skinny.

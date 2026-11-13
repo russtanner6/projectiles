@@ -6,6 +6,7 @@
 //
 // part = "nose_spike"   sharp cone, sleekest, least drag (chips easily)
 //        "nose_ogive"   rounded bullet nose, tougher
+//        "nose_trocar"  3-sided point with thick rounded ridges and a blunt-ish tip (Russ)
 //        "tail_fins"    4 (8 mm) or 6 (1/2 in.) swept fins with a slight cant for gentle spin
 //        "tail_basket"  flared, windowed drag cone (like a shuttlecock /
 //                       the military tail Russ found); no fins to snap
@@ -99,6 +100,37 @@ module nose_ogive() {
     }
 }
 
+// trocar nose (Russ): a 3-sided point, like a trocar grind on a rod. Three flat
+// faces start at the sleeve's top edge (round there) and meet near a rounded tip,
+// leaving thick rounded ridges between them. Looking down on it: a 3-sided point
+// with fat corners. The rod stops at the base of the point (the point is too slim
+// to hold it with a 1.5 mm wall), so the point is solid plastic.
+module nose_trocar() {
+    // envelope: a fat tangent ogive (bullet) of length L with a rounded tip; three flat
+    // faces, each touching the sleeve's top edge and leaning in to pass trocar_tip_flat
+    // from the axis at the tip, grind it into a 3-sided point. What's left of the ogive
+    // between the faces is the thick, rounded ridges.
+    Rb = hub_d / 2; L = trocar_len; rt = trocar_tip_r;
+    z0 = nose_taper + nose_sock;
+    rho = (Rb * Rb + L * L) / (2 * Rb);
+    pts = [for (i = [0 : 40]) let(x = L * i / 40, y = sqrt(rho * rho - pow(L - x, 2)) + Rb - rho) [max(y, 0), L - x]];
+    ang = atan((Rb - trocar_tip_flat) / (L - rt));       // face lean from vertical
+    difference() {
+        union() {
+            nose_base();
+            translate([0, 0, z0 - 0.01]) intersection() {
+                hull() {
+                    rotate_extrude() polygon(concat([[0, 0]], [for (i = [40 : -1 : 0]) if (pts[i][1] < L - rt) pts[i]], [[0, L - rt]]));
+                    translate([0, 0, L - rt * 1.6]) sphere(r = rt, $fn = 48);
+                }
+                intersection_for (i = [0 : 2]) rotate([0, 0, 120 * i + 90])
+                    translate([Rb, 0, 0]) rotate([0, -ang, 0]) translate([-50, -50, -10]) cube([50, 100, 100]);
+            }
+        }
+        nose_socket(z0, nose_taper);
+    }
+}
+
 module fin() {
     // swept trapezoid: root along the hub, leading edge (top) swept back
     r0 = hub_d / 2 - 0.5; r1 = fin_span / 2;
@@ -161,6 +193,7 @@ module rod() { color("silver") cylinder(h = rod_len, d = rod_d); }
 
 if (part == "nose_spike") nose_spike();
 else if (part == "nose_ogive") nose_ogive();
+else if (part == "nose_trocar") nose_trocar();
 else if (part == "tail_fins") tail_fins();
 else if (part == "tail_basket") tail_basket(0);
 else if (part == "tail_basket_spin") tail_basket(basket_twist);
