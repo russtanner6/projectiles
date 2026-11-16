@@ -49,7 +49,7 @@ When there are action items:
 - **Mostly printed; metal only where Russ says.** The default is still
   all-printed PCTG. Approved exceptions: a metal chain or steel cable joining
   the chain-shot balls; a steel rod down the middle of flechettes and some
-  dart variants; steel balls, nuts or lead shot as canister-shot payload; non-printed parts (fabric, rubber band) for a parachute or
+  dart variants; steel balls, nuts or lead shot as canister-shot payload; lead shot sealed in the lead mine's pockets; non-printed parts (fabric, rubber band) for a parachute or
   streamer on the high-altitude projectile.
 - **Two rod sizes, always (Russ's rule).** Everything designed around a steel
   rod must come in both sizes, as a `rod_d` parameter with both STL sets built:
@@ -192,6 +192,12 @@ When there are action items:
     (8 mm square posts, flared square bases, flat ends). 37.9 g, 48.6 mm tall, 39.6 mm wide.
     Pin ends stop at the flats, so it has its own shorter pin (`chain_shot_mine_faceted_pin.stl`).
     This is the mine in the MASTER zip.
+  - `chain_shot_mine_lead.scad` (`lead = true`, faceted only; Russ): two sealed side pockets
+    (+/-Y of the pin/cable slab, 3 mm walls, 2.6 mm past the release openings) filled with
+    lead shot during a print pause. Pockets run z 8 -> 26 mm, open at the top until the pause,
+    then 50 deg roofs close them. 2.83 cm^3 total (~10% of the body; the pin, cable channel and
+    walls leave no room for 25-50%). ~19 g of lead (60% packing), ~54 g total vs 38 g.
+    Pause at the 26.2 mm layer; shot <= 3.5 mm (#6 birdshot fits).
 - `designs/flechette/`: steel flechette, a 150 mm rod with push-on printed parts
   (snug press fit, no glue). Sockets rev 2: no crush ribs (Russ: PCTG ribs don't
   crush, tails wouldn't go on; noses at +0.2 mm were a bit loose). A plain grip

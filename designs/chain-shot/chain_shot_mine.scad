@@ -42,6 +42,9 @@ slug_round  = 2.0;      // slug: rounded top edge
 horns       = true;     // true = sea-mine version with thick horns on the upper half
 faceted     = false;    // true = 8-sided body (octagon from above and from the side) and square horns (Russ:
                         // round shapes print jagged and stringy on his printer; flat faces print clean)
+lead        = false;    // faceted only: two sealed side pockets for lead shot, filled during a print PAUSE (Russ)
+lead_wall   = 3.0;      // plastic around the pockets
+lead_pause  = 26.0;     // PAUSE here: pockets are open up to this height; their 50 deg roofs print after
 horn_n      = 5;
 horn_elev   = 55;       // ring horns point this far above level (>= 45 to print unsupported)
 horn_d      = 8.0;
@@ -133,10 +136,36 @@ module horns_all() {
     }
 }
 
+// lead pockets: one each side of the pin/cable slab (+/-Y), symmetric so the CG stays centred.
+// Each is one convex hull: a thin start low in the chamfer, full width through the band,
+// open top at lead_pause, then a 50 deg roof that closes after the pause.
+lp_y0 = pin_w / 2 + clr + release_w / 2 + 2.6 - pin_w / 2 - clr;   // 2.6 mm past the 16 mm release openings (10.6)
+module lead_sec(a, y0) {               // octagon of apothem a (flats on X and Y), part with y >= y0
+    intersection() {
+        rotate([0, 0, 22.5]) circle(r = a / cos(22.5), $fn = 8);
+        translate([-50, y0]) square([100, 50]);
+    }
+}
+module lead_pocket() {
+    a_band = R * cos(22.5) - lead_wall;            // inner flat distance in the straight band
+    fb = R * tan(22.5);
+    z_band = zc - fb;                              // bottom of the straight band
+    z0 = 8.0;                                      // pocket floor (in the chamfer zone)
+    a0 = (R - (zc - fb - z0) / tan(50)) * cos(22.5) - lead_wall / sin(50);
+    ro = ((a_band - lp_y0) / 2) * tan(50);         // roof height to a ridge
+    hull() {
+        translate([0, 0, z0]) linear_extrude(0.01) lead_sec(a0, lp_y0);
+        translate([0, 0, z_band]) linear_extrude(lead_pause - z_band) lead_sec(a_band, lp_y0);
+        translate([0, 0, lead_pause + ro - 0.01]) linear_extrude(0.01)
+            translate([0, (a_band + lp_y0) / 2]) square([2 * (a_band * sqrt(2) - (a_band + lp_y0) / 2) - 2 * ro / tan(50) - 6, 0.02], center = true);
+    }
+}
+
 module ball() {
     roof_top = floor_z + pin_side + pin_w / 2 * T50;
     difference() {
         union() { ball_shape(); if (horns) horns_all(); }
+        if (faceted && lead) for (s = [0, 1]) mirror([0, s, 0]) lead_pocket();
         // cable channel: the pin's own house shape grown by cable_gap all
         // round, so the ceiling runs parallel to the pin's 50 deg roof and
         // steers a cable pushed up one side over the top and down the other.
