@@ -40,6 +40,8 @@ part        = "ball";   // "ball", "pin", or "both"
 shape       = "slug";   // "ball" (round) or "slug" (39.6 x 39.6 mm cylinder: no overhangs, ~70% heavier)
 slug_round  = 2.0;      // slug: rounded top edge
 horns       = false;    // true = sea-mine version with thick horns on the upper half
+faceted     = false;    // true = 8-sided body (octagon from above and from the side) and square horns (Russ:
+                        // round shapes print jagged and stringy on his printer; flat faces print clean)
 horn_n      = 5;
 horn_elev   = 55;       // ring horns point this far above level (>= 45 to print unsupported)
 horn_d      = 8.0;
@@ -67,6 +69,7 @@ clr         = 0.2;      // pin-to-hole clearance
 
 assert(ball_d <= max_width, "ball_d exceeds max_width");
 R  = ball_d / 2;
+Rf = faceted ? R * cos(22.5) : R;      // distance to the flats on +/-X (pin ends stay inside)
 zc = R;
 zt = zc - R * cos(cone_a);
 rt = R * sin(cone_a);
@@ -75,9 +78,9 @@ T50 = tan(50);
 
 // x positions along the pin axis (ball centre = 0); head on -X, prongs on +X
 chan_w    = pin_w + 2 * clr + 2 * cable_gap;   // channel width across the pin (15.4 mm)
-x_head_in = -R + head_len + 1.5;        // inner face of the head = counterbore shoulder
-x_ledge   = R - 6.0;                    // square ledge the hooks catch on
-x_tip     = sqrt(R * R - pow(pin_w / 2 + barb, 2)) - 0.3;   // pin end, inside the ball surface
+x_head_in = -Rf + head_len + 1.5;        // inner face of the head = counterbore shoulder
+x_ledge   = Rf - 6.0;                    // square ledge the hooks catch on
+x_tip     = faceted ? Rf - 0.3 : sqrt(R * R - pow(pin_w / 2 + barb, 2)) - 0.3;   // pin end, inside the ball surface
 floor_z   = -pin_side / 2;              // pin floor, relative to the ball centre
 
 module house(w, h, fl = floor_z) {      // flat floor, straight sides, 50 deg peaked roof
@@ -96,15 +99,26 @@ module ball_shape() {
             translate([R - slug_round, ball_d - slug_round]) circle(r = slug_round, $fn = 48);
             translate([R - 0.01, 0]) square([0.01, ball_d - slug_round]);
         }
+    } else if (faceted) {
+        // side view: an octagon with a flat bottom (cable exit) and flat top; underside 50 deg
+        fb = R * tan(22.5);                    // half the vertical band = octagon side / 2
+        r_bot = R - (zc - fb) / tan(50);       // bottom flat radius
+        rotate([0, 0, 22.5]) rotate_extrude($fn = 8)
+            polygon([[0, 0], [r_bot, 0], [R, zc - fb], [R, zc + fb], [R - (R - fb), 2 * R], [0, 2 * R]]);
     } else intersection() {
         translate([0, 0, zc]) sphere(r = R);
         translate([0, 0, zt]) cylinder(h = 2 * R, r = R + 1);
     }
-    if (shape != "slug") cylinder(h = zt + 0.6, r1 = rb, r2 = rb + (zt + 0.6) / tan(cone_a));
+    if (shape != "slug" && !faceted) cylinder(h = zt + 0.6, r1 = rb, r2 = rb + (zt + 0.6) / tan(cone_a));
 }
 
 module horn(len) {
-    translate([0, 0, R - 2]) {
+    if (faceted) translate([0, 0, R - 4]) {
+        // square horn: flared square base, straight square post, flat square end
+        hull() { translate([0, 0, 0.01 / 2]) cube([horn_d + 5, horn_d + 5, 0.01], center = true);
+                 translate([0, 0, 5.5]) cube([horn_d, horn_d, 0.01], center = true); }
+        translate([-horn_d / 2, -horn_d / 2, 0]) cube([horn_d, horn_d, len + 4]);
+    } else translate([0, 0, R - 2]) {
         cylinder(h = 3.5, d1 = horn_d + 5, d2 = horn_d);
         cylinder(h = len + 2 - horn_d / 2, d = horn_d);
         translate([0, 0, len + 2 - horn_d / 2]) sphere(d = horn_d);
@@ -167,7 +181,9 @@ module pin() {
     // ends trimmed flush to the outside: a sphere for the ball, a cylinder for the slug
     intersection() {
         pin_raw();
-        if (shape == "slug") translate([0, 0, -R]) cylinder(h = ball_d, r = R - 0.15); else sphere(r = R - 0.15);
+        if (shape == "slug") translate([0, 0, -R]) cylinder(h = ball_d, r = R - 0.15);
+        else if (faceted) translate([-Rf + 0.15, -R, -R]) cube([2 * Rf - 0.3, 2 * R, 2 * R]);
+        else sphere(r = R - 0.15);
     }
 }
 

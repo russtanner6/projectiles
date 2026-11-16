@@ -186,6 +186,12 @@ When there are action items:
   - `chain_shot_mine.scad`: sea-mine version with thick 8 mm horns. A ring of 5 points
     55 deg up, plus 1 on top; horns on the underside can't print without support.
     It stays inside the 39.6 mm width.
+  - `chain_shot_mine_faceted.scad` (`faceted = true`, Russ): round shapes print jagged and
+    stringy on his printer, so the mine is now an 8-sided body (octagon from above and from
+    the side, flats on the pin axis, 50 deg underside, flat bottom and top) with square horns
+    (8 mm square posts, flared square bases, flat ends). 37.9 g, 48.6 mm tall, 39.6 mm wide.
+    Pin ends stop at the flats, so it has its own shorter pin (`chain_shot_mine_faceted_pin.stl`).
+    This is the mine in the MASTER zip.
 - `designs/flechette/`: steel flechette, a 150 mm rod with push-on printed parts
   (snug press fit, no glue). Sockets rev 2: no crush ribs (Russ: PCTG ribs don't
   crush, tails wouldn't go on; noses at +0.2 mm were a bit loose). A plain grip
