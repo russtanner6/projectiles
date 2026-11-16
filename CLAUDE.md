@@ -49,7 +49,7 @@ When there are action items:
 - **Mostly printed; metal only where Russ says.** The default is still
   all-printed PCTG. Approved exceptions: a metal chain or steel cable joining
   the chain-shot balls; a steel rod down the middle of flechettes and some
-  dart variants; steel balls, nuts or lead shot as canister-shot payload; lead shot sealed in the lead mine's pockets; non-printed parts (fabric, rubber band) for a parachute or
+  dart variants; steel balls, nuts or lead shot as canister-shot payload; lead shot sealed in the lead mine's pockets and the Mk1-L dart's nose pocket; non-printed parts (fabric, rubber band) for a parachute or
   streamer on the high-altitude projectile.
 - **Two rod sizes, always (Russ's rule).** Everything designed around a steel
   rod must come in both sizes, as a `rod_d` parameter with both STL sets built:
@@ -133,6 +133,16 @@ When there are action items:
   hooks only on the sides so they fold in fully (arms squeeze 0.9 mm; slot allows 1.1).
   `mk1r_dart.stl` (39.6 mm, 134 g), plug `mk1r_plug.stl`; packet
   `Mk1-R Rod Dart Packet.zip`. ~150 g assembled, CG 61 mm from tip, +0.80 cal.
+- `designs/mk1/mk1l_dart.scad`: Mk1-L Lead Dart (Russ): Mk1-R body, ratchet and snap plug, but
+  a sealed lead pocket in the nose instead of the rod. Filled from the BASE after printing
+  (dart nose-down; no nose hole, no pause), closed with the permanent plug, whose spring keeps
+  the shot packed against the nose so it can't take a run at the roof on impact (Russ's
+  concern). Walls (Russ: punishing hits): pocket 19 mm wide (10.3 mm side walls), 50 deg roof
+  starting 3 mm behind the nose base (21.7 mm of solid nose in front), 9.5 mm floor over the
+  aft cavity, which is shortened (cavity_top 55, Mk1 62). Lock (Russ: no chance it comes out):
+  4 barbs per arm (Mk1-R 2), 16 ratchet teeth (Mk1-R 10). Shot surface 77 mm down from the
+  base (+/-5 mm). ~45 g of #6 lead; ~183 g total; CG 58.7 mm from tip, +0.85 cal (Mk1 +0.76).
+  `mk1l_dart.stl`, `mk1l_plug.stl`; MASTER zip folder 8.
 - `designs/hf1/`: HF1 High-Flier, for maximum height with parachute recovery (Russ:
   "no failure is an option"; robustness and reliability required for electronics and chute).
   Agreed: full-bore dart (not a sabot), fired behind the wad, ~175-185 mm, three widths;
