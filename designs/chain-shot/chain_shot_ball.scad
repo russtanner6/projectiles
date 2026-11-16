@@ -68,6 +68,11 @@ barb        = 1.0;      // how far each hook sticks out (snap engagement)
 prong_len   = 13.0;     // springy prong length (longer = easier flex, less strain)
 slot_w      = 2 * barb + 0.4;   // gap between the prongs so they can close fully
 clr         = 0.2;      // pin-to-hole clearance
+pin_round   = 2.0;      // pin's peak and roof corners rounded (Russ: sharp edges can cut Kevlar line)
+// Faceted mine (flush, Russ): the pin goes in from ONE side only (-X). Its head fills a pocket
+// its own size, flush with that flat face. The hooks snap into a hidden pocket inside the far
+// side, so there's no hole there either. The pin is permanent; the cable still threads around it.
+flush       = faceted;
 
 assert(ball_d <= max_width, "ball_d exceeds max_width");
 R  = ball_d / 2;
@@ -80,13 +85,21 @@ T50 = tan(50);
 
 // x positions along the pin axis (ball centre = 0); head on -X, prongs on +X
 chan_w    = pin_w + 2 * clr + 2 * cable_gap;   // channel width across the pin (15.4 mm)
-x_head_in = -Rf + head_len + 1.5;        // inner face of the head = counterbore shoulder
-x_ledge   = Rf - 6.0;                    // square ledge the hooks catch on
-x_tip     = faceted ? Rf - 0.3 : sqrt(R * R - pow(pin_w / 2 + barb, 2)) - 0.3;   // pin end, inside the ball surface
+x_head_in = flush ? -Rf + head_len : -Rf + head_len + 1.5;   // inner face of the head = counterbore shoulder
+x_ledge   = flush ? Rf - 8.0 : Rf - 6.0;                    // square ledge the hooks catch on
+x_tip     = flush ? Rf - 3.0 : faceted ? Rf - 0.3 : sqrt(R * R - pow(pin_w / 2 + barb, 2)) - 0.3;   // pin end, inside the ball surface
 floor_z   = -pin_side / 2;              // pin floor, relative to the ball centre
+pocket_w  = pin_w + 2 * barb + 0.8;     // hidden hook pocket (flush style): hooks spring out into it
+x_pocket  = Rf - 2.6;                   // its far end: 2.6 mm of wall left under the flat face
 
 module house(w, h, fl = floor_z) {      // flat floor, straight sides, 50 deg peaked roof
     polygon([[-w / 2, fl], [w / 2, fl], [w / 2, fl + h], [0, fl + h + w / 2 * T50], [-w / 2, fl + h]]);
+}
+module house_round(w, h) {             // the pin's profile: square floor corners, rounded roof and peak
+    union() {
+        offset(r = pin_round) offset(delta = -pin_round) house(w, h);
+        translate([-w / 2, floor_z]) square([w, pin_round]);
+    }
 }
 module along_x(x0, x1) {                // extrude a profile (y, z) along X from x0 to x1
     translate([x0, 0, 0]) rotate([90, 0, 90]) linear_extrude(height = x1 - x0) children();
@@ -138,26 +151,34 @@ module horns_all() {
 // lead pockets: one each side of the pin/cable slab (+/-Y), symmetric so the CG stays centred.
 // Each is one convex hull: a thin start low in the chamfer, full width through the band,
 // open top at lead_pause, then a 50 deg roof that closes after the pause.
-lp_y0 = pin_w / 2 + clr + release_w / 2 + 2.6 - pin_w / 2 - clr;   // 2.6 mm past the 16 mm release openings (10.6)
-module lead_sec(a, y0) {               // octagon of apothem a (flats on X and Y), part with y >= y0
+lp_y0 = (flush ? max(pin_w + 2 * cable_gap + 2 * clr, head_w + 2 * clr, pocket_w) : release_w) / 2 + 2.6;   // 2.6 mm past the cable channel / openings
+// Pockets are unions of convex pieces, each with its own 50 deg roof (a union adds no new
+// overhangs). Piece 1 spans the middle beside the cable channel; pieces 2 and 3 (flush style)
+// reach further in toward the pin near each end, where the channel isn't.
+lp_y1 = (flush ? max(head_w + 2 * clr, pocket_w) : release_w) / 2 + 2.6;   // past the head pocket / hook pocket
+lp_x1 = chan_t / 2 + 2.6;                                                   // past the cable channel
+module lead_sec(a, y0, xa, xb) {       // octagon of apothem a (flats on X and Y), part with y >= y0, xa <= x <= xb
     intersection() {
         rotate([0, 0, 22.5]) circle(r = a / cos(22.5), $fn = 8);
-        translate([-50, y0]) square([100, 50]);
+        translate([xa, y0]) square([xb - xa, 50]);
     }
 }
-module lead_pocket() {
+module lead_piece(y0, xa, xb, d) {   // d: how far the 50 deg roof closes in (under the piece's inradius)
     a_band = R * cos(22.5) - lead_wall;            // inner flat distance in the straight band
     fb = R * tan(22.5);
     z_band = zc - fb;                              // bottom of the straight band
     z0 = 8.0;                                      // pocket floor (in the chamfer zone)
     a0 = (R - (zc - fb - z0) / tan(50)) * cos(22.5) - lead_wall / sin(50);
-    ro = ((a_band - lp_y0) / 2) * tan(50);         // roof height to a ridge
     hull() {
-        translate([0, 0, z0]) linear_extrude(0.01) lead_sec(a0, lp_y0);
-        translate([0, 0, z_band]) linear_extrude(lead_pause - z_band) lead_sec(a_band, lp_y0);
-        translate([0, 0, lead_pause + ro - 0.01]) linear_extrude(0.01)
-            translate([0, (a_band + lp_y0) / 2]) square([2 * (a_band * sqrt(2) - (a_band + lp_y0) / 2) - 2 * ro / tan(50) - 6, 0.02], center = true);
+        translate([0, 0, z0]) linear_extrude(0.01) lead_sec(a0, y0, xa, xb);
+        // full width starts 1 mm above the band's bottom edge, so the wall stays 3 mm at that corner
+        translate([0, 0, z_band + 1.0]) linear_extrude(lead_pause - z_band - 1.0) lead_sec(a_band, y0, xa, xb);
+        translate([0, 0, lead_pause + d * tan(50) - 0.01]) linear_extrude(0.01) offset(delta = -d) lead_sec(a_band, y0, xa, xb);
     }
+}
+module lead_pocket() {
+    lead_piece(lp_y0, -50, 50, (R * cos(22.5) - lead_wall - lp_y0) / 2 - 0.05);
+    if (flush) { lead_piece(lp_y1, lp_x1, 50, 2.0); lead_piece(lp_y1, -50, -lp_x1, 2.0); }
 }
 
 module ball() {
@@ -180,12 +201,19 @@ module ball() {
         translate([0, 0, zc]) {
             // pin hole through the middle
             along_x(x_head_in - 0.01, x_ledge + 0.01) house(pin_w + 2 * clr, pin_side + 2 * clr, floor_z - clr);
+            if (flush) {
+                // head pocket: exactly the head's size, so the head ends flush with the flat face
+                along_x(-R - 2, x_head_in) house(head_w + 2 * clr, pin_side + 2 * clr, floor_z - clr);
+                // hidden hook pocket inside the far side (no hole to the outside)
+                along_x(x_ledge, x_pocket) house(pocket_w, pin_side + 2 * clr, floor_z - clr);
+            } else {
             // entry opening for the head: as wide as the release opening on the
             // far side, so the ball stays balanced (the pin body centres the head)
             along_x(-R - 2, x_head_in) house(release_w, pin_side + 2 * clr, floor_z - clr);
             // exit pocket the hooks spring into, open to the surface and wide
             // enough to get pliers (or fingertips) on both hooks
             along_x(x_ledge, R + 2) house(release_w, pin_side + 2 * clr, floor_z - clr);
+            }
         }
     }
 }
@@ -193,8 +221,8 @@ module ball() {
 module pin_raw() {
     difference() {
         union() {
-            along_x(x_head_in - 0.15, x_tip) house(pin_w, pin_side);            // body
-            along_x(-R, x_head_in - 0.15) house(head_w, pin_side);             // head (0.15 short of its shoulder)
+            along_x(x_head_in - 0.15, x_tip) house_round(pin_w, pin_side);      // body (rounded roof: kind to the cable)
+            along_x(flush ? -Rf + 0.1 : -R, x_head_in - 0.15) house(head_w, pin_side);   // head (0.15 short of its shoulder)
             // hooks: square catch face just past the ledge, then a lead-in taper to the tip
             for (s = [-1, 1]) mirror([0, s < 0 ? 1 : 0, 0])
                 translate([0, 0, floor_z]) linear_extrude(height = pin_side)

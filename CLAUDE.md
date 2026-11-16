@@ -195,9 +195,16 @@ When there are action items:
   - `chain_shot_mine_lead.scad` (`lead = true`, faceted only; Russ): two sealed side pockets
     (+/-Y of the pin/cable slab, 3 mm walls, 2.6 mm past the release openings) filled with
     lead shot during a print pause. Pockets run z 8 -> 26 mm, open at the top until the pause,
-    then 50 deg roofs close them. 2.83 cm^3 total (~10% of the body; the pin, cable channel and
-    walls leave no room for 25-50%). ~19 g of lead (60% packing), ~54 g total vs 38 g.
+    then 50 deg roofs close them. Rev 2 (Russ: bigger, same outer wall): each pocket is a union
+    of convex pieces (middle piece beside the cable channel, end pieces reaching in toward the
+    pin where the channel isn't), 4.0 cm^3 total; outer wall 3.0 mm, 2.6 mm to channel/pin
+    pockets. ~27 g of lead (60% packing), ~61 g total vs 39 g. (Rev 1: 2.83 cm^3, ~54 g.)
     Pause at the 26.2 mm layer; shot <= 3.5 mm (#6 birdshot fits).
+  - Pin rev 2 (all chain-shot pins, Russ): body profile has a 2 mm rounded peak and roof
+    corners (`pin_round`) so it doesn't cut Kevlar line. Faceted mines (`flush`): the pin goes
+    in from -X only; its head fills a head-sized pocket, flush with the flat face; the hooks
+    snap into a hidden pocket inside the +X side (2.6 mm wall, no outside hole), so the pin
+    is permanent (the cable still threads around it). Ledge at Rf-8, tip at Rf-3.
 - `designs/flechette/`: steel flechette, a 150 mm rod with push-on printed parts
   (snug press fit, no glue). Sockets rev 2: no crush ribs (Russ: PCTG ribs don't
   crush, tails wouldn't go on; noses at +0.2 mm were a bit loose). A plain grip
