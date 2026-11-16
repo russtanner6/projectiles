@@ -205,6 +205,10 @@ When there are action items:
     in from -X only; its head fills a head-sized pocket, flush with the flat face; the hooks
     snap into a hidden pocket inside the +X side (2.6 mm wall, no outside hole), so the pin
     is permanent (the cable still threads around it). Ledge at Rf-8, tip at Rf-3.
+  - Rev 3 (Russ): hooks bigger (barb 1.3 mm, was 1.0; 2.4 mm catch face, was 1.6; Russ saw
+    wear after many insert/remove cycles). Prongs 2.0 mm, snap strain ~2.3% (was 2.0%).
+    Faceted horns: long edges rounded 1 mm, ends bevelled 45 deg (fewer chips on rocks), and
+    no top horn (Russ). Faceted mine 38.2 g, 43.9 mm tall; lead mine ~60 g filled.
 - `designs/flechette/`: steel flechette, a 150 mm rod with push-on printed parts
   (snug press fit, no glue). Sockets rev 2: no crush ribs (Russ: PCTG ribs don't
   crush, tails wouldn't go on; noses at +0.2 mm were a bit loose). A plain grip

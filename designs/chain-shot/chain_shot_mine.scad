@@ -65,10 +65,12 @@ pin_w       = 7.0;      // pin width (thick)
 pin_side    = 4.0;      // height of the pin's straight sides (roof adds pin_w/2*tan(50))
 head_w      = 10.5;     // head at the entry end
 head_len    = 4.0;      // head length (sits in the entry counterbore)
-barb        = 1.0;      // how far each hook sticks out (snap engagement)
+barb        = 1.3;      // how far each hook sticks out (snap engagement; rev 3: was 1.0, Russ saw wear)
 prong_len   = 13.0;     // springy prong length (longer = easier flex, less strain)
 slot_w      = 2 * barb + 0.4;   // gap between the prongs so they can close fully
 clr         = 0.2;      // pin-to-hole clearance
+hook_flat   = 2.4;      // length of each hook's full-height catch (rev 3: was 1.6)
+horn_r      = 1.0;      // faceted horns: long edges rounded, ends bevelled (fewer chips on rocks)
 pin_round   = 2.0;      // pin's peak and roof corners rounded (Russ: sharp edges can cut Kevlar line)
 // Faceted mine (flush, Russ): the pin goes in from ONE side only (-X). Its head fills a pocket
 // its own size, flush with that flat face. The hooks snap into a hidden pocket inside the far
@@ -128,12 +130,15 @@ module ball_shape() {
     if (shape != "slug" && !faceted) cylinder(h = zt + 0.6, r1 = rb, r2 = rb + (zt + 0.6) / tan(cone_a));
 }
 
+module rsq(w) { offset(r = horn_r, $fn = 24) square(w - 2 * horn_r, center = true); }   // square with rounded corners
 module horn(len) {
     if (faceted) translate([0, 0, R - 4]) {
         // square horn: flared square base, straight square post, flat square end
-        hull() { translate([0, 0, 0.01 / 2]) cube([horn_d + 5, horn_d + 5, 0.01], center = true);
-                 translate([0, 0, 5.5]) cube([horn_d, horn_d, 0.01], center = true); }
-        translate([-horn_d / 2, -horn_d / 2, 0]) cube([horn_d, horn_d, len + 4]);
+        hull() { linear_extrude(0.01) rsq(horn_d + 5);
+                 translate([0, 0, 5.5]) linear_extrude(0.01) rsq(horn_d); }
+        linear_extrude(len + 3) rsq(horn_d);
+        hull() { translate([0, 0, len + 3 - 0.01]) linear_extrude(0.01) rsq(horn_d);
+                 translate([0, 0, len + 4 - 0.01]) linear_extrude(0.01) rsq(horn_d - 2); }   // 45 deg bevel at the end
     } else translate([0, 0, R - 2]) {
         cylinder(h = 3.5, d1 = horn_d + 5, d2 = horn_d);
         cylinder(h = len + 2 - horn_d / 2, d = horn_d);
@@ -145,7 +150,7 @@ module horns_all() {
         // ring rotated so no horn sits over the pin's side openings (+/-X)
         for (i = [0 : horn_n - 1])
             rotate([0, 0, 360 * i / horn_n + 90]) rotate([0, 90 - horn_elev, 0]) horn(horn_out);
-        horn(top_horn);
+        if (!faceted) horn(top_horn);   // faceted mines: no top horn (Russ)
     }
 }
 
@@ -228,7 +233,7 @@ module pin_raw() {
             for (s = [-1, 1]) mirror([0, s < 0 ? 1 : 0, 0])
                 translate([0, 0, floor_z]) linear_extrude(height = pin_side)
                     polygon([[x_ledge + 0.25, pin_w / 2 - 0.01], [x_ledge + 0.25, pin_w / 2 + barb],
-                             [x_ledge + 1.6, pin_w / 2 + barb], [x_tip, pin_w / 2 + 0.05], [x_tip, pin_w / 2 - 0.01]]);
+                             [x_ledge + hook_flat, pin_w / 2 + barb], [x_tip, pin_w / 2 + 0.05], [x_tip, pin_w / 2 - 0.01]]);
         }
         // split the end into two springy prongs
         translate([x_tip - prong_len, -slot_w / 2, floor_z - 1]) cube([prong_len + 1, slot_w, 30]);
