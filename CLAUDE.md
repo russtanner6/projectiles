@@ -143,6 +143,14 @@ When there are action items:
   4 barbs per arm (Mk1-R 2), 16 ratchet teeth (Mk1-R 10). Shot surface 77 mm down from the
   base (+/-5 mm). ~45 g of #6 lead; ~183 g total; CG 58.7 mm from tip, +0.85 cal (Mk1 +0.76).
   `mk1l_dart.stl`, `mk1l_plug.stl`; MASTER zip folder 8.
+  Plug rev 2 (Russ: his short fill let the old plug slide all the way up the tube, and he had
+  no way to judge the fill): snap-rivet plug. Flat head (r 5.6) in a 3 mm recess with a 50 deg
+  conical seat = hard stop; tuning-fork slot (V, closing at z 30) with two hooks (1.3 mm) that
+  snap into a groove (z 10-13, flat catch floor, 50 deg roof) = locked both ways, ~0.2 mm play;
+  pinch notches beside the head to remove with needle-nose pliers. Spring 6 beams, 2.5 mm
+  preload, takes +/-1.5 mm of fill level. FILL GAUGE (`mk1l_gauge.stl`): stick with grooves at
+  lead_level -/+ 1.5 mm from its tip; one groove showing at the base = right amount.
+  The old ratchet is gone; old darts don't take the new plug.
 - `designs/hf1/`: HF1 High-Flier, for maximum height with parachute recovery (Russ:
   "no failure is an option"; robustness and reliability required for electronics and chute).
   Agreed: full-bore dart (not a sabot), fired behind the wad, ~175-185 mm, three widths;

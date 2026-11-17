@@ -1,18 +1,21 @@
 // Mk1-L Lead Dart (Russ): the Mk1 ducted-tail dart with a sealed lead pocket in the nose,
-// filled from the BASE after printing and closed with the Mk1-R's permanent snap plug.
-// Generated from mk1r_dart.scad (same body, ratchet and plug); edit the lead section here.
+// filled from the BASE after printing and closed with a snap-rivet plug.
+// Generated from mk1r_dart.scad (same body); edit the lead / plug section here.
 //
 // Nose: solid, no hole, no print pause. Inside it, a thick-walled pocket (19 mm wide, 50 deg
-// cone roof, 10.3 mm side walls, ~22 mm of solid nose in front, 9.5 mm floor). An 8.15 mm channel runs from the
-// base up the axis into the pocket floor (the same channel and ratchet as the Mk1-R).
-// Filling (dart standing nose-down in a cup):
-//   1. pour #6 lead birdshot (about 2.8 mm) into the base hole, tapping to settle it, until
-//      the shot surface is lead_depth mm down from the base (mark a stick), about fill_g grams;
-//   2. optional: a few drops of thin super glue down the hole to lock the shot;
-//   3. push the plug in (spring end first) until it stops hard against the shot. Its arms
-//      click over the ratchet: permanent. The spring keeps the shot packed against the nose,
-//      so there's no gap for it to slam forward on impact.
-// Print 100% infill, 6+ walls, nose up, supports off. Plug prints on its flat side.
+// cone roof, 10.3 mm side walls, ~22 mm of solid nose in front, 9.5 mm floor). An 8.15 mm
+// channel runs up the axis from the base into the pocket floor.
+// Plug rev 2 (Russ: the first plug slid all the way up the tube when the shot was short):
+//   - flat HEAD that sits in a recess at the base: a hard stop, it can't go in any farther;
+//   - tuning-fork split with two big HOOKS that snap into a groove just inside the base:
+//     it can't come back out (locked both ways, no travel);
+//   - spring on its tip keeps the shot packed against the nose;
+//   - to remove (if you overfill): pinch the two head halves together with needle-nose pliers
+//     in the two notches beside the head, then pull.
+// FILL GAUGE (part = "gauge"): a stick with two grooves. Dart nose-down in a cup, pour shot in,
+// tap to settle, push the gauge in until its tip touches the shot:
+//   neither groove showing -> add shot;  one groove showing -> just right;  both showing -> too much.
+// Print the dart 100% infill, 6+ walls, nose up, supports off. Plug and gauge print on their flat side.
 /* [Global] */
 part           = "dart";   // "dart", "plug" (print orientation), "assembly" (preview)
 max_width      = 40.0;   // barrel-sized like the sabot and wad (Russ): 39.6
@@ -152,11 +155,11 @@ plug_flat    = 2.75;      // plug has ONE flat (y = -plug_flat) to print on; the
 arm_len      = 16.0;      // springy arms (split by a slot)
 arm_slot     = 2.2;
 barb_n       = 4;        // Mk1-L: 4 barbs per arm (Mk1-R has 2): Russ wants no chance of it coming out
-spring_beams = 4;
+spring_beams = 6;         // Mk1-L plug rev 2: more spring travel (takes +/-1.5 mm of fill level)
 spring_beam  = 1.0;
 spring_gap   = 0.8;
 spring_cap   = 1.5;
-preload      = 1.5;       // spring squeeze when the rod is exactly rod_len
+preload      = 2.5;       // spring squeeze at the target fill level
 
 lead_r      = 9.5;       // pocket radius: 10.3 mm side walls to the 39.6 mm body (Russ: thick walls, punishing hits)
 roof_back   = 3.0;       // pocket roof starts this far behind the nose base (more solid nose in front)
@@ -171,26 +174,36 @@ assert(total_length - z_peak >= 20, "nose too thin in front of the lead");
 assert(lead_level - z_chan0 >= 6, "plug tip must sit well inside the channel");
 rod_top  = lead_floor + 1;                              // channel runs up into the pocket
 r_in     = rod_bore / 2;
-r_out    = r_in + rat_depth;
-barb_r   = r_out - 0.15;
+// snap-rivet plug (rev 2)
+cb_r     = 5.8;          // head recess at the base
+cb_d     = 3.0;
+head_r   = 5.6;
+hook_h   = 1.3;          // how far each hook sticks out past the bore
+z_g0     = 10.0;         // groove floor = the hooks' catch ledge
+z_g1     = 13.0;         // groove straight part ends; 50 deg chamfer back to the bore above it
+r_g      = r_in + hook_h + 0.2;
+z_root   = 30.0;         // top of the fork slot (where the prongs bend)
+z_hook   = z_g0 + 0.2;   // hooks' catch face (0.2 mm play)
+pinch_w  = 4.0;          // pliers notches beside the head (on the prongs' sides)
+pinch_r  = 7.0;
+gauge_tol = 1.5;         // fill tolerance the spring takes (+/-)
 spring_h = spring_beams * spring_beam + (spring_beams + 1) * spring_gap + spring_cap;
 plug_top = lead_level + preload;                        // free (unsqueezed) top of the plug
-plug_bot = rat_z0 + 6 * rat_pitch - 1.0;                // nominal: barbs on the middle teeth
+plug_bot = 0.3;                                         // head sits 0.3 mm inside the base face
 plug_len = plug_top - plug_bot;
-assert(lead_level > plug_bot + arm_len + spring_h + 5, "plug too short");
+assert(lead_level > z_root + spring_h + 5, "plug too short");
+assert(spring_beams * 1 + 0 >= 0);
 
 module rod_channel() {
-    // straight bore up the axis with a sawtooth ratchet at the base and a
-    // 50 deg pointed top; every tooth's catch face faces up, every ramp >= 50 deg
-    ramp = rat_pitch;   // full pitch is ramp (step is vertical in Z)
-    pts = concat(
-        [[0, -1], [r_out, -1]],
-        [for (i = [0 : rat_n - 1]) each [[r_out, rat_z0 + i * rat_pitch], [r_in, rat_z0 + (i + 1) * rat_pitch]]],
-        [[r_in, rod_top], [0, rod_top + r_in * tan(50)]]
-    );
-    rotate_extrude($fn = 64) polygon(pts);
+    // head recess, bore, hook groove (flat catch floor, 50 deg chamfer roof), bore up to the pocket
+    rotate_extrude($fn = 64) polygon([
+        [0, -1], [cb_r, -1], [cb_r, cb_d], [r_in, cb_d + (cb_r - r_in) * tan(50)],   // 50 deg conical seat (no flat ceiling)
+        [r_in, z_g0], [r_g, z_g0], [r_g, z_g1], [r_in, z_g1 + (r_g - r_in) * tan(50)],
+        [r_in, rod_top], [0, rod_top + r_in * tan(50)]]);
+    // pliers notches beside the head, on the prongs' sides (+/-X); flat roof is the base face side
+    for (s = [-1, 1]) rotate([0, 0, s > 0 ? 0 : 180]) rotate([90, 0, 90]) linear_extrude(pinch_r)
+        polygon([[-pinch_w / 2, -1], [pinch_w / 2, -1], [pinch_w / 2, cb_d - 1.5], [0, cb_d - 1.5 + pinch_w / 2 * tan(50)], [-pinch_w / 2, cb_d - 1.5]]);   // gable roof
 }
-
 module lead_pocket() {
     rotate_extrude() polygon([[0, lead_floor], [lead_r, lead_floor], [lead_r, z_roof0], [0, z_peak]]);
 }
@@ -207,29 +220,35 @@ module rod_dart() {
     }
 }
 
-// plug in the dart frame, at its nominal installed position (unsqueezed)
-module plug_section(h) {
-    linear_extrude(h) intersection() { circle(r = plug_r, $fn = 64); translate([-plug_r - 1, -plug_flat]) square([2 * plug_r + 2, plug_flat + plug_r + 1]); }
+// plug in the dart frame, installed (spring unsqueezed)
+module plug_section(h, r = plug_r) {
+    linear_extrude(h) intersection() { circle(r = r, $fn = 64); translate([-r - 1, -plug_flat]) square([2 * r + 2, plug_flat + r + 1]); }
 }
 module plug() {
-    zb = plug_bot; zs = plug_top - spring_h;
+    zs = plug_top - spring_h;
     difference() {
         union() {
-            translate([0, 0, zb]) plug_section(zs - zb);
-            // barbs: square catch face down, ramp up, as rings (so they follow the
-            // round bore exactly) cut down to the flat-sided arms
+            intersection() {                                                            // head (hard stop): cone top
+                translate([0, 0, plug_bot]) plug_section(cb_d + 3 - plug_bot, head_r);    // seats on the 50 deg seat
+                rotate_extrude($fn = 64) polygon([[0, 0], [head_r, 0], [head_r, cb_d - 0.15 - (cb_r - head_r) * tan(50)], [0, cb_d - 0.15 + cb_r * tan(50)]]);
+            }
+            translate([0, 0, cb_d - 0.01]) plug_section(zs - cb_d + 0.01);              // stem
+            // hooks on both prongs: flat catch face down, 30 deg lead-in ramp up. Made as a ring
+            // (so the ramp follows the round bore exactly) cut down to the two prong sides
             intersection() {
-                for (k = [0 : barb_n - 1]) let(zc = zb + 1.0 + k * rat_pitch)
-                    rotate_extrude($fn = 64) polygon([[plug_r - 0.3, zc], [barb_r, zc], [r_in - 0.1, zc + rat_pitch - 0.1], [plug_r - 0.3, zc + rat_pitch - 0.1]]);
-                // hooks only on the sides (within 30 deg of the arms' bending direction),
-                // so they fold fully inward when the arms squeeze
-                translate([0, 0, zb]) linear_extrude(arm_len) translate([-barb_r - 1, -plug_flat]) square([2 * barb_r + 2, plug_flat + barb_r * sin(30)]);   // down to the print flat (no overhang)
+                rotate_extrude($fn = 64) polygon([[plug_r - 0.5, z_hook], [r_g - 0.2, z_hook], [r_g - 0.2, z_hook + 2.0],
+                                 [plug_r - 0.5, z_hook + 2.0 + (r_g - 0.2 - plug_r + 0.5) / tan(30)]]);
+                translate([-10, -plug_flat, z_hook - 1]) cube([20, plug_flat + 2.0, 10]);    // within ~30 deg of the bend direction
             }
         }
-        // slot that splits the bottom into two arms
-        translate([-arm_slot / 2, -plug_flat - 1, zb - 1]) cube([arm_slot, plug_flat + plug_r + 3, arm_len + 1]);
+        // tuning-fork slot: wide at the head, closing to nothing at z_root, so pinching the head
+        // halves pulls both hooks fully inside the bore
+        w_hook = 2 * (hook_h + 0.1);
+        w0 = w_hook * (z_root - plug_bot) / (z_root - z_hook - 1);
+        translate([0, plug_r + 2, 0]) rotate([90, 0, 0]) linear_extrude(2 * plug_r + 4)
+            polygon([[-w0 / 2, -1], [w0 / 2, -1], [0, z_root]]);
     }
-    // spring stack: beams joined at alternating ends, then a cap that meets the rod
+    // spring stack: beams joined at alternating ends, then a cap that meets the shot
     intersection() {
         union() {
             for (k = [0 : spring_beams]) let(z0 = zs + k * (spring_beam + spring_gap), side = (k % 2 == 0) ? 1 : -1)
@@ -241,11 +260,25 @@ module plug() {
         translate([0, 0, zs - 0.02]) plug_section(spring_h + 0.04);
     }
 }
+// fill gauge: round stick (one flat), tip end goes in; two grooves at lead_level -/+ gauge_tol
+// from the tip, then a fat handle
+module gauge() {
+    gl = lead_level + 25;
+    difference() {
+        union() {
+            plug_section(gl, 3.6);
+            translate([0, 0, lead_level + 12]) plug_section(13, 6);                       // handle
+        }
+        for (d = [lead_level - gauge_tol, lead_level + gauge_tol])
+            translate([-10, 1.5, d - 0.6]) cube([20, 10, 1.2]);                       // groove across the top
+    }
+}
 
-echo(str("LEAD: shot surface ", total_length - lead_level, " mm from the nose tip = ", lead_level, " mm down from the base; plug length ", plug_len, "; solid nose over pocket ", total_length - z_peak, " mm; floor ", lead_floor - aft_peak, " mm"));
+echo(str("PLUG rev 2: length ", plug_len, "; groove at ", z_g0, "; gauge grooves at ", lead_level - gauge_tol, " and ", lead_level + gauge_tol, " from the tip. LEAD: shot surface ", total_length - lead_level, " mm from the nose tip = ", lead_level, " mm down from the base; plug length ", plug_len, "; solid nose over pocket ", total_length - z_peak, " mm; floor ", lead_floor - aft_peak, " mm"));
 
 if (part == "dart") rod_dart();
 else if (part == "plug") translate([0, 0, plug_flat]) rotate([90, 0, 0]) translate([0, 0, -plug_bot]) plug();
+else if (part == "gauge") translate([0, 0, plug_flat]) rotate([90, 0, 0]) gauge();
 else if (part == "plug_placed") plug();
 else if (part == "slug") lead_fill();
 else { rod_dart(); color("silver") lead_fill(); color("orange") plug(); }
