@@ -260,6 +260,17 @@ module plug() {
         translate([0, 0, zs - 0.02]) plug_section(spring_h + 0.04);
     }
 }
+// SHORT PLUG (Russ, for epoxy-filled darts): same head, fork and hooks as the full plug, but the
+// stem stops just past the fork (z_root + short_extra), with a 45 deg chamfer on its tip. The epoxy
+// locks the shot; this only caps the base, locked both ways like the full plug.
+short_extra = 3.3;
+module plug_short() {
+    zt = z_root + short_extra;
+    intersection() {
+        plug();
+        rotate_extrude($fn = 64) polygon([[0, -1], [10, -1], [10, zt - plug_r], [plug_r, zt - plug_r], [0, zt]]);
+    }
+}
 // fill gauge: round stick (one flat), tip end goes in; two grooves at lead_level -/+ gauge_tol
 // from the tip, then a fat handle
 module gauge() {
@@ -278,6 +289,8 @@ echo(str("PLUG rev 2: length ", plug_len, "; groove at ", z_g0, "; gauge grooves
 
 if (part == "dart") rod_dart();
 else if (part == "plug") translate([0, 0, plug_flat]) rotate([90, 0, 0]) translate([0, 0, -plug_bot]) plug();
+else if (part == "plug_short") translate([0, 0, plug_flat]) rotate([90, 0, 0]) translate([0, 0, -plug_bot]) plug_short();
+else if (part == "plug_short_placed") plug_short();
 else if (part == "gauge") translate([0, 0, plug_flat]) rotate([90, 0, 0]) gauge();
 else if (part == "plug_placed") plug();
 else if (part == "slug") lead_fill();

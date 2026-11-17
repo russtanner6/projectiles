@@ -151,6 +151,12 @@ When there are action items:
   preload, takes +/-1.5 mm of fill level. FILL GAUGE (`mk1l_gauge.stl`): stick with grooves at
   lead_level -/+ 1.5 mm from its tip; one groove showing at the base = right amount.
   The old ratchet is gone; old darts don't take the new plug.
+  Epoxy option (Russ): pour thin epoxy over the shot instead of relying on the spring plug; the
+  cured slug can't leave the 19 mm pocket through the 8 mm channel. Thin, solvent-free epoxy only
+  (TotalBoat Penetrating ~100 cP; Smooth-On XTC-3D 350 cP, 10 min pot life, pour in two stages for
+  fine shot); UV resin won't cure inside. SHORT PLUG (`mk1l_plug_short.stl`, part plug_short):
+  same head, fork and hooks, stem ends at z_root + 3.3 (32.7 mm, 1.3 in.); caps the base of an
+  epoxy-filled dart. Can't be 1/2 in.: the prongs need ~19 mm to flex 1.3 mm at ~1.4% strain.
 - `designs/hf1/`: HF1 High-Flier, for maximum height with parachute recovery (Russ:
   "no failure is an option"; robustness and reliability required for electronics and chute).
   Agreed: full-bore dart (not a sabot), fired behind the wad, ~175-185 mm, three widths;
