@@ -173,11 +173,9 @@ module lead_piece(y0, xa, xb, d) {   // d: how far the 50 deg roof closes in (un
     a_band = R * cos(22.5) - lead_wall;            // inner flat distance in the straight band
     fb = R * tan(22.5);
     z_band = zc - fb;                              // bottom of the straight band
-    z0 = 8.0;                                      // pocket floor (in the chamfer zone)
-    a0 = (R - (zc - fb - z0) / tan(50)) * cos(22.5) - lead_wall / sin(50);
     hull() {
-        translate([0, 0, z0]) linear_extrude(0.01) lead_sec(a0, y0, xa, xb);
-        // full width starts 1 mm above the band's bottom edge, so the wall stays 3 mm at that corner
+        // flat floor 1 mm above the top of the sloped underside (rev 4, Russ: a thin wall leaning out
+        // over the pocket softened and curled while printing), so the overhanging part is solid
         translate([0, 0, z_band + 1.0]) linear_extrude(lead_pause - z_band - 1.0) lead_sec(a_band, y0, xa, xb);
         translate([0, 0, lead_pause + d * tan(50) - 0.01]) linear_extrude(0.01) offset(delta = -d) lead_sec(a_band, y0, xa, xb);
     }

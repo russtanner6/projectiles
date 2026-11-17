@@ -219,6 +219,11 @@ When there are action items:
     wear after many insert/remove cycles). Prongs 2.0 mm, snap strain ~2.3% (was 2.0%).
     Faceted horns: long edges rounded 1 mm, ends bevelled 45 deg (fewer chips on rocks), and
     no top horn (Russ). Faceted mine 38.2 g, 43.9 mm tall; lead mine ~60 g filled.
+  - Lead mine rev 4: Russ's prints went soft and curled at the outer edges ~10 mm up: the
+    pockets started in the 50 deg sloped underside, leaving a thin 3 mm wall leaning out over
+    the pocket. Pockets now start with a flat floor 1 mm above the slope (z 12.6), so the
+    overhanging part is solid. 3.42 cm^3, ~23 g lead, ~57 g filled. Lesson: no thin walls
+    over hollows in an overhanging zone.
 - `designs/flechette/`: steel flechette, a 150 mm rod with push-on printed parts
   (snug press fit, no glue). Sockets rev 2: no crush ribs (Russ: PCTG ribs don't
   crush, tails wouldn't go on; noses at +0.2 mm were a bit loose). A plain grip
