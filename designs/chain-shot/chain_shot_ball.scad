@@ -92,6 +92,14 @@ x_ledge   = flush ? Rf - 8.0 : Rf - 6.0;                    // square ledge the 
 x_tip     = flush ? Rf - 3.0 : faceted ? Rf - 0.3 : sqrt(R * R - pow(pin_w / 2 + barb, 2)) - 0.3;   // pin end, inside the ball surface
 floor_z   = -pin_side / 2;              // pin floor, relative to the ball centre
 pocket_w  = pin_w + 2 * barb + 0.8;     // hidden hook pocket (flush style): hooks spring out into it
+head_side = 2.0;                        // flush head (rev 5, Russ: the tall peaked head notched the face's top edge):
+                                        // wide (head_w) only up to this height, then no taller than the pin body
+module head_shape(g = 0) {              // flush head profile, grown by g (pocket) or not (pin)
+    union() {
+        house(pin_w + 2 * g, pin_side + 2 * g, floor_z - g);
+        house(head_w + 2 * g, head_side + 2 * g, floor_z - g);
+    }
+}
 x_pocket  = Rf - 2.6;                   // its far end: 2.6 mm of wall left under the flat face
 
 module house(w, h, fl = floor_z) {      // flat floor, straight sides, 50 deg peaked roof
@@ -206,7 +214,7 @@ module ball() {
             along_x(x_head_in - 0.01, x_ledge + 0.01) house(pin_w + 2 * clr, pin_side + 2 * clr, floor_z - clr);
             if (flush) {
                 // head pocket: exactly the head's size, so the head ends flush with the flat face
-                along_x(-R - 2, x_head_in) house(head_w + 2 * clr, pin_side + 2 * clr, floor_z - clr);
+                along_x(-R - 2, x_head_in) head_shape(clr);
                 // hidden hook pocket inside the far side (no hole to the outside)
                 along_x(x_ledge, x_pocket) house(pocket_w, pin_side + 2 * clr, floor_z - clr);
             } else {
@@ -225,7 +233,8 @@ module pin_raw() {
     difference() {
         union() {
             along_x(x_head_in - 0.15, x_tip) house_round(pin_w, pin_side);      // body (rounded roof: kind to the cable)
-            along_x(flush ? -Rf + 0.1 : -R, x_head_in - 0.15) house(head_w, pin_side);   // head (0.15 short of its shoulder)
+            if (flush) along_x(-Rf + 0.1, x_head_in - 0.15) head_shape(0);          // low flush head
+            else along_x(-R, x_head_in - 0.15) house(head_w, pin_side);             // head (0.15 short of its shoulder)
             // hooks: square catch face just past the ledge, then a lead-in taper to the tip
             for (s = [-1, 1]) mirror([0, s < 0 ? 1 : 0, 0])
                 translate([0, 0, floor_z]) linear_extrude(height = pin_side)

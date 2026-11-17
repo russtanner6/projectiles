@@ -224,6 +224,9 @@ When there are action items:
     the pocket. Pockets now start with a flat floor 1 mm above the slope (z 12.6), so the
     overhanging part is solid. 3.42 cm^3, ~23 g lead, ~57 g filled. Lesson: no thin walls
     over hollows in an overhanging zone.
+  - Rev 5 (Russ): the flush pin head (10.5 mm house, peak ~8.7 mm over the pin floor) notched
+    the flat face's top edge. Head is now wide (10.5 mm) only 2 mm up, then no taller than the
+    pin body; head pocket tops out at z 26.5, 1.5 mm under the edge (z 28.0). New pin STL.
 - `designs/flechette/`: steel flechette, a 150 mm rod with push-on printed parts
   (snug press fit, no glue). Sockets rev 2: no crush ribs (Russ: PCTG ribs don't
   crush, tails wouldn't go on; noses at +0.2 mm were a bit loose). A plain grip
